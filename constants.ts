@@ -1,8 +1,14 @@
 export const IMAGES = {
-  hero: "/assets/images/upscaleimage.png",
-  about: "https://lh3.googleusercontent.com/aida-public/AB6AXuCGS2JJUkG0ebvv_D3xYUN20NdIe-Ve_I_IoGCeh4rqMyu9aeWDT02SbOmXsAGpyAiupkXkPVom-EBIKYMw3XljaSBSJD9w-yUKVPk7eb9YnXqtHr-OHONadqGwaLwuO1woFIopaEWOuvZXgFC6rwU1B1Ehi-28gn89utx1xk50pZ075pUKgx7sQDeF51CPpQNEWFaCNKAUcrk9kImRtaOnI-QDG7fci8wxaDKFBhwAPZebN-bNSGTPYAkstEiQ2p2I8VmoIlARLbxX",
+  hero: "/assets/images/upscaleimage.jpeg",
+  about: "/assets/images/principal.jpeg",
   signature: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1upKRIVwYLIGBtIAARAVaZWaqbfGF-T3TMCMGgZFarfRRN04pYmFy5hY9hHOJ1BN0sTYcLDkkVF9PLHXRwISVRDQyw9YQNFcvGR0jNv3Xs_mgJsNirIguMB8cmledPVhO-iW-wmT0A8K2WN5XR2G3XSakL790E7_goo3NCA8kjuRw1NzDw7e0QhdnLveQ_pvhPrGgzUiMIMoQr_H7Z9wvTNodt_Up-8ijbSE3VD9lphujmrKFfjq3QJUobRhjzJujLnaB1MDdpmjb",
-  service1: "https://lh3.googleusercontent.com/aida-public/AB6AXuBYrJRo7hq-rTUEC1Q9nrWx-uotDD4Vk3OTQ_pboUNqji4QC4EEtx89WdoKBd-KfwuL4mTCMWqJMxFyDLlDzLxD8BDRL6MCQzHT5LJtYCHJjNrm6pyVOoyluZUegQZlYJZxrWK4HlBC3TM2yw60X9uNRo34kwHUiIFlzhiBwysBulXEj2Ce7dAzZwJaAUZCXYdkqV8p09kFC24Z2YjkQwC85_hUDiJLAg3_8A_GWEEdSDAPxYT9PX8SkcUOgVNyxwfFUiHM3NCVj-OR",
-  service2: "https://lh3.googleusercontent.com/aida-public/AB6AXuDLaA2Rsdrmpg1sdUibD03G1r2f2P6UWojx2f-R4w_oEVAN5JzTVf-OaTbefoQED2B4Ti87qXSDuzMTEwiAkJ26Tw1OhCivGxEBao1V4WghoSxyWLIKdQjbhpEL3Ejwn87q6jOaoeibpAD9Q4AMQJV2FGKM5QK6t7hmRPSjTOFKgEv0VxGEL2VIdyT_m3HE2wPHXz8mO1L49ri9AQ4sBWr_YHoStRsXan3B_soYyjB6BIAmNDEshS6WVJinwnoxPrISgsz0xUdk1Opr",
-  service3: "https://lh3.googleusercontent.com/aida-public/AB6AXuD6FWqFpm-H0kcULNXz8oKz2gOjpkS0yR8ijZVCgL-lovAIiMjywHBKZxjyBSC6kKn1FcFvB8r_g2SFQLd70EOY7CM3Kc6nciSuiavNxnLDT0hQIYPoW8Rvt80xkhT09Ut9HwQtzjXwKzkk8a2Ari1fuhYhT5U56WDbC3rgL5yNCJWDsWJiSxZlacnt2se8EIweKJyGGBAU-PL67-KVcjxmXlV52LnPWBX9IVVtxKn3s6Umy349wG65yxyajiznOW9HY7XR4ndwVyly"
+  service1: "/assets/images/service_therapy.png",
+  service2: "/assets/images/service_journey.png",
+  service3: "/assets/images/service_career.png",
+  btn1: "/assets/images/1.jpeg",
+  btn2: "/assets/images/2.jpeg",
+  btn3: "/assets/images/3.jpeg",
+  btn4: "/assets/images/4.jpeg",
+  btn5: "/assets/images/5.jpeg",
+  btn6: "/assets/images/6.jpeg",
 };

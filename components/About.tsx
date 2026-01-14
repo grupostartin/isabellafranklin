@@ -21,6 +21,7 @@ const About: React.FC = () => {
                 src={IMAGES.about}
                 alt="Terapeuta em ambiente natural e iluminado"
                 className="relative rounded-2xl shadow-xl w-full h-[300px] md:h-[500px] object-cover"
+                style={{ objectPosition: 'center 15%' }}
               />
             </div>
           </motion.div>

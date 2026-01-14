@@ -31,8 +31,8 @@ const App: React.FC = () => {
           <Hero />
           <About />
           <TargetAudience />
-          <Services />
           <Testimonials />
+          <Services />
           <Footer />
         </main>
       )}

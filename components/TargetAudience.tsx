@@ -30,7 +30,7 @@ const TargetAudience: React.FC = () => {
         >
           <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">Para quem é este espaço</span>
           <h2 className="font-display text-4xl md:text-5xl text-gray-900 font-bold">A Travessia da Transformação</h2>
-          <div className="w-24 h-1 bg-secondary mx-auto mt-6 rounded-full"></div>
+          <div className="w-24 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch relative">
@@ -45,14 +45,14 @@ const TargetAudience: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-surface-light p-8 md:p-12 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group"
+            className="bg-white p-8 md:p-12 rounded-[2rem] border-2 border-gray-200 shadow-lg shadow-gray-100/50 relative overflow-hidden group"
           >
-            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-15 transition-opacity">
               <X size={120} strokeWidth={1} />
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-gray-800 mb-8 flex items-center">
-              <span className="w-10 h-10 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mr-4 text-lg">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8 flex items-center">
+              <span className="w-10 h-10 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mr-4 text-lg border border-secondary/20">
                 <X size={20} />
               </span>
               Como você chega
@@ -65,9 +65,9 @@ const TargetAudience: React.FC = () => {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start text-gray-600 text-lg leading-relaxed"
+                  className="flex items-start text-gray-700 font-medium text-lg leading-relaxed"
                 >
-                  <span className="mr-3 mt-1.5 flex-shrink-0 w-1.5 h-1.5 bg-secondary/40 rounded-full"></span>
+                  <span className="mr-3 mt-1.5 flex-shrink-0 w-2 h-2 bg-secondary/60 rounded-full shadow-sm"></span>
                   {item}
                 </motion.li>
               ))}
@@ -80,14 +80,14 @@ const TargetAudience: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white p-8 md:p-12 rounded-[2rem] border-2 border-primary/20 shadow-xl relative overflow-hidden group"
+            className="bg-primary p-8 md:p-12 rounded-[2rem] shadow-2xl shadow-primary/20 relative overflow-hidden group"
           >
-            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-primary">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity text-white">
               <Check size={120} strokeWidth={1} />
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8 flex items-center">
-              <span className="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-4 text-lg">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+              <span className="w-10 h-10 bg-white/20 text-white rounded-full flex items-center justify-center mr-4 text-lg">
                 <Check size={20} />
               </span>
               Como você sai
@@ -100,9 +100,9 @@ const TargetAudience: React.FC = () => {
                   initial={{ opacity: 0, x: 10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start text-gray-800 font-medium text-lg leading-relaxed group-hover:translate-x-1 transition-transform"
+                  className="flex items-start text-white font-medium text-lg leading-relaxed group-hover:translate-x-1 transition-transform"
                 >
-                  <Check className="mr-3 mt-1 text-primary flex-shrink-0" size={18} strokeWidth={3} />
+                  <Check className="mr-3 mt-1 text-white flex-shrink-0" size={18} strokeWidth={3} />
                   {item}
                 </motion.li>
               ))}

@@ -69,6 +69,7 @@ const Services: React.FC = () => {
                   src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+                  style={{ objectPosition: 'center 20%' }}
                 />
               </div>
               <div className="p-6 md:p-8 flex flex-col flex-grow text-center md:text-left items-center md:items-start">
