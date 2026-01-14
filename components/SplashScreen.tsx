@@ -36,7 +36,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           className="font-display text-3xl md:text-5xl lg:text-6xl text-gray-800 leading-tight italic"
         >
-          <span className="text-primary">Cuidar de si</span> também é um ato de <span className="text-secondary">coragem</span>.
+          <span className="text-primary">Mulheres seguras</span> não esperam <span className="text-secondary">permissão.</span>
         </motion.h1>
 
         <motion.div

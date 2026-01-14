@@ -40,20 +40,23 @@ const About: React.FC = () => {
 
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               <p>
-                Olá, sou a Isabella Franklin. Acredito que a terapia é mais do que resolver problemas; é um processo profundo de autoconhecimento. Minha missão é ajudar mulheres a redescobrirem sua força interior em um ambiente livre de julgamentos.
+                Durante muitos anos, eu vivi desconectada de quem eu era. A virada não veio de fora, mas do momento em que decidi olhar para dentro, em uma busca profunda por <span className="text-secondary font-semibold italic">autoconhecimento, consciência emocional e integração espiritual.</span>
               </p>
               <p>
-                Com mais de 10 anos de experiência clínica, combino técnicas baseadas em evidências com uma abordagem humana e empática. Aqui, sua história importa e seus sentimentos são validados.
+                Há mais de uma década, transformo essa vivência em método. Foi através de estudos, práticas e do acompanhamento de milhares de mulheres que nasceu o <strong className="text-secondary">Método Mulher Bella</strong>.
+              </p>
+              <p>
+                Este é um caminho para quem deseja sair do autoabandono para a maturidade emocional. Um processo para deixar de se adaptar para "caber" e aprender a <span className="text-primary font-medium">se escolher, honrar seu valor e sustentar o próprio lugar.</span>
+              </p>
+              <p>
+                Hoje, guio mulheres em uma travessia estruturada de posicionamento interno e verdade emocional, refletindo em relacionamentos saudáveis, prosperidade e equilíbrio.
+              </p>
+              <p className="font-bold text-primary italic text-xl border-l-4 border-primary pl-6 py-2 mt-8 bg-surface-light rounded-r-lg">
+                Aqui, a transformação começa em você e reverbera em todas as áreas da sua vida.
               </p>
             </div>
 
-            <div className="pt-4 mx-auto md:mx-0">
-              <img
-                src={IMAGES.signature}
-                alt="Assinatura Dra. Isabella Franklin"
-                className="h-12 md:h-16 opacity-70"
-              />
-            </div>
+
           </motion.div>
 
         </div>

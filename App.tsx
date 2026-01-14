@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import TargetAudience from './components/TargetAudience';
 import Services from './components/Services';
+import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -23,7 +24,7 @@ const App: React.FC = () => {
       <AnimatePresence>
         {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       </AnimatePresence>
-      
+
       {!showSplash && (
         <main className="min-h-screen flex flex-col">
           <Navbar />
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <About />
           <TargetAudience />
           <Services />
+          <Testimonials />
           <Footer />
         </main>
       )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, PlayCircle, BookOpen, Camera, ArrowRight, ChevronDown } from 'lucide-react';
+import { Star, PlayCircle, BookOpen, Camera, ArrowRight, ChevronDown, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { IMAGES } from '../constants';
 
@@ -25,10 +25,12 @@ const Hero: React.FC = () => {
   };
 
   const buttons = [
-    { icon: Star, text: "Mentoria Seja Protagonista", href: "https://wa.me/5531990622003" },
-    { icon: PlayCircle, text: "Curso Seja Protagonista", href: "https://wa.me/5531990622003" },
-    { icon: BookOpen, text: "Ebook Elevando sua Frequência", href: "https://wa.me/5531990622003" },
-    { icon: Camera, text: "Instagram", href: "https://www.instagram.com/isabellafranklind" },
+    { icon: Star, text: "MENTORIA DAS BELLAS ☀️", href: "https://wa.me/5531990622003", subtitle: "Formulário ou WhatsApp" },
+    { icon: PlayCircle, text: "PORTAL DAS BELLAS", href: "#", subtitle: "(Em breve)" },
+    { icon: Heart, text: "ATENDIMENTO SISTÊMICO", href: "https://wa.me/5531990622003" },
+    { icon: BookOpen, text: "CURSO ALÉM DAS MÁSCARAS", href: "https://wa.me/5531990622003" },
+    { icon: BookOpen, text: "CURSO DESTRAVE SUA VIDA", href: "https://wa.me/5531990622003" },
+    { icon: Camera, text: "CONTATO PARA PALESTRAS E EVENTOS", href: "https://wa.me/5531990622003" },
   ];
 
   return (
@@ -81,16 +83,28 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + (index * 0.1) }}
                 href={btn.href}
-                className="relative flex items-center w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl shadow-md active:scale-95 transition-transform overflow-hidden"
+                className="relative flex items-center w-full h-24 px-6 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group"
               >
-                {/* Background decoration for mobile cards */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-50/50 to-white -z-10"></div>
+                {/* Visual Background - Using a styled overlay pattern */}
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 z-0"></div>
 
-                <div className="flex items-center">
-                  <div className="p-2.5 bg-primary/10 rounded-full mr-4">
-                    <btn.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                {/* Hero image as a subtle background overlay like the reference */}
+                <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 z-0 overflow-hidden">
+                  <img src={IMAGES.hero} className="w-full h-full object-cover object-top filter grayscale" alt="" />
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent to-gray-900"></div>
+                </div>
+
+                <div className="flex items-center w-full justify-between relative z-10">
+                  <div className="flex items-center">
+                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-4 group-hover:bg-primary/20 transition-colors">
+                      <btn.icon className="w-6 h-6 text-white group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-lg text-white tracking-wide">{btn.text}</span>
+                      {btn.subtitle && <span className="text-white/50 text-xs font-medium uppercase tracking-widest mt-0.5">{btn.subtitle}</span>}
+                    </div>
                   </div>
-                  <span className="font-bold text-base text-gray-800 leading-tight">{btn.text}</span>
+                  <ArrowRight className="text-white/40 group-hover:text-primary group-hover:translate-x-1 transition-all" size={20} />
                 </div>
               </motion.a>
             ))}
@@ -141,31 +155,42 @@ const Hero: React.FC = () => {
           >
             <div className="text-center md:text-left">
               <motion.h2 variants={itemVariants} className="text-secondary font-bold tracking-wider text-sm uppercase mb-2">
-                Psicóloga Clínica e Mentora
+                Mentora e Terapeuta Sistêmica
               </motion.h2>
               <motion.h1 variants={itemVariants} className="font-display text-5xl md:text-6xl text-gray-900 mb-6">
-                Dra. <span className="text-primary italic">Isabella Franklin</span>
+                <span className="text-primary italic">Isabella Franklin</span>
               </motion.h1>
-              <motion.p variants={itemVariants} className="text-xl md:text-2xl font-light text-gray-600 leading-relaxed italic border-l-4 border-primary pl-6 py-2 my-6 bg-surface-light rounded-r-lg">
-                "Um espaço seguro para você se reconectar com quem você é."
-              </motion.p>
             </div>
 
-            <div className="flex flex-col space-y-5 w-full max-w-lg mx-auto md:mx-0">
+            <div className="flex flex-col space-y-4 w-full max-w-lg mx-auto md:mx-0">
               {buttons.map((btn, index) => (
                 <motion.a
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ y: -4, backgroundColor: "#7F9B52", color: "#FFFFFF", borderColor: "#7F9B52" }}
+                  whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   href={btn.href}
-                  className="group relative flex items-center justify-between w-full px-8 py-6 bg-white border-2 border-accent-green text-gray-800 rounded-2xl shadow-lg hover:shadow-xl"
+                  className="relative flex items-center justify-between w-full h-24 px-8 rounded-3xl shadow-xl isolate border border-white/20 overflow-hidden group"
                 >
-                  <div className="flex items-center">
-                    <btn.icon className="w-8 h-8 mr-6 text-accent-green group-hover:text-white" strokeWidth={1.5} />
-                    <span className="font-bold text-xl tracking-wide">{btn.text}</span>
+                  {/* Visual Background - Using a dark sleek pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 z-0"></div>
+
+                  {/* Hero image as a subtle background overlay */}
+                  <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 z-0 overflow-hidden">
+                    <img src={IMAGES.hero} className="w-full h-full object-cover object-top filter grayscale" alt="" />
+                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-gray-900"></div>
                   </div>
-                  <ArrowRight className="opacity-0 group-hover:opacity-100" />
+
+                  <div className="flex items-center relative z-10">
+                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-6 group-hover:bg-primary/20 transition-colors">
+                      <btn.icon className="w-8 h-8 text-white group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-xl text-white tracking-wide">{btn.text}</span>
+                      {btn.subtitle && <span className="text-white/50 text-sm font-medium uppercase tracking-widest mt-1">{btn.subtitle}</span>}
+                    </div>
+                  </div>
+                  <ArrowRight className="text-white/40 group-hover:text-primary group-hover:translate-x-2 transition-all relative z-10" />
                 </motion.a>
               ))}
             </div>
