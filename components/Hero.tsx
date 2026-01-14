@@ -32,20 +32,20 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <header className="relative min-h-[90vh] flex items-center pt-8 pb-12 md:pt-24 md:pb-20 overflow-hidden bg-background-light">
+    <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-background-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
         {/* Mobile Layout */}
-        <div className="md:hidden flex flex-col items-center">
+        <div className="md:hidden flex flex-col items-center max-w-sm mx-auto">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-2 pt-2"
+            className="text-center mb-6 pt-2"
           >
             <img
               src="/assets/images/logo.png"
               alt="Logo Isabella Franklin"
-              className="h-35 md:h-20 mx-auto object-contain"
+              className="h-28 mx-auto object-contain"
             />
           </motion.div>
 
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="w-full aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl mb-6 relative"
+            className="w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mb-8 relative"
           >
             <img
               src={IMAGES.hero}
@@ -67,13 +67,13 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center space-x-2 text-gray-400 mb-4"
+            className="flex items-center space-x-2 text-gray-400 mb-6"
           >
             <span className="text-xs tracking-[0.2em] uppercase">Links Úteis</span>
             <ChevronDown size={14} />
           </motion.div>
 
-          <div className="w-full space-y-3">
+          <div className="w-full space-y-4">
             {buttons.map((btn, index) => (
               <motion.a
                 key={index}
@@ -81,16 +81,16 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + (index * 0.1) }}
                 href={btn.href}
-                className="relative flex items-center justify-between w-full px-6 py-4 bg-white border border-gray-100 rounded-2xl shadow-md active:scale-95 transition-transform overflow-hidden"
+                className="relative flex items-center w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl shadow-md active:scale-95 transition-transform overflow-hidden"
               >
                 {/* Background decoration for mobile cards */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-50/50 to-white -z-10"></div>
 
                 <div className="flex items-center">
-                  <div className="p-2 bg-surface-light rounded-full mr-4">
+                  <div className="p-2.5 bg-primary/10 rounded-full mr-4">
                     <btn.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
                   </div>
-                  <span className="font-bold text-base text-gray-800">{btn.text}</span>
+                  <span className="font-bold text-base text-gray-800 leading-tight">{btn.text}</span>
                 </div>
               </motion.a>
             ))}
