@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isabella Franklin - Terapia e Mentoria</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#E97A01",
+            "primary-hover": "#c76801",
+            secondary: "#D1523E",
+            complementary: "#F46771",
+            "accent-green": "#7F9B52",
+            "background-light": "#FFFFFF",
+            "background-dark": "#121212",
+            "surface-light": "#F9FAFB",
+            "surface-dark": "#1E1E1E",
+          },
+          fontFamily: {
+            display: ["Playfair Display", "serif"],
+            body: ["Lato", "sans-serif"],
+          },
+          boxShadow: {
+            glow: "0 0 15px rgba(127, 155, 82, 0.3)",
+            "glow-primary": "0 0 20px rgba(233, 122, 1, 0.25)",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hide scrollbar for splash screen phase */
+    body.loading {
+      overflow: hidden;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "framer-motion": "https://esm.sh/framer-motion@^12.26.2",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body class="font-body bg-background-light text-gray-800 transition-colors duration-300 antialiased loading">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

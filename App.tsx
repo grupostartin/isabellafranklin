@@ -1,0 +1,41 @@
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import SplashScreen from './components/SplashScreen';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import TargetAudience from './components/TargetAudience';
+import Services from './components/Services';
+import Footer from './components/Footer';
+
+const App: React.FC = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    // Remove the 'loading' class from body once splash is done
+    if (!showSplash) {
+      document.body.classList.remove('loading');
+    }
+  }, [showSplash]);
+
+  return (
+    <>
+      <AnimatePresence>
+        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      </AnimatePresence>
+      
+      {!showSplash && (
+        <main className="min-h-screen flex flex-col">
+          <Navbar />
+          <Hero />
+          <About />
+          <TargetAudience />
+          <Services />
+          <Footer />
+        </main>
+      )}
+    </>
+  );
+};
+
+export default App;
