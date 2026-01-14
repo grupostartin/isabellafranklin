@@ -31,11 +31,11 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-center group">
                 <Mail className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
-                contato@mana.com.br
+                isabellafanini@hotmail.com
               </li>
               <li className="flex items-center group">
                 <Phone className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
-                (11) 99999-9999
+                (31) 99062-2003
               </li>
               <li className="flex items-center group">
                 <MapPin className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
