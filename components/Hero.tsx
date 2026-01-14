@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
   };
 
   const buttons = [
-    { icon: Star, text: "MENTORIA DAS BELLAS ☀️", href: "https://forms.gle/DrkqwchzUhXS4ETH8", image: IMAGES.btn1, position: 'center 20%' },
+    { icon: Star, text: "MENTORIA DAS BELLAS", href: "https://forms.gle/DrkqwchzUhXS4ETH8", image: IMAGES.btn1, position: 'center 20%' },
     { icon: PlayCircle, text: "PORTAL DAS BELLAS", href: "#", subtitle: "(Em breve)", image: IMAGES.btn2, position: 'center 35%' },
     { icon: Heart, text: "ATENDIMENTO SISTÊMICO", href: "https://wa.me/5531990622003", image: IMAGES.btn3, position: 'center 20%' },
     { icon: BookOpen, text: "CURSO ALÉM DAS MÁSCARAS", href: "https://wa.me/5531990622003", image: IMAGES.btn4, position: 'center 35%' },
@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-1 cursor-pointer z-20 group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center space-y-1 cursor-pointer z-20 group"
         onClick={() => {
           const nextSec = document.getElementById('sobre');
           if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
