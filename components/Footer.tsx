@@ -5,12 +5,12 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white py-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
           <div className="col-span-1 md:col-span-2">
             <img
               src="/assets/images/logo.png"
               alt="MANA Terapia e Mentoria"
-              className="h-10 md:h-12 w-auto mb-4 object-contain"
+              className="h-10 md:h-12 w-auto mb-4 object-contain mx-auto md:mx-0"
             />
             <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
               Psicologia clínica e mentoria para mulheres que buscam reencontrar sua essência e viver com mais plenitude.
@@ -29,15 +29,15 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold mb-4 text-gray-200">Contato</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li className="flex items-center group">
+              <li className="flex items-center justify-center md:justify-start group">
                 <Mail className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
                 isabellafanini@hotmail.com
               </li>
-              <li className="flex items-center group">
+              <li className="flex items-center justify-center md:justify-start group">
                 <Phone className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
                 (31) 99062-2003
               </li>
-              <li className="flex items-center group">
+              <li className="flex items-center justify-center md:justify-start group">
                 <MapPin className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
                 São Paulo, SP
               </li>

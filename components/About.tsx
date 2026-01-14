@@ -4,7 +4,7 @@ import { IMAGES } from '../constants';
 
 const About: React.FC = () => {
   return (
-    <section id="sobre" className="py-20 bg-surface-light">
+    <section id="sobre" className="py-12 md:py-20 bg-surface-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-16 items-center">
 
@@ -20,7 +20,7 @@ const About: React.FC = () => {
               <img
                 src={IMAGES.about}
                 alt="Terapeuta em ambiente natural e iluminado"
-                className="relative rounded-2xl shadow-xl w-full h-[500px] object-cover"
+                className="relative rounded-2xl shadow-xl w-full h-[300px] md:h-[500px] object-cover"
               />
             </div>
           </motion.div>
@@ -30,13 +30,13 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full md:w-1/2 space-y-6"
+            className="w-full md:w-1/2 space-y-6 text-center md:text-left flex flex-col items-center md:items-start"
           >
             <span className="text-primary font-bold tracking-widest uppercase text-sm">Minha História</span>
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 font-bold">
+            <h2 className="font-display text-3xl md:text-5xl text-gray-900 font-bold">
               Acolhimento e Transformação
             </h2>
-            <div className="w-20 h-1 bg-secondary rounded-full"></div>
+            <div className="w-20 h-1 bg-secondary rounded-full mx-auto md:mx-0"></div>
 
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               <p>
@@ -47,11 +47,11 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 mx-auto md:mx-0">
               <img
                 src={IMAGES.signature}
                 alt="Assinatura Dra. Isabella Franklin"
-                className="h-16 opacity-70"
+                className="h-12 md:h-16 opacity-70"
               />
             </div>
           </motion.div>
