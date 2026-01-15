@@ -4,7 +4,7 @@ import { IMAGES } from '../constants';
 
 const About: React.FC = () => {
   return (
-    <section id="sobre" className="py-12 md:py-20 bg-surface-light overflow-hidden">
+    <section id="sobre" className="py-12 md:py-20 bg-[#D1523E]/10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-16 items-center">
 

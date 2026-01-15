@@ -48,9 +48,9 @@ const Testimonials: React.FC = () => {
     };
 
     return (
-        <section id="depoimentos" className="py-20 md:py-32 bg-accent-green/5 relative overflow-hidden">
+        <section id="depoimentos" className="py-20 md:py-32 bg-[#F46771]/05 relative overflow-hidden">
             {/* Decorative Background Elements */}
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-[#F46771]/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -79,7 +79,7 @@ const Testimonials: React.FC = () => {
                         whileInView={{ width: 80 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.4, duration: 0.8 }}
-                        className="h-1 bg-accent-green mx-auto mt-6 rounded-full"
+                        className="h-1 bg-[#F46771] mx-auto mt-6 rounded-full"
                     ></motion.div>
                 </div>
 
@@ -95,9 +95,9 @@ const Testimonials: React.FC = () => {
                             key={index}
                             variants={itemVariants}
                             whileHover={{ y: -10 }}
-                            className="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-accent-green/10 flex flex-col items-center text-center relative"
+                            className="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-[#F46771]/10 flex flex-col items-center text-center relative"
                         >
-                            <div className="absolute -top-6 bg-accent-green text-white p-4 rounded-2xl shadow-lg ring-4 ring-white">
+                            <div className="absolute -top-6 bg-[#F46771] text-white p-4 rounded-2xl shadow-lg ring-4 ring-white">
                                 <Quote size={24} />
                             </div>
 
