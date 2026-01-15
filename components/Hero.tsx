@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-gradient-to-br from-[#FFFBF9] via-white to-[#FDF4EE]">
+    <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-[#F46771]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
         {/* Mobile Layout */}
@@ -84,25 +84,25 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + (index * 0.1) }}
                 href={btn.href}
-                className="relative flex items-center w-full h-24 px-6 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group"
+                className="relative flex items-center w-full h-24 px-6 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group bg-[#1A0F0D]"
               >
                 {/* Custom Background Image for each button */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
                   <img src={btn.image} className="w-full h-full object-cover opacity-60 grayscale-[20%]" style={{ objectPosition: btn.position }} alt="" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#D1523E]/70 via-[#D1523E]/30 to-transparent"></div>
                 </div>
 
                 <div className="flex items-center w-full justify-between relative z-10">
                   <div className="flex items-center">
-                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-4 group-hover:bg-primary/20 transition-colors">
-                      <btn.icon className="w-6 h-6 text-white group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-4 group-hover:bg-complementary/20 transition-colors">
+                      <btn.icon className="w-6 h-6 text-white group-hover:text-complementary transition-colors" strokeWidth={1.5} />
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-lg text-white tracking-wide">{btn.text}</span>
                       {btn.subtitle && <span className="text-white/50 text-xs font-medium uppercase tracking-widest mt-0.5">{btn.subtitle}</span>}
                     </div>
                   </div>
-                  <ArrowRight className="text-white/40 group-hover:text-primary group-hover:translate-x-1 transition-all" size={20} />
+                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-1 transition-all" size={20} />
                 </div>
               </motion.a>
             ))}
@@ -157,24 +157,24 @@ const Hero: React.FC = () => {
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   href={btn.href}
-                  className="relative flex items-center justify-between w-full h-32 px-8 rounded-[2.5rem] shadow-xl border border-white/20 overflow-hidden group bg-gray-900 opacity-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
+                  className="relative flex items-center justify-between w-full h-32 px-8 rounded-[2.5rem] shadow-xl border border-white/20 overflow-hidden group bg-[#1A0F0D] transition-all duration-500 cursor-pointer"
                 >
                   {/* Visual Background Pattern with specific image */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
                     <img src={btn.image} className="w-full h-full object-cover opacity-70 grayscale-[10%] group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: btn.position }} alt="" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/70 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#D1523E]/70 via-[#D1523E]/30 to-transparent"></div>
                   </div>
 
                   <div className="flex items-center relative z-10">
-                    <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl mr-5 group-hover:bg-primary/20 transition-colors">
-                      <btn.icon className="w-8 h-8 text-white group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                    <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl mr-5 group-hover:bg-complementary/20 transition-colors">
+                      <btn.icon className="w-8 h-8 text-white group-hover:text-complementary transition-colors" strokeWidth={1.5} />
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-lg lg:text-xl text-white tracking-wide">{btn.text}</span>
                       {btn.subtitle && <span className="text-white/50 text-xs font-medium uppercase tracking-widest mt-1">{btn.subtitle}</span>}
                     </div>
                   </div>
-                  <ArrowRight className="text-white/40 group-hover:text-primary group-hover:translate-x-2 transition-all relative z-10" size={28} />
+                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-2 transition-all relative z-10" size={28} />
                 </motion.a>
               ))}
             </div>

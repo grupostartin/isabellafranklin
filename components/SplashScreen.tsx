@@ -18,7 +18,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="fixed inset-0 z-[100] bg-white flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] bg-[#F46771]/20 flex items-center justify-center p-4"
     >
       <div className="max-w-2xl text-center">
         <motion.img
