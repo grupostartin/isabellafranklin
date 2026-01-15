@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-[#F46771]/10">
+    <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-gradient-to-br from-[#FFFBF9] via-white to-[#FDF4EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
         {/* Mobile Layout */}
