@@ -25,12 +25,12 @@ const Hero: React.FC = () => {
   };
 
   const buttons = [
-    { icon: Star, text: "MENTORIA DAS BELLAS", href: "https://forms.gle/DrkqwchzUhXS4ETH8", image: IMAGES.btn1, position: 'center 20%' },
+    { icon: Star, text: "MENTORIA DAS BELLAS", href: "https://forms.gle/DrkqwchzUhXS4ETH8", image: IMAGES.btn1, position: 'center 20%', target: "_blank" },
     { icon: PlayCircle, text: "PORTAL DAS BELLAS", href: "#", subtitle: "(Em breve)", image: IMAGES.btn2, position: 'center 35%' },
-    { icon: Heart, text: "ATENDIMENTO SISTÊMICO", href: "https://wa.me/5531990622003", image: IMAGES.btn3, position: 'center 20%' },
-    { icon: BookOpen, text: "CURSO ALÉM DAS MÁSCARAS", href: "https://wa.me/5531990622003", image: IMAGES.btn4, position: 'center 35%' },
-    { icon: BookOpen, text: "CURSO DESTRAVE SUA VIDA", href: "https://wa.me/5531990622003", image: IMAGES.btn5, position: 'center 35%' },
-    { icon: Camera, text: "CONTATO PARA PALESTRAS E EVENTOS", href: "https://wa.me/5531990622003", image: IMAGES.btn6, position: 'center 20%' },
+    { icon: Heart, text: "ATENDIMENTO SISTÊMICO", href: "https://wa.me/5531990622003", image: IMAGES.btn3, position: 'center 20%', target: "_blank" },
+    { icon: BookOpen, text: "CURSO ALÉM DAS MÁSCARAS", href: "/lp", image: IMAGES.btn4, position: 'center 35%', target: "_blank" },
+    { icon: BookOpen, text: "CURSO DESTRAVE SUA VIDA", href: "https://wa.me/5531990622003", image: IMAGES.btn5, position: 'center 35%', target: "_blank" },
+    { icon: Camera, text: "CONTATO PARA PALESTRAS E EVENTOS", href: "https://wa.me/5531990622003", image: IMAGES.btn6, position: 'center 20%', target: "_blank" },
   ];
 
   return (
@@ -84,6 +84,8 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + (index * 0.1) }}
                 href={btn.href}
+                target={btn.target}
+                rel={btn.target === "_blank" ? "noopener noreferrer" : undefined}
                 className="relative flex items-center w-full h-24 px-6 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group bg-[#1A0F0D]"
               >
                 {/* Custom Background Image for each button */}
@@ -157,6 +159,8 @@ const Hero: React.FC = () => {
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   href={btn.href}
+                  target={btn.target}
+                  rel={btn.target === "_blank" ? "noopener noreferrer" : undefined}
                   className="relative flex items-center justify-between w-full h-32 px-8 rounded-[2.5rem] shadow-xl border border-white/20 overflow-hidden group bg-[#1A0F0D] transition-all duration-500 cursor-pointer"
                 >
                   {/* Visual Background Pattern with specific image */}

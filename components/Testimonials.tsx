@@ -1,31 +1,37 @@
 import React from 'react';
-import { Quote, Star, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Quote, Star, ArrowRight, Eye, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface Testimonial {
     text: string;
     author: string;
     role: string;
+    images?: string[];
 }
 
 const Testimonials: React.FC = () => {
     const testimonials: Testimonial[] = [
         {
-            text: "Graças a você eu mudei de dentro pra fora. Você me deu um 360 e me abriu um olhar para tantos aspectos da vida que eu nem tinha ideia. Me fez acreditar em mim e tornou este um dos melhores anos da minha vida!",
+            text: "Graças a você eu mudei de dentro pra fora...",
             author: "Caroline Martines",
-            role: "Mentoria Individual"
+            role: "Mentoria Individual",
+            images: ["/assets/testimonials/caroline.jpg"]
         },
         {
-            text: "A Mentoria das Bellas tem sido transformadora. Senti camadas dentro de mim se reorganizando, me permitindo enxergar padrões, me libertar de bloqueios e abrir espaço para minha evolução com mais amor, coragem e clareza.",
+            text: "A Mentoria das Bellas tem sido transformadora...",
             author: "Priscila",
-            role: "Mentoria das Bellas"
+            role: "Mentoria das Bellas",
+            images: ["/assets/testimonials/priscila.jpg"]
         },
         {
-            text: "Encontrei meu equilíbrio emocional e, consequentemente, minha vida financeira destravou. Era tudo uma questão de posicionamento interno.",
-            author: "Fernanda Lima",
-            role: "Mentoria de Posicionamento"
+            text: "A mentoria das Bellas foi um divisor de águas na minha vida...",
+            author: "Michelle Melo",
+            role: "Mentoria das Bellas",
+            images: ["/assets/testimonials/michelle-2.jpg", "/assets/testimonials/michelle-1.jpg"]
         }
     ];
+
+    const [selectedTestimonial, setSelectedTestimonial] = React.useState<Testimonial | null>(null);
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -94,24 +100,103 @@ const Testimonials: React.FC = () => {
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            whileHover={{ y: -10 }}
-                            className="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-[#F46771]/10 flex flex-col items-center text-center relative"
+                            whileHover={{ y: -5 }}
+                            className="bg-white rounded-3xl shadow-lg border border-[#F46771]/10 flex flex-col relative overflow-hidden h-[500px]"
                         >
-                            <div className="absolute -top-6 bg-[#F46771] text-white p-4 rounded-2xl shadow-lg ring-4 ring-white">
-                                <Quote size={24} />
+                            <div className="absolute top-0 w-full p-4 flex justify-between items-start z-10">
+                                <div className="bg-[#F46771] text-white p-3 rounded-xl shadow-lg">
+                                    <Quote size={20} />
+                                </div>
                             </div>
 
-                            <p className="text-gray-600 text-lg leading-relaxed italic mb-8 mt-4">
-                                "{t.text}"
-                            </p>
+                            <div className="flex-1 overflow-hidden relative">
+                                {t.images && t.images.length > 0 ? (
+                                    <div className="w-full h-full relative cursor-pointer" onClick={() => setSelectedTestimonial(t)}>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-[1] h-full" />
+                                        <img
+                                            src={t.images[0]}
+                                            alt={`Depoimento de ${t.author}`}
+                                            className="w-full h-full object-cover object-top opacity-90 transition-transform duration-500 hover:scale-105"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="p-8 pt-16 h-full relative cursor-pointer" onClick={() => setSelectedTestimonial(t)}>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent z-[1]" />
+                                        <p className="text-gray-600 text-lg leading-relaxed italic line-clamp-6">
+                                            "{t.text}"
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
 
-                            <div className="mt-auto">
-                                <h4 className="font-display text-xl font-bold text-gray-900">{t.author}</h4>
-                                <p className="text-primary text-sm font-semibold uppercase tracking-widest mt-1">{t.role}</p>
+                            <div className="p-6 relative z-10 bg-white border-t border-gray-100">
+                                <div className="mb-4">
+                                    <h4 className="font-display text-xl font-bold text-gray-900">{t.author}</h4>
+                                    <p className="text-primary text-sm font-semibold uppercase tracking-widest">{t.role}</p>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedTestimonial(t)}
+                                    className="w-full flex items-center justify-center space-x-2 py-3 bg-gray-50 hover:bg-primary/10 text-gray-700 hover:text-primary rounded-xl transition-colors font-medium group"
+                                >
+                                    <Eye size={18} className="group-hover:scale-110 transition-transform" />
+                                    <span>Ver depoimento completo</span>
+                                </button>
                             </div>
                         </motion.div>
                     ))}
                 </motion.div>
+
+                <AnimatePresence>
+                    {selectedTestimonial && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                            onClick={() => setSelectedTestimonial(null)}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative"
+                            >
+                                <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-20">
+                                    <div>
+                                        <h3 className="font-display text-2xl font-bold text-gray-900">{selectedTestimonial.author}</h3>
+                                        <p className="text-primary text-sm font-medium">{selectedTestimonial.role}</p>
+                                    </div>
+                                    <button
+                                        onClick={() => setSelectedTestimonial(null)}
+                                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-gray-900"
+                                    >
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="p-6 overflow-y-auto custom-scrollbar">
+                                    {selectedTestimonial.images && selectedTestimonial.images.length > 0 ? (
+                                        <div className="space-y-4">
+                                            {selectedTestimonial.images.map((img, idx) => (
+                                                <img
+                                                    key={idx}
+                                                    src={img}
+                                                    alt={`Depoimento de ${selectedTestimonial.author} - Parte ${idx + 1}`}
+                                                    className="w-full h-auto rounded-xl shadow-sm border border-gray-100"
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
+                                            "{selectedTestimonial.text}"
+                                        </p>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

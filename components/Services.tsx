@@ -10,21 +10,27 @@ const Services: React.FC = () => {
       desc: "Sessões individuais para identificar e liberar padrões repetitivos (relacionamentos, finanças...) e conflitos do sistema familiar, através da Constelação Familiar, trazendo clareza emocional e novos movimentos na vida.",
       image: IMAGES.service1,
       borderColor: "border-primary",
-      btnColor: "text-primary hover:text-primary-hover"
+      btnColor: "text-primary hover:text-primary-hover",
+      href: "https://wa.me/5531990622003",
+      target: "_blank"
     },
     {
       title: "Mentoria Individual",
       desc: "Acompanhamento individual para mulheres que desejam aprofundar o autoconhecimento, se reconectar com o próprio valor, melhorar seus relacionamentos e se posicionar com um olhar personalizado.",
       image: IMAGES.service2,
       borderColor: "border-secondary",
-      btnColor: "text-secondary hover:text-red-700"
+      btnColor: "text-secondary hover:text-red-700",
+      href: "https://wa.me/5531990622003",
+      target: "_blank"
     },
     {
       title: "Mentoria das Bellas",
       desc: "Um programa em grupo profundo e transformador para mulheres que querem romper padrões emocionais, se fortalecer internamente e viver relacionamentos e uma vida mais alinhados com quem realmente são.",
       image: IMAGES.service3,
       borderColor: "border-accent-green",
-      btnColor: "text-accent-green hover:text-green-700"
+      btnColor: "text-accent-green hover:text-green-700",
+      href: "https://forms.gle/DrkqwchzUhXS4ETH8",
+      target: "_blank"
     },
     {
       title: "Portal das Bellas",
@@ -32,14 +38,17 @@ const Services: React.FC = () => {
       desc: "Um espaço exclusivo de curadoria, conteúdos e trocas profundas para mulheres que buscam evolução contínua e uma comunidade que as impulsione.",
       image: IMAGES.service4,
       borderColor: "border-primary",
-      btnColor: "text-primary hover:text-primary-hover"
+      btnColor: "text-primary hover:text-primary-hover",
+      href: "#",
     },
     {
       title: "Curso Além das Máscaras",
       desc: "Curso online para mulheres que desejam compreender suas feridas emocionais e se tornarem mais confiantes, leves e donas de si, se reconectando com quem realmente são.",
       image: IMAGES.service5,
       borderColor: "border-secondary",
-      btnColor: "text-secondary hover:text-red-700"
+      btnColor: "text-secondary hover:text-red-700",
+      href: "/lp",
+      target: "_blank"
     }
   ];
 
@@ -97,7 +106,9 @@ const Services: React.FC = () => {
                   {service.desc}
                 </p>
                 <a
-                  href="#"
+                  href={service.href}
+                  target={service.target}
+                  rel={service.target === "_blank" ? "noopener noreferrer" : undefined}
                   className={`inline-flex items-center justify-center md:justify-start font-bold transition-colors ${service.btnColor} group`}
                 >
                   Quero saber mais <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
