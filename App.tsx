@@ -1,42 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import SplashScreen from './components/SplashScreen';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import TargetAudience from './components/TargetAudience';
-import Services from './components/Services';
-import Testimonials from './components/Testimonials';
-import Footer from './components/Footer';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import LP from './pages/LP';
 
 const App: React.FC = () => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    // Remove the 'loading' class from body once splash is done
-    if (!showSplash) {
-      document.body.classList.remove('loading');
-    }
-  }, [showSplash]);
-
   return (
-    <>
-      <AnimatePresence>
-        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-      </AnimatePresence>
-
-      {!showSplash && (
-        <main className="min-h-screen flex flex-col overflow-x-hidden">
-          <Navbar />
-          <Hero />
-          <About />
-          <TargetAudience />
-          <Testimonials />
-          <Services />
-          <Footer />
-        </main>
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lp" element={<LP />} />
+      </Routes>
+    </Router>
   );
 };
 

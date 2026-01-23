@@ -6,25 +6,40 @@ import { IMAGES } from '../constants';
 const Services: React.FC = () => {
   const services = [
     {
-      title: "Terapia Individual",
-      desc: "Sessões semanais focadas nas suas questões pessoais, traumas e crescimento emocional em um ambiente sigiloso.",
+      title: "Atendimento Sistêmico",
+      desc: "Sessões individuais para identificar e liberar padrões repetitivos (relacionamentos, finanças...) e conflitos do sistema familiar, através da Constelação Familiar, trazendo clareza emocional e novos movimentos na vida.",
       image: IMAGES.service1,
       borderColor: "border-primary",
       btnColor: "text-primary hover:text-primary-hover"
     },
     {
-      title: "Jornada da Autoestima",
-      desc: "Um programa estruturado para fortalecer sua autoimagem, confiança e amor próprio através de exercícios práticos.",
+      title: "Mentoria Individual",
+      desc: "Acompanhamento individual para mulheres que desejam aprofundar o autoconhecimento, se reconectar com o próprio valor, melhorar seus relacionamentos e se posicionar com um olhar personalizado.",
       image: IMAGES.service2,
       borderColor: "border-secondary",
       btnColor: "text-secondary hover:text-red-700"
     },
     {
-      title: "Mentoria de Carreira",
-      desc: "Direcionamento estratégico para mulheres que desejam alavancar suas carreiras sem sacrificar a saúde mental.",
+      title: "Mentoria das Bellas",
+      desc: "Um programa em grupo profundo e transformador para mulheres que querem romper padrões emocionais, se fortalecer internamente e viver relacionamentos e uma vida mais alinhados com quem realmente são.",
       image: IMAGES.service3,
       borderColor: "border-accent-green",
       btnColor: "text-accent-green hover:text-green-700"
+    },
+    {
+      title: "Portal das Bellas",
+      subtitle: "(Em breve)",
+      desc: "Um espaço exclusivo de curadoria, conteúdos e trocas profundas para mulheres que buscam evolução contínua e uma comunidade que as impulsione.",
+      image: IMAGES.service4,
+      borderColor: "border-primary",
+      btnColor: "text-primary hover:text-primary-hover"
+    },
+    {
+      title: "Curso Além das Máscaras",
+      desc: "Curso online para mulheres que desejam compreender suas feridas emocionais e se tornarem mais confiantes, leves e donas de si, se reconectando com quem realmente são.",
+      image: IMAGES.service5,
+      borderColor: "border-secondary",
+      btnColor: "text-secondary hover:text-red-700"
     }
   ];
 
@@ -42,7 +57,7 @@ const Services: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-secondary font-bold tracking-widest uppercase text-sm">Como posso ajudar</span>
-            <h2 className="font-display text-3xl md:text-4xl text-gray-900 font-bold mt-2">Meus Serviços</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-gray-900 font-bold mt-2">Nossos Serviços</h2>
           </motion.div>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -53,16 +68,17 @@ const Services: React.FC = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className={`flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-lg border-t-4 ${service.borderColor} transition-transform duration-300`}
+              className={`flex flex-col bg-white rounded-[2rem] overflow-hidden shadow-lg border-t-4 ${service.borderColor} transition-transform duration-300 ${index >= 3 ? 'lg:translate-x-1/2' : ''} ${index === 4 ? 'lg:translate-x-1/2' : ''}`}
+              style={index >= 3 && window.innerWidth >= 1024 ? { gridColumn: `span 1` } : {}}
             >
               <div className="h-48 overflow-hidden">
                 <img
@@ -73,7 +89,10 @@ const Services: React.FC = () => {
                 />
               </div>
               <div className="p-6 md:p-8 flex flex-col flex-grow text-center md:text-left items-center md:items-start">
-                <h3 className="font-display text-xl md:text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-gray-900">{service.title}</h3>
+                  {service.subtitle && <span className="text-xs font-bold text-secondary uppercase tracking-wider">{service.subtitle}</span>}
+                </div>
                 <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
                   {service.desc}
                 </p>
