@@ -25,12 +25,49 @@ const Hero: React.FC = () => {
   };
 
   const buttons = [
-    { icon: Star, text: "MENTORIA DAS BELLAS", href: "https://forms.gle/DrkqwchzUhXS4ETH8", image: IMAGES.btn1, position: 'center 20%', target: "_blank" },
-    { icon: PlayCircle, text: "PORTAL DAS BELLAS", href: "#", subtitle: "(Em breve)", image: IMAGES.btn2, position: 'center 35%' },
-    { icon: Heart, text: "ATENDIMENTO SISTÊMICO", href: "https://wa.me/5531990622003", image: IMAGES.btn3, position: 'center 20%', target: "_blank" },
-    { icon: BookOpen, text: "CURSO ALÉM DAS MÁSCARAS", href: "/lp", image: IMAGES.btn4, position: 'center 35%', target: "_blank" },
-    { icon: BookOpen, text: "CURSO DESTRAVE SUA VIDA", href: "https://wa.me/5531990622003", image: IMAGES.btn5, position: 'center 35%', target: "_blank" },
-    { icon: Camera, text: "CONTATO PARA PALESTRAS E EVENTOS", href: "https://wa.me/5531990622003", image: IMAGES.btn6, position: 'center 20%', target: "_blank" },
+    {
+      icon: Star,
+      text: "MENTORIA DAS BELLAS",
+      description: "Acompanhamento em grupo profundo e transformador.",
+      href: "https://forms.gle/DrkqwchzUhXS4ETH8",
+      image: IMAGES.btn1,
+      position: 'center 20%',
+      target: "_blank"
+    },
+    {
+      icon: Heart,
+      text: "MARQUE SEU ATENDIMENTO INDIVIDUAL",
+      description: "Sessões personalizadas de terapia sistêmica.",
+      href: "https://wa.me/5531990622003",
+      image: IMAGES.btn3,
+      position: 'center 20%',
+      target: "_blank"
+    },
+    {
+      icon: PlayCircle,
+      text: "PORTAL DAS BELLAS",
+      description: "Um espaço vivo de conteúdos e meditações.",
+      href: "/portal",
+      image: IMAGES.btn2,
+      position: 'center 35%'
+    },
+    {
+      icon: BookOpen,
+      text: "CURSO ALÉM DAS MÁSCARAS",
+      description: "Transforme sua vida e cure suas feridas.",
+      href: "/lp",
+      image: IMAGES.btn4,
+      position: 'center 35%'
+    },
+    {
+      icon: Camera,
+      text: "CONTATO PARA PALESTRAS E EVENTOS",
+      description: "Leve transformação para sua empresa ou evento.",
+      href: "https://wa.me/5531990622003",
+      image: IMAGES.btn6,
+      position: 'center 20%',
+      target: "_blank"
+    },
   ];
 
   return (
@@ -86,7 +123,7 @@ const Hero: React.FC = () => {
                 href={btn.href}
                 target={btn.target}
                 rel={btn.target === "_blank" ? "noopener noreferrer" : undefined}
-                className="relative flex items-center w-full h-24 px-6 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group bg-[#1A0F0D]"
+                className="relative flex items-center w-full min-h-[5.5rem] px-6 py-4 rounded-3xl shadow-xl isolate border border-white/20 active:scale-[0.98] transition-all overflow-hidden group bg-[#1A0F0D]"
               >
                 {/* Custom Background Image for each button */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
@@ -96,15 +133,15 @@ const Hero: React.FC = () => {
 
                 <div className="flex items-center w-full justify-between relative z-10">
                   <div className="flex items-center">
-                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-4 group-hover:bg-complementary/20 transition-colors">
+                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl mr-4 group-hover:bg-complementary/20 transition-colors shrink-0">
                       <btn.icon className="w-6 h-6 text-white group-hover:text-complementary transition-colors" strokeWidth={1.5} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bold text-lg text-white tracking-wide">{btn.text}</span>
-                      {btn.subtitle && <span className="text-white/50 text-xs font-medium uppercase tracking-widest mt-0.5">{btn.subtitle}</span>}
+                      <span className="font-bold text-sm md:text-base text-white tracking-wide leading-tight uppercase">{btn.text}</span>
+                      {btn.description && <span className="text-white/60 text-[10px] font-medium mt-1 leading-tight">{btn.description}</span>}
                     </div>
                   </div>
-                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-1 transition-all" size={20} />
+                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-1 transition-all shrink-0 ml-2" size={18} />
                 </div>
               </motion.a>
             ))}
@@ -144,14 +181,14 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Side: Links (Invisíveis até o Hover) */}
+          {/* Right Side: Links */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="col-span-8 flex flex-col pt-24"
+            className="col-span-8 flex flex-col pt-12"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-6">
               {buttons.map((btn, index) => (
                 <motion.a
                   key={index}
@@ -161,7 +198,7 @@ const Hero: React.FC = () => {
                   href={btn.href}
                   target={btn.target}
                   rel={btn.target === "_blank" ? "noopener noreferrer" : undefined}
-                  className="relative flex items-center justify-between w-full h-32 px-8 rounded-[2.5rem] shadow-xl border border-white/20 overflow-hidden group bg-[#1A0F0D] transition-all duration-500 cursor-pointer"
+                  className="relative flex items-center justify-between w-full min-h-[8rem] px-8 py-6 rounded-[2.5rem] shadow-xl border border-white/20 overflow-hidden group bg-[#1A0F0D] transition-all duration-500 cursor-pointer"
                 >
                   {/* Visual Background Pattern with specific image */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
@@ -170,15 +207,15 @@ const Hero: React.FC = () => {
                   </div>
 
                   <div className="flex items-center relative z-10">
-                    <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl mr-5 group-hover:bg-complementary/20 transition-colors">
+                    <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl mr-5 group-hover:bg-complementary/20 transition-colors shrink-0">
                       <btn.icon className="w-8 h-8 text-white group-hover:text-complementary transition-colors" strokeWidth={1.5} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bold text-lg lg:text-xl text-white tracking-wide">{btn.text}</span>
-                      {btn.subtitle && <span className="text-white/50 text-xs font-medium uppercase tracking-widest mt-1">{btn.subtitle}</span>}
+                      <span className="font-bold text-base lg:text-lg text-white tracking-wide leading-tight uppercase">{btn.text}</span>
+                      {btn.description && <span className="text-white/60 text-xs font-medium mt-2 leading-tight">{btn.description}</span>}
                     </div>
                   </div>
-                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-2 transition-all relative z-10" size={28} />
+                  <ArrowRight className="text-white/40 group-hover:text-complementary group-hover:translate-x-2 transition-all relative z-10 shrink-0 ml-4" size={24} />
                 </motion.a>
               ))}
             </div>
