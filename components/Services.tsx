@@ -34,12 +34,11 @@ const Services: React.FC = () => {
     },
     {
       title: "Portal das Bellas",
-      subtitle: "(Em breve)",
       desc: "Um espaço exclusivo de curadoria, conteúdos e trocas profundas para mulheres que buscam evolução contínua e uma comunidade que as impulsione.",
       image: IMAGES.service4,
       borderColor: "border-primary",
       btnColor: "text-primary hover:text-primary-hover",
-      href: "#",
+      href: "/portal",
     },
     {
       title: "Curso Além das Máscaras",
@@ -100,7 +99,6 @@ const Services: React.FC = () => {
               <div className="p-6 md:p-8 flex flex-col flex-grow text-center md:text-left items-center md:items-start">
                 <div className="flex items-center gap-2 mb-4">
                   <h3 className="font-display text-xl md:text-2xl font-bold text-gray-900">{service.title}</h3>
-                  {service.subtitle && <span className="text-xs font-bold text-secondary uppercase tracking-wider">{service.subtitle}</span>}
                 </div>
                 <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
                   {service.desc}
