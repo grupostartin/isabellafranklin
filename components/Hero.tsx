@@ -72,44 +72,41 @@ const Hero: React.FC = () => {
 
   return (
     <header className="relative min-h-screen flex items-start md:items-center pt-6 pb-12 md:pt-24 md:pb-20 overflow-x-hidden bg-gradient-to-br from-[#FFFBF9] via-white to-[#FDF4EE]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* Mobile Video Background */}
+      <div className="md:hidden absolute inset-0 z-0">
+        <video
+          src={IMAGES.portalVideo}
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black/70" />
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         {/* Mobile Layout */}
         <div className="md:hidden flex flex-col items-center max-w-sm mx-auto">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-6 pt-2"
+            className="text-center mb-10 pt-4"
           >
             <img
               src="/assets/images/logo.png"
               alt="Logo Isabella Franklin"
-              className="h-28 mx-auto object-contain"
+              className="h-32 mx-auto object-contain brightness-0 invert"
             />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="w-full aspect-[2/1] rounded-3xl overflow-hidden shadow-2xl mb-6 relative"
-          >
-            <img
-              src={IMAGES.hero}
-              alt="Isabella Franklin"
-              className="w-full h-full object-cover"
-              style={{ objectPosition: 'center 15%' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center space-x-2 text-gray-400 mb-6"
+            className="flex items-center space-x-2 text-white/40 mb-8"
           >
-            <span className="text-xs tracking-[0.2em] uppercase">Links Úteis</span>
+            <span className="text-xs tracking-[0.2em] uppercase font-bold">Links Úteis</span>
             <ChevronDown size={14} />
           </motion.div>
 

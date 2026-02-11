@@ -22,8 +22,21 @@ const Portal: React.FC = () => {
 
             {/* --- HERO SECTION --- */}
             <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 px-4 overflow-hidden">
-                {/* Visual Identity Background Elements */}
-                <div className="absolute inset-0 z-0">
+                {/* Mobile Video Background */}
+                <div className="lg:hidden absolute inset-0 z-0">
+                    <video
+                        src={IMAGES.portalVideo}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
+                </div>
+
+                {/* Visual Identity Background Elements (Desktop Only) */}
+                <div className="hidden lg:block absolute inset-0 z-0">
                     <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-gradient-to-bl from-[#D1523E]/10 to-transparent rounded-bl-full"></div>
                     <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-[#F46771]/10 to-transparent rounded-tr-full"></div>
                     <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#E97A01]/5 rounded-full blur-[100px]"></div>
@@ -34,28 +47,28 @@ const Portal: React.FC = () => {
                         initial="hidden"
                         animate="visible"
                         variants={staggerContainer}
-                        className="flex flex-col space-y-8"
+                        className="flex flex-col space-y-8 text-center lg:text-left items-center lg:items-start"
                     >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 bg-secondary/10 px-4 py-2 rounded-full w-fit">
+                        <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 bg-secondary/10 lg:bg-secondary/10 px-4 py-2 rounded-full w-fit backdrop-blur-sm">
                             <Sparkles size={16} className="text-secondary" />
                             <span className="text-secondary font-bold text-xs tracking-widest uppercase">Um espaço vivo de transformação</span>
                         </motion.div>
 
-                        <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-7xl text-gray-900 leading-[1.1]">
+                        <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-7xl text-white lg:text-gray-900 leading-[1.1]">
                             PORTAL DAS <br />
                             <span className="text-secondary italic">BELLAS</span>
                         </motion.h1>
 
                         <motion.div variants={fadeInUp} className="space-y-4">
-                            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-tight">
+                            <p className="text-xl md:text-2xl font-bold text-white/90 lg:text-gray-800 leading-tight transition-colors">
                                 Saia da dependência emocional e se transforme na mulher confiante que atrai o sucesso que merece.
                             </p>
-                            <p className="text-lg text-gray-600 leading-relaxed">
+                            <p className="text-lg text-white/70 lg:text-gray-600 leading-relaxed transition-colors">
                                 Relacionamentos duradouros, prosperidade financeira e uma relação linda com Deus te esperam quando você assumir o seu lugar.
                             </p>
                         </motion.div>
 
-                        <motion.div variants={fadeInUp} className="pt-4 flex flex-col space-y-4">
+                        <motion.div variants={fadeInUp} className="pt-4 flex flex-col space-y-4 w-full sm:w-auto">
                             <motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -66,10 +79,10 @@ const Portal: React.FC = () => {
                                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                             </motion.a>
                             <div className="flex items-center justify-center lg:justify-start space-x-6">
-                                <span className="flex items-center text-xs text-gray-400">
+                                <span className="flex items-center text-xs text-white/40 lg:text-gray-400">
                                     <ShieldCheck size={14} className="mr-1 text-accent-green" /> 7 dias de garantia
                                 </span>
-                                <span className="flex items-center text-xs text-gray-400">
+                                <span className="flex items-center text-xs text-white/40 lg:text-gray-400">
                                     <Star size={14} className="mr-1 text-yellow-400 fill-yellow-400" /> +500 vidas transformadas
                                 </span>
                             </div>
@@ -80,13 +93,16 @@ const Portal: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
+                        className="relative hidden lg:block"
                     >
-                        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] border-8 border-white">
-                            <img
-                                src={IMAGES.service4 || IMAGES.hero}
-                                alt="Portal das Bellas"
+                        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] border-8 border-white bg-gray-100">
+                            <video
+                                src={IMAGES.portalVideo}
                                 className="w-full h-full object-cover"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
 

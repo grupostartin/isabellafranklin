@@ -13,4 +13,5 @@ export const IMAGES = {
   btn4: "/assets/images/4.jpeg",
   btn5: "/assets/images/5.jpeg",
   btn6: "/assets/images/6.jpeg",
+  portalVideo: "/assets/images/portal_video.mp4",
 };
