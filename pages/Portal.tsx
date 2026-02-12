@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Star, CheckCircle, ArrowRight, ShieldCheck, Heart, Sparkles, BookOpen, Users, Video, Clock, CreditCard, MessageCircle, HelpCircle } from 'lucide-react';
+import { Star, CheckCircle, ArrowRight, ShieldCheck, Heart, Sparkles, BookOpen, Users, Video, Clock, CreditCard, MessageCircle, HelpCircle, Quote, Eye, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { IMAGES } from '../constants';
 
 const fadeInUp = {
@@ -16,7 +16,41 @@ const staggerContainer = {
     }
 };
 
+interface Testimonial {
+    text: string;
+    author: string;
+    role: string;
+    avatar?: string;
+    images?: string[];
+}
+
 const Portal: React.FC = () => {
+    const testimonials: Testimonial[] = [
+        {
+            text: "Graças a você eu mudei de dentro pra fora...",
+            author: "Caroline Martines",
+            role: "Mentoria Individual",
+            avatar: "C",
+            images: ["/assets/testimonials/caroline.jpg"]
+        },
+        {
+            text: "A Mentoria das Bellas tem sido transformadora...",
+            author: "Priscila",
+            role: "Mentoria das Bellas",
+            avatar: "P",
+            images: ["/assets/testimonials/priscila.jpg"]
+        },
+        {
+            text: "A mentoria das Bellas foi um divisor de águas na minha vida...",
+            author: "Michelle Melo",
+            role: "Mentoria das Bellas",
+            avatar: "M",
+            images: ["/assets/testimonials/michelle-2.jpg", "/assets/testimonials/michelle-1.jpg"]
+        }
+    ];
+
+    const [selectedTestimonial, setSelectedTestimonial] = React.useState<Testimonial | null>(null);
+
     return (
         <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden">
 
@@ -145,18 +179,50 @@ const Portal: React.FC = () => {
                         </p>
 
                         {/* Depoimentos / Testimonials Space */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                            {[1, 2].map((i) => (
-                                <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-left">
-                                    <div className="flex text-yellow-500 mb-3">
-                                        <Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                            {testimonials.map((t, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="bg-white p-6 rounded-3xl shadow-md border border-[#F46771]/10 text-left flex flex-col justify-between hover:shadow-xl transition-all h-[420px]"
+                                >
+                                    <div>
+                                        <div className="flex justify-between items-start mb-4">
+                                            <div className="bg-[#F46771] text-white p-2 rounded-lg shadow-sm">
+                                                <Quote size={16} />
+                                            </div>
+                                            <div className="flex text-yellow-500">
+                                                {[...Array(5)].map((_, starIdx) => (
+                                                    <Star key={starIdx} size={14} fill="currentColor" />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <p className="text-gray-600 text-sm italic mb-6 line-clamp-6">"{t.text}"</p>
                                     </div>
-                                    <p className="text-gray-600 text-sm italic mb-4">"Minha vida mudou completamente depois do portal. Hoje me sinto segura e dona da minha história."</p>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs uppercase">B</div>
-                                        <span className="text-sm font-bold text-gray-900">Aluna do Portal</span>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs uppercase overflow-hidden">
+                                                {t.images && t.images.length > 0 ? (
+                                                    <img src={t.images[0]} alt={t.author} className="w-full h-full object-cover" />
+                                                ) : t.avatar}
+                                            </div>
+                                            <div>
+                                                <span className="block text-sm font-bold text-gray-900">{t.author}</span>
+                                                <span className="block text-[10px] text-secondary font-medium uppercase tracking-wider">{t.role}</span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setSelectedTestimonial(t)}
+                                            className="w-full flex items-center justify-center space-x-2 py-2.5 bg-gray-50 hover:bg-secondary/10 text-gray-700 hover:text-secondary rounded-xl transition-colors text-xs font-bold group"
+                                        >
+                                            <Eye size={16} className="group-hover:scale-110 transition-transform" />
+                                            <span>VER DEPOIMENTO COMPLETO</span>
+                                        </button>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
@@ -384,15 +450,53 @@ const Portal: React.FC = () => {
                         <p className="text-xl text-gray-500">Veja dezenas de mulheres vivendo isso:</p>
                     </div>
 
-                    {/* Placeholder for Depoimentos Cards/Scroll */}
-                    <div className="flex flex-wrap justify-center gap-4">
-                        {[1, 2, 3, 4, 5, 6].map(i => (
-                            <div key={i} className="w-full sm:w-64 aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-md flex items-center justify-center relative group">
-                                <MessageCircle size={32} className="text-gray-300 group-hover:scale-110 transition-transform" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                                    <p className="text-white text-xs font-bold">Depoimento {i}</p>
+                    {/* Real Testimonial Images Scroll/Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {testimonials.map((t, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white rounded-[2.5rem] shadow-xl border border-[#F46771]/10 flex flex-col relative overflow-hidden h-[540px] group"
+                            >
+                                <div className="absolute top-0 w-full p-4 flex justify-between items-start z-10">
+                                    <div className="bg-[#F46771] text-white p-3 rounded-xl shadow-lg">
+                                        <Quote size={20} />
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div className="flex-1 overflow-hidden relative cursor-pointer" onClick={() => setSelectedTestimonial(t)}>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-[1] h-full" />
+                                    {t.images && t.images.length > 0 && (
+                                        <img
+                                            src={t.images[0]}
+                                            alt={`Depoimento de ${t.author}`}
+                                            className="w-full h-full object-cover object-top opacity-90 transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                    )}
+                                </div>
+
+                                <div className="p-8 relative z-10 bg-white border-t border-gray-50 flex flex-col justify-between">
+                                    <div className="mb-6">
+                                        <div className="flex text-yellow-400 mb-2">
+                                            {[...Array(5)].map((_, starIdx) => (
+                                                <Star key={starIdx} size={14} fill="currentColor" />
+                                            ))}
+                                        </div>
+                                        <h4 className="font-display text-2xl font-bold text-gray-900">{t.author}</h4>
+                                        <p className="text-secondary text-xs font-bold uppercase tracking-[0.2em] mt-1">{t.role}</p>
+                                    </div>
+                                    <button
+                                        onClick={() => setSelectedTestimonial(t)}
+                                        className="w-full flex items-center justify-center space-x-2 py-4 bg-gray-50 hover:bg-secondary/10 text-gray-700 hover:text-secondary rounded-2xl transition-all font-bold group"
+                                    >
+                                        <Eye size={20} className="group-hover:scale-110 transition-transform" />
+                                        <span>VER DEPOIMENTO COMPLETO</span>
+                                    </button>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -560,6 +664,62 @@ const Portal: React.FC = () => {
             <footer className="py-12 bg-[#1A0F0D] text-center">
                 <p className="text-white/20 text-xs tracking-widest uppercase">© {new Date().getFullYear()} Isabella Franklin. Todos os direitos reservados.</p>
             </footer>
+
+            {/* Testimonial Modal */}
+            <AnimatePresence>
+                {selectedTestimonial && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setSelectedTestimonial(null)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-white rounded-[2.5rem] max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative"
+                        >
+                            <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-20">
+                                <div>
+                                    <h3 className="font-display text-3xl font-bold text-gray-900">{selectedTestimonial.author}</h3>
+                                    <p className="text-secondary text-sm font-bold uppercase tracking-widest mt-1">{selectedTestimonial.role}</p>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedTestimonial(null)}
+                                    className="p-3 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-900"
+                                >
+                                    <X size={28} />
+                                </button>
+                            </div>
+
+                            <div className="p-8 overflow-y-auto custom-scrollbar">
+                                {selectedTestimonial.images && selectedTestimonial.images.length > 0 ? (
+                                    <div className="space-y-6">
+                                        {selectedTestimonial.images.map((img, idx) => (
+                                            <img
+                                                key={idx}
+                                                src={img}
+                                                alt={`Depoimento de ${selectedTestimonial.author}`}
+                                                className="w-full h-auto rounded-3xl shadow-sm border border-gray-100"
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="relative">
+                                        <Quote className="absolute -top-4 -left-4 text-secondary/10 w-16 h-16 -z-10" />
+                                        <p className="text-gray-700 text-xl leading-relaxed italic whitespace-pre-line relative z-10">
+                                            "{selectedTestimonial.text}"
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
