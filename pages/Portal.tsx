@@ -22,24 +22,17 @@ const Portal: React.FC = () => {
 
             {/* --- HERO SECTION --- */}
             <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 px-4 overflow-hidden">
-                {/* Mobile Video Background */}
-                <div className="lg:hidden absolute inset-0 z-0">
+                {/* Background Video (Desktop & Mobile) */}
+                <div className="absolute inset-0 z-0">
                     <video
-                        src={IMAGES.portalVideo}
-                        className="w-full h-full object-cover"
+                        src={IMAGES.portalBackgroundVideo}
+                        className="w-full h-full object-cover blur-sm scale-110"
                         autoPlay
                         muted
                         loop
                         playsInline
                     />
                     <div className="absolute inset-0 bg-black/60" />
-                </div>
-
-                {/* Visual Identity Background Elements (Desktop Only) */}
-                <div className="hidden lg:block absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-gradient-to-bl from-[#D1523E]/10 to-transparent rounded-bl-full"></div>
-                    <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-[#F46771]/10 to-transparent rounded-tr-full"></div>
-                    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#E97A01]/5 rounded-full blur-[100px]"></div>
                 </div>
 
                 <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -54,16 +47,16 @@ const Portal: React.FC = () => {
                             <span className="text-secondary font-bold text-xs tracking-widest uppercase">Um espaço vivo de transformação</span>
                         </motion.div>
 
-                        <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-7xl text-white lg:text-gray-900 leading-[1.1]">
+                        <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-7xl text-white leading-[1.1]">
                             PORTAL DAS <br />
                             <span className="text-secondary italic">BELLAS</span>
                         </motion.h1>
 
                         <motion.div variants={fadeInUp} className="space-y-4">
-                            <p className="text-xl md:text-2xl font-bold text-white/90 lg:text-gray-800 leading-tight transition-colors">
+                            <p className="text-xl md:text-2xl font-bold text-white/90 leading-tight transition-colors">
                                 Saia da dependência emocional e se transforme na mulher confiante que atrai o sucesso que merece.
                             </p>
-                            <p className="text-lg text-white/70 lg:text-gray-600 leading-relaxed transition-colors">
+                            <p className="text-lg text-white/70 leading-relaxed transition-colors">
                                 Relacionamentos duradouros, prosperidade financeira e uma relação linda com Deus te esperam quando você assumir o seu lugar.
                             </p>
                         </motion.div>
@@ -79,10 +72,10 @@ const Portal: React.FC = () => {
                                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                             </motion.a>
                             <div className="flex items-center justify-center lg:justify-start space-x-6">
-                                <span className="flex items-center text-xs text-white/40 lg:text-gray-400">
+                                <span className="flex items-center text-xs text-white/50">
                                     <ShieldCheck size={14} className="mr-1 text-accent-green" /> 7 dias de garantia
                                 </span>
-                                <span className="flex items-center text-xs text-white/40 lg:text-gray-400">
+                                <span className="flex items-center text-xs text-white/50">
                                     <Star size={14} className="mr-1 text-yellow-400 fill-yellow-400" /> +500 vidas transformadas
                                 </span>
                             </div>
@@ -92,38 +85,27 @@ const Portal: React.FC = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative hidden lg:block"
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="hidden lg:flex flex-col items-center justify-center space-y-4"
                     >
-                        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] border-8 border-white bg-gray-100">
-                            <video
-                                src={IMAGES.portalVideo}
-                                className="w-full h-full object-cover"
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                        <div className="bg-white/5 backdrop-blur-md px-8 py-6 rounded-3xl border border-white/10 flex flex-col items-center text-center">
+                            <div className="text-secondary mb-3">
+                                <Sparkles size={32} className="animate-pulse" />
+                            </div>
+                            <h3 className="text-xl font-display text-white font-bold italic">Ambiente Seleto</h3>
+                            <p className="text-white/40 text-xs uppercase tracking-widest mt-1">Exclusividade Garantida</p>
 
-                            {/* Floating Card */}
-                            <motion.div
-                                initial={{ x: 50, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: 1.2 }}
-                                className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/20 hidden sm:block max-w-[180px]"
-                            >
-                                <div className="flex items-center space-x-2 mb-1">
-                                    <div className="w-2 h-2 rounded-full bg-accent-green animate-pulse"></div>
-                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-tighter">Espaço Vivo</span>
+                            <div className="mt-6 flex items-center -space-x-2">
+                                {[1, 2, 3].map(i => (
+                                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white/10 bg-white/5 overflow-hidden flex items-center justify-center text-[8px] text-white/40">
+                                        {String.fromCharCode(64 + i)}
+                                    </div>
+                                ))}
+                                <div className="px-3 h-8 rounded-full border-2 border-white/10 bg-secondary/20 flex items-center justify-center text-[10px] font-bold text-white ml-2">
+                                    +500 BELLAS
                                 </div>
-                                <p className="text-sm font-bold text-gray-900 leading-tight italic">Sua nova vida começa do outro lado.</p>
-                            </motion.div>
+                            </div>
                         </div>
-
-                        {/* Decorative Circles */}
-                        <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 rounded-full -z-10 blur-2xl"></div>
-                        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-secondary/10 rounded-full -z-10 blur-3xl"></div>
                     </motion.div>
                 </div>
             </section>
