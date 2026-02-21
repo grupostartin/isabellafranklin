@@ -27,25 +27,28 @@ interface Testimonial {
 const Portal: React.FC = () => {
     const testimonials: Testimonial[] = [
         {
+            text: "Gratidão por tanto. Sou prova de que o seu propósito esta sendo vivido e cumprido nessa terra.",
+            author: "Ana Carolina Perondi",
+            role: "Portal das Bellas",
+            avatar: "A",
+            images: ["/assets/images/WhatsApp Image 2026-02-20 at 14.40.05.jpeg"]
+        },
+        {
+            text: "Isa, Bella querida ✨ Esses ensinamentos e mudanças têm sido milagres na minha vida. Gratidão por tudo mesmo!",
+            author: "Maiara Parisoto",
+            role: "Portal das Bellas",
+            avatar: "M",
+            images: [
+                "/assets/images/WhatsApp Image 2026-02-20 at 14.42.37.jpeg",
+                "/assets/images/WhatsApp Image 2026-02-20 at 14.49.41.jpeg"
+            ]
+        },
+        {
             text: "Graças a você eu mudei de dentro pra fora...",
             author: "Caroline Martines",
             role: "Mentoria Individual",
             avatar: "C",
             images: ["/assets/testimonials/caroline.jpg"]
-        },
-        {
-            text: "A Mentoria das Bellas tem sido transformadora...",
-            author: "Priscila",
-            role: "Mentoria das Bellas",
-            avatar: "P",
-            images: ["/assets/testimonials/priscila.jpg"]
-        },
-        {
-            text: "A mentoria das Bellas foi um divisor de águas na minha vida...",
-            author: "Michelle Melo",
-            role: "Mentoria das Bellas",
-            avatar: "M",
-            images: ["/assets/testimonials/michelle-2.jpg", "/assets/testimonials/michelle-1.jpg"]
         }
     ];
 
@@ -172,9 +175,9 @@ const Portal: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-[#FFFBF9] border border-secondary/10 rounded-[2.5rem] p-8 md:p-12 shadow-sm"
+                        className="bg-[#D1523E] border border-secondary/10 rounded-[2.5rem] p-8 md:p-12 shadow-sm"
                     >
-                        <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                        <p className="text-lg text-white mb-8 leading-relaxed">
                             Hoje vivo do que eu amo, tenho um relacionamento incrível e me sinto cada vez mais feliz e realizada com a vida e com quem eu sou, hoje quero te ajudar a voltar pra você assim como elas voltaram:
                         </p>
 
@@ -187,47 +190,45 @@ const Portal: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-white p-6 rounded-3xl shadow-md border border-[#F46771]/10 text-left flex flex-col justify-between hover:shadow-xl transition-all h-[420px]"
+                                    className="bg-white rounded-[2rem] shadow-md border border-secondary/10 overflow-hidden flex flex-col hover:shadow-xl transition-all h-[500px] group cursor-pointer"
+                                    onClick={() => setSelectedTestimonial(t)}
                                 >
-                                    <div>
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div className="bg-[#F46771] text-white p-2 rounded-lg shadow-sm">
-                                                <Quote size={16} />
-                                            </div>
-                                            <div className="flex text-yellow-500">
-                                                {[...Array(5)].map((_, starIdx) => (
-                                                    <Star key={starIdx} size={14} fill="currentColor" />
-                                                ))}
-                                            </div>
+                                    <div className="relative flex-1 bg-gray-50 overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent z-[1]" />
+                                        {t.images && t.images.length > 0 && (
+                                            <img
+                                                src={t.images[0]}
+                                                alt={t.author}
+                                                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                        )}
+                                        <div className="absolute top-4 left-4 z-[2] bg-white/90 backdrop-blur-sm p-2 rounded-xl shadow-sm border border-secondary/10">
+                                            <Quote size={14} className="text-[#D1523E]" />
                                         </div>
-                                        <p className="text-gray-600 text-sm italic mb-6 line-clamp-6">"{t.text}"</p>
                                     </div>
-                                    <div className="space-y-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs uppercase overflow-hidden">
-                                                {t.images && t.images.length > 0 ? (
-                                                    <img src={t.images[0]} alt={t.author} className="w-full h-full object-cover" />
-                                                ) : t.avatar}
-                                            </div>
+
+                                    <div className="p-6 bg-white shrink-0">
+                                        <div className="flex text-yellow-500 mb-2">
+                                            {[...Array(5)].map((_, starIdx) => (
+                                                <Star key={starIdx} size={12} fill="currentColor" />
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center justify-between">
                                             <div>
                                                 <span className="block text-sm font-bold text-gray-900">{t.author}</span>
                                                 <span className="block text-[10px] text-secondary font-medium uppercase tracking-wider">{t.role}</span>
                                             </div>
+                                            <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                                                <Eye size={16} />
+                                            </div>
                                         </div>
-                                        <button
-                                            onClick={() => setSelectedTestimonial(t)}
-                                            className="w-full flex items-center justify-center space-x-2 py-2.5 bg-gray-50 hover:bg-secondary/10 text-gray-700 hover:text-secondary rounded-xl transition-colors text-xs font-bold group"
-                                        >
-                                            <Eye size={16} className="group-hover:scale-110 transition-transform" />
-                                            <span>VER DEPOIMENTO COMPLETO</span>
-                                        </button>
                                     </div>
                                 </motion.div>
                             ))}
                         </div>
 
-                        <p className="text-xl font-display text-secondary font-bold italic">
-                            "No final do ano, quero receber uma mensagem sua, assim como recebi delas!"
+                        <p className="text-2xl font-display text-white font-bold">
+                            No final do ano, quero receber uma mensagem sua, assim como recebi delas!
                         </p>
                     </motion.div>
                 </div>
@@ -243,7 +244,7 @@ const Portal: React.FC = () => {
                 <div className="max-w-6xl mx-auto px-4 relative z-10">
                     <div className="text-center mb-16">
                         <h2 className="font-display text-4xl md:text-5xl mb-4">TÁ NA HORA DE VOCÊ <br /><span className="text-primary italic">VOLTAR PRA VOCÊ</span></h2>
-                        <p className="text-white/60 text-lg">A transformação que acontece quando você decide atravessar.</p>
+                        <p className="text-white/60 text-lg">A transformação que acontece quando você decide atravessar o Portal:</p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -259,14 +260,15 @@ const Portal: React.FC = () => {
                             </h3>
                             <ul className="space-y-4">
                                 {[
-                                    "Tem medo de impor limites",
-                                    "Teve medo de ser abandonada e passou a cobrar atenção",
-                                    "Falta de posicionamento",
-                                    "Insegurança, ansiedade e estresse altos",
-                                    "Passou muito tempo só no celular ao invés de fazer o que precisa",
-                                    "Medo de julgamento, ou dizer não",
-                                    "Explodiu do nada...e depois se sentiu culpa",
-                                    "Problemas financeiros"
+                                    "Tem dificuldade de impor limites",
+                                    "Vive com dependência emocional e medo do abandono",
+                                    "Não consegue se posicionar",
+                                    "Vive insegura, ansiosa e estressada",
+                                    "Passa tempo demais no celular e procrastina",
+                                    "Tem medo de julgamento e dificuldade em dizer não",
+                                    "Explode de repente e depois sente culpa",
+                                    "Repete padrões e atrai relacionamentos imaturos",
+                                    "Enfrenta dificuldades financeiras"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start space-x-3 text-white/50">
                                         <div className="bg-red-500/20 text-red-400 p-0.5 rounded mt-1">
@@ -293,14 +295,15 @@ const Portal: React.FC = () => {
                             </h3>
                             <ul className="space-y-4 relative z-10">
                                 {[
-                                    "Consegue se posicionar sem culpa e impor seus limites",
-                                    "Sabe se comunicar de forma assertiva",
-                                    "Melhora suas relações e é cada vez mais realizada no relacionamento",
+                                    "Impõe limites com segurança e sem culpa",
+                                    "Se relaciona com maturidade e autonomia emocional",
+                                    "Sabe se posicionar na vida e nos relacionamentos",
                                     "Se sente segura de si e autoconfiante",
-                                    "Atrai relacionamentos maduros",
-                                    "Se livra do medo do julgamento e realiza seus sonhos",
+                                    "Age com foco e disciplina",
+                                    "Se expressa sem medo de julgamento e realiza seus sonhos",
                                     "É equilibrada emocionalmente",
-                                    "Quebra padrões de repetição e se torna cada vez mais próspera"
+                                    "Quebra ciclos de repetição e tem relacionamentos incríveis",
+                                    "Quebra padrões e se torna cada vez mais próspera"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start space-x-3 text-white">
                                         <div className="bg-primary text-white p-0.5 rounded mt-1">
@@ -316,30 +319,67 @@ const Portal: React.FC = () => {
             </section>
 
             {/* --- TARGET AUDIENCE --- */}
-            <section className="py-24 bg-white">
-                <div className="max-w-4xl mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">Pra quem é o Portal?</h2>
-                        <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+            <section className="py-16 bg-white relative">
+                <div className="max-w-6xl mx-auto px-4 relative z-10">
+                    <div className="text-center mb-12">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="font-display text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Pra quem é o <span className="text-primary">Portal?</span>
+                        </motion.h2>
+                        <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
-                            "Mulheres que têm dificuldades de impor limites",
-                            "Mulheres que se sentem emocionalmente dependentes",
-                            "Mulheres com medo do julgamento",
-                            "Mulheres que querem destravar problemas financeiros",
-                            "Mulheres que vivem ansiosas, estressadas, ou procrastinam"
+                            {
+                                icon: <ShieldCheck size={20} />,
+                                title: "Limites e Posicionamento",
+                                text: "Para mulheres que têm dificuldade de dizer não e se anulam pelos outros."
+                            },
+                            {
+                                icon: <Heart size={20} />,
+                                title: "Dependência Emocional",
+                                text: "Para quem deseja conquistar autonomia emocional e felicidade real no amor."
+                            },
+                            {
+                                icon: <MessageCircle size={20} />,
+                                title: "Medo do Julgamento",
+                                text: "Para quem trava na hora de se expressar por medo do que vão pensar."
+                            },
+                            {
+                                icon: <Sparkles size={20} />,
+                                title: "Insegurança",
+                                text: "Para quem quer resgatar a mulher confiante que existe por dentro."
+                            },
+                            {
+                                icon: <CreditCard size={20} />,
+                                title: "Vida Financeira",
+                                text: "Para mulheres que querem desbloquear padrões que impedem a abundância."
+                            },
+                            {
+                                icon: <Clock size={20} />,
+                                title: "Foco e Equilíbrio",
+                                text: "Para quem vive ansiosa e quer ter controle sobre sua rotina e emoções."
+                            }
                         ].map((item, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-[#FFFBF9] p-8 rounded-3xl border border-secondary/5 h-full flex items-center justify-center text-center hover:shadow-md transition-shadow"
+                                transition={{ delay: i * 0.05 }}
+                                whileHover={{ y: -5 }}
+                                className="group relative bg-gradient-to-br from-[#1A0F0D] to-[#2D1A17] p-6 rounded-[1.5rem] border border-white/5 hover:border-primary/30 transition-all duration-300 shadow-xl"
                             >
-                                <p className="text-gray-700 font-bold leading-relaxed">{item}</p>
+                                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white mb-4 shadow-lg shadow-primary/20">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                                <p className="text-white/50 text-sm leading-relaxed">{item.text}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -347,55 +387,69 @@ const Portal: React.FC = () => {
             </section>
 
             {/* --- FEATURES SECTION --- */}
-            <section className="py-24 bg-[#FFFBF9]">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-6">
-                        <div className="max-w-2xl">
-                            <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <section className="py-16 bg-[#1A0F0D] relative overflow-hidden">
+                {/* Decorative background elements */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
+
+                <div className="max-w-6xl mx-auto px-4 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between mb-12 gap-6 text-center lg:text-left">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-xl"
+                        >
+                            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
                                 NA PRÁTICA, <br />
-                                <span className="text-secondary italic">COMO FUNCIONA O PORTAL?</span>
+                                <span className="text-primary uppercase tracking-tight">COMO FUNCIONA O PORTAL?</span>
                             </h2>
-                            <p className="text-lg text-gray-600 leading-relaxed">
+                            <p className="text-base text-white/60 leading-relaxed">
                                 O Portal das Bellas é um espaço vivo que está sempre sendo atualizado. Veja tudo o que você terá acesso imediato:
                             </p>
-                        </div>
-                        <div className="bg-secondary/10 px-6 py-3 rounded-2xl flex items-center space-x-3 shrink-0">
-                            <Clock className="text-secondary" />
-                            <span className="text-secondary font-bold text-sm uppercase tracking-widest">Acesso Imediato</span>
-                        </div>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="bg-primary px-6 py-3 rounded-xl flex items-center space-x-3 shrink-0 shadow-lg"
+                        >
+                            <Clock className="text-white w-4 h-4" />
+                            <span className="text-white font-bold text-xs uppercase tracking-[0.2em]">Acesso Imediato</span>
+                        </motion.div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
                             {
-                                icon: <Users size={28} />,
-                                title: "Meditações guiadas semanais",
-                                detail: "Ao vivo e gravadas. Para você ter equilíbrio emocional e conseguir ser próspera até nos momentos difíceis."
+                                icon: <Users size={24} />,
+                                title: "Meditações guiadas",
+                                detail: "Ao vivo e gravadas. Para você ter equilíbrio emocional e ser próspera no caos."
                             },
                             {
-                                icon: <Video size={28} />,
-                                title: "Aulas ao vivo quinzenais",
-                                detail: "Com aprofundamento sobre relacionamentos, dinâmicas sistêmicas, posicionamento… tudo para você ter um relacionamento leve."
+                                icon: <Video size={24} />,
+                                title: "Aulas ao vivo",
+                                detail: "Aprofundamento quinzenal sobre relações e dinâmicas sistêmicas para um amor leve."
                             },
                             {
-                                icon: <BookOpen size={28} />,
+                                icon: <BookOpen size={24} />,
                                 title: "Clube do Livro",
-                                detail: "Com leituras selecionadas para você desenvolver sua mentalidade e prosperidade financeira."
+                                detail: "Leituras selecionadas para desenvolver sua mentalidade e prosperidade financeira."
                             },
                             {
-                                icon: <Sparkles size={28} />,
-                                title: "Aulas complementares gravadas",
-                                detail: "Entenda seus traumas, desbloqueie padrões financeiros e transforme-se na sua versão magnética e autoconfiante."
+                                icon: <Sparkles size={24} />,
+                                title: "Aulas gravadas",
+                                detail: "Entenda seus traumas e transforme-se na sua versão magnética e autoconfiante."
                             },
                             {
-                                icon: <ArrowRight size={28} />,
+                                icon: <ArrowRight size={24} />,
                                 title: "Desafios semanais",
-                                detail: "Para aplicar na vida real e ter resultados tangíveis e visíveis na sua vida financeira e em seus relacionamentos."
+                                detail: "Aplicações práticas para resultados visíveis em finanças e relacionamentos."
                             },
                             {
-                                icon: <Heart size={28} />,
-                                title: "Práticas de alinhamento energético",
-                                detail: "Saia do modo sobrevivência e sinta-se presente e disposta para as conquistas do seu dia a dia."
+                                icon: <Heart size={24} />,
+                                title: "Alinhamento energético",
+                                detail: "Saia do modo sobrevivência e sinta-se disposta para as conquistas do dia."
                             }
                         ].map((feature, i) => (
                             <motion.div
@@ -403,104 +457,51 @@ const Portal: React.FC = () => {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:border-secondary/20 transition-colors"
+                                transition={{ delay: i * 0.05 }}
+                                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                                className="group relative bg-white/5 backdrop-blur-sm p-6 rounded-[1.5rem] border border-white/10 hover:border-primary/40 transition-all duration-300"
                             >
-                                <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-6 italic">
+                                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                                <p className="text-gray-600 text-base leading-relaxed">{feature.detail}</p>
+                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{feature.title}</h3>
+                                <p className="text-white/50 text-sm leading-relaxed">{feature.detail}</p>
                             </motion.div>
                         ))}
 
-                        {/* Special Features */}
-                        <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                            <div className="bg-gradient-to-br from-[#1A0F0D] to-black text-white p-8 rounded-[2rem] flex items-center justify-between group overflow-hidden relative">
-                                <div className="relative z-10">
-                                    <h3 className="text-xl font-bold mb-2">Convidados especiais</h3>
-                                    <p className="text-white/60">Trazendo visões que complementam e enriquecem a travessia.</p>
+                        {/* Special Features Overlay Cards */}
+                        <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                            <motion.div
+                                whileHover={{ scale: 1.01 }}
+                                className="bg-gradient-to-br from-[#241512] to-[#1A0F0D] p-6 rounded-[1.5rem] flex items-center justify-between group relative border border-white/5 hover:border-secondary/30 transition-all"
+                            >
+                                <div className="z-10">
+                                    <h3 className="text-lg font-bold text-white mb-1">Convidados especiais</h3>
+                                    <p className="text-white/40 text-sm">Visões que enriquecem a travessia.</p>
                                 </div>
-                                <div className="relative z-10 shrink-0 ml-4">
-                                    <Star className="text-primary group-hover:scale-110 transition-transform" size={40} />
+                                <div className="z-10 w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+                                    <Star size={24} fill="currentColor" />
                                 </div>
-                                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
-                            </div>
-                            <div className="bg-secondary/10 text-secondary p-8 rounded-[2rem] flex items-center justify-between group overflow-hidden relative border border-secondary/20">
-                                <div className="relative z-10">
-                                    <h3 className="text-xl font-bold mb-2">Descontos exclusivos</h3>
-                                    <p className="text-secondary/70">Em mentorias, cursos e experiências conduzidas por mim.</p>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.01 }}
+                                className="bg-gradient-to-br from-primary/20 to-primary/5 p-6 rounded-[1.5rem] flex items-center justify-between group relative border border-primary/20 hover:border-primary transition-all"
+                            >
+                                <div className="z-10">
+                                    <h3 className="text-lg font-bold text-white mb-1">Descontos exclusivos</h3>
+                                    <p className="text-white/40 text-sm">Em mentorias, cursos e experiências.</p>
                                 </div>
-                                <div className="relative z-10 shrink-0 ml-4">
-                                    <CreditCard className="group-hover:rotate-12 transition-transform" size={40} />
+                                <div className="z-10 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+                                    <CreditCard size={24} />
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* --- SOCIAL PROOF 2 --- */}
-            <section className="py-24 bg-white overflow-hidden">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6 italic underline decoration-secondary">
-                            MAS NÃO ACREDITE APENAS NO QUE EU TO FALANDO
-                        </h2>
-                        <p className="text-xl text-gray-500">Veja dezenas de mulheres vivendo isso:</p>
-                    </div>
 
-                    {/* Real Testimonial Images Scroll/Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {testimonials.map((t, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-white rounded-[2.5rem] shadow-xl border border-[#F46771]/10 flex flex-col relative overflow-hidden h-[540px] group"
-                            >
-                                <div className="absolute top-0 w-full p-4 flex justify-between items-start z-10">
-                                    <div className="bg-[#F46771] text-white p-3 rounded-xl shadow-lg">
-                                        <Quote size={20} />
-                                    </div>
-                                </div>
-
-                                <div className="flex-1 overflow-hidden relative cursor-pointer" onClick={() => setSelectedTestimonial(t)}>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-[1] h-full" />
-                                    {t.images && t.images.length > 0 && (
-                                        <img
-                                            src={t.images[0]}
-                                            alt={`Depoimento de ${t.author}`}
-                                            className="w-full h-full object-cover object-top opacity-90 transition-transform duration-700 group-hover:scale-105"
-                                        />
-                                    )}
-                                </div>
-
-                                <div className="p-8 relative z-10 bg-white border-t border-gray-50 flex flex-col justify-between">
-                                    <div className="mb-6">
-                                        <div className="flex text-yellow-400 mb-2">
-                                            {[...Array(5)].map((_, starIdx) => (
-                                                <Star key={starIdx} size={14} fill="currentColor" />
-                                            ))}
-                                        </div>
-                                        <h4 className="font-display text-2xl font-bold text-gray-900">{t.author}</h4>
-                                        <p className="text-secondary text-xs font-bold uppercase tracking-[0.2em] mt-1">{t.role}</p>
-                                    </div>
-                                    <button
-                                        onClick={() => setSelectedTestimonial(t)}
-                                        className="w-full flex items-center justify-center space-x-2 py-4 bg-gray-50 hover:bg-secondary/10 text-gray-700 hover:text-secondary rounded-2xl transition-all font-bold group"
-                                    >
-                                        <Eye size={20} className="group-hover:scale-110 transition-transform" />
-                                        <span>VER DEPOIMENTO COMPLETO</span>
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* --- CHECKOUT / PRICING SECTION --- */}
             <section id="checkout" className="py-24 bg-[#FFFBF9] relative overflow-hidden">
@@ -512,8 +513,8 @@ const Portal: React.FC = () => {
                         className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 -translate-y-10"
                     >
                         <div className="p-8 md:p-12 text-center">
-                            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Cruze o portal para sua nova vida</h2>
-                            <p className="text-gray-500 mb-10 italic">Depois que você atravessar o portal, sua vida nunca será a mesma.</p>
+                            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Atravesse o portal para sua nova vida</h2>
+                            <p className="text-gray-500 mb-10">Depois que você atravessar o portal, sua vida nunca será a mesma.</p>
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                                 {[
@@ -608,7 +609,7 @@ const Portal: React.FC = () => {
             <section className="py-24 bg-[#FFFBF9]">
                 <div className="max-w-3xl mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="font-display text-4xl font-bold mb-4 italic">FAQ</h2>
+                        <h2 className="font-display text-4xl font-bold mb-4">FAQ</h2>
                         <div className="w-12 h-1 bg-secondary mx-auto"></div>
                     </div>
 
