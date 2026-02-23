@@ -190,10 +190,10 @@ const Portal: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-white rounded-[2rem] shadow-md border border-secondary/10 overflow-hidden flex flex-col hover:shadow-xl transition-all h-[500px] group cursor-pointer"
+                                    className="bg-white rounded-[2rem] shadow-md border border-secondary/10 overflow-hidden flex flex-col hover:shadow-xl transition-all group cursor-pointer"
                                     onClick={() => setSelectedTestimonial(t)}
                                 >
-                                    <div className="relative flex-1 bg-gray-50 overflow-hidden">
+                                    <div className="relative aspect-square bg-gray-50 overflow-hidden">
                                         <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent z-[1]" />
                                         {t.images && t.images.length > 0 && (
                                             <img
@@ -216,7 +216,6 @@ const Portal: React.FC = () => {
                                         <div className="flex items-center justify-between">
                                             <div>
                                                 <span className="block text-sm font-bold text-gray-900">{t.author}</span>
-                                                <span className="block text-[10px] text-secondary font-medium uppercase tracking-wider">{t.role}</span>
                                             </div>
                                             <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
                                                 <Eye size={16} />
@@ -373,13 +372,13 @@ const Portal: React.FC = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
                                 whileHover={{ y: -5 }}
-                                className="group relative bg-gradient-to-br from-[#1A0F0D] to-[#2D1A17] p-6 rounded-[1.5rem] border border-white/5 hover:border-primary/30 transition-all duration-300 shadow-xl"
+                                className="group relative bg-[#D1523E] p-6 rounded-[1.5rem] border border-white/10 hover:shadow-2xl transition-all duration-300 shadow-xl"
                             >
-                                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white mb-4 shadow-lg shadow-primary/20">
+                                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white mb-4 shadow-sm">
                                     {item.icon}
                                 </div>
-                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                                <p className="text-white/50 text-sm leading-relaxed">{item.text}</p>
+                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-white/90 transition-colors">{item.title}</h3>
+                                <p className="text-white/80 text-sm leading-relaxed">{item.text}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -686,7 +685,6 @@ const Portal: React.FC = () => {
                             <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-20">
                                 <div>
                                     <h3 className="font-display text-3xl font-bold text-gray-900">{selectedTestimonial.author}</h3>
-                                    <p className="text-secondary text-sm font-bold uppercase tracking-widest mt-1">{selectedTestimonial.role}</p>
                                 </div>
                                 <button
                                     onClick={() => setSelectedTestimonial(null)}
