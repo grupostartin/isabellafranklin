@@ -544,7 +544,7 @@ const Portal: React.FC = () => {
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    href="https://link-de-pagamento-aqui.com"
+                                    href="https://pay.kiwify.com.br/Pk004Jy"
                                     className="w-full max-w-sm py-6 bg-secondary text-white font-bold text-2xl rounded-2xl shadow-xl shadow-secondary/30 flex items-center justify-center group"
                                 >
                                     QUERO ATRAVESSAR O PORTAL
