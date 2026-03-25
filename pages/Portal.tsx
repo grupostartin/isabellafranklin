@@ -49,13 +49,58 @@ const Portal: React.FC = () => {
             role: "Mentoria Individual",
             avatar: "C",
             images: ["/assets/testimonials/caroline.jpg"]
+        },
+        {
+            text: "Michelle, você é incrível! Sua jornada é inspiradora e seu crescimento me emociona. Gratidão por confiar nesse processo.",
+            author: "Michelle",
+            role: "Portal das Bellas",
+            avatar: "M",
+            images: [
+                "/assets/testimonials/michelle-2.jpg",
+                "/assets/testimonials/michelle-1.jpg"
+            ]
+        },
+        {
+            text: "Priscila, você chegou tão longe! Sua transformação é real e visível. Que honra acompanhar sua jornada.",
+            author: "Priscila",
+            role: "Portal das Bellas",
+            avatar: "P",
+            images: ["/assets/testimonials/priscila.jpg"]
+        },
+        {
+            text: "Nunca imaginei que em tão pouco tempo eu estaria tão diferente. O Portal mudou minha relação comigo mesma.",
+            author: "Portal das Bellas",
+            role: "Portal das Bellas",
+            avatar: "B",
+            images: ["/assets/images/6.jpeg"]
         }
     ];
 
     const [selectedTestimonial, setSelectedTestimonial] = React.useState<Testimonial | null>(null);
+    const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+
+    // Reset image index when modal opens
+    React.useEffect(() => {
+        if (selectedTestimonial) setCurrentImageIndex(0);
+    }, [selectedTestimonial]);
+
+    const nextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (selectedTestimonial?.images && currentImageIndex < selectedTestimonial.images.length - 1) {
+            setCurrentImageIndex(prev => prev + 1);
+        }
+    };
+
+    const prevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (currentImageIndex > 0) {
+            setCurrentImageIndex(prev => prev - 1);
+        }
+    };
 
     return (
         <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden">
+
 
             {/* --- HERO SECTION --- */}
             <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 px-4 overflow-hidden">
@@ -178,11 +223,11 @@ const Portal: React.FC = () => {
                         className="bg-[#D1523E] border border-secondary/10 rounded-[2.5rem] p-8 md:p-12 shadow-sm"
                     >
                         <p className="text-lg text-white mb-8 leading-relaxed">
-                            Hoje vivo do que eu amo, tenho um relacionamento incrível e me sinto cada vez mais feliz e realizada com a vida e com quem eu sou, hoje quero te ajudar a voltar pra você assim como elas voltaram:
+                            Hoje posso te provar que é possível viver uma vida onde você tem um relacionamento incrível e se sente cada vez mais feliz e realizada com a vida e com quem é. Quero te ajudar a voltar pra você assim como elas voltaram:
                         </p>
 
                         {/* Depoimentos / Testimonials Space */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                             {testimonials.map((t, i) => (
                                 <motion.div
                                     key={i}
@@ -535,11 +580,13 @@ const Portal: React.FC = () => {
 
                             <div className="flex flex-col items-center bg-gray-50/50 p-10 rounded-[2.5rem] border border-gray-100">
                                 <span className="text-gray-400 line-through text-2xl mb-2 font-light italic">De: R$ 997,00</span>
-                                <div className="flex items-center space-x-4 mb-2">
-                                    <span className="text-gray-900 font-bold text-lg uppercase tracking-tight mt-2">Por:</span>
-                                    <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 397,00</span>
+                                <div className="flex flex-col items-center mb-2">
+                                    <div className="flex items-baseline space-x-3">
+                                        <span className="text-gray-900 font-bold text-xl uppercase tracking-tight">12x de</span>
+                                        <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 41,06</span>
+                                    </div>
+                                    <span className="text-gray-500 text-lg font-medium mt-3">Ou R$ 397,00 <span className="underline">à vista</span></span>
                                 </div>
-                                <span className="text-gray-500 font-medium mb-10">Ou parcelado em 12x no cartão</span>
 
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}
@@ -680,36 +727,85 @@ const Portal: React.FC = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-white rounded-[2.5rem] max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative"
+                            className={`bg-white rounded-[2.5rem] ${selectedTestimonial.images && selectedTestimonial.images.length > 0 ? 'max-w-sm' : 'max-w-2xl'} w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative`}
                         >
-                            <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-20">
-                                <div>
-                                    <h3 className="font-display text-3xl font-bold text-gray-900">{selectedTestimonial.author}</h3>
+                            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-20">
+                                <div className="px-2">
+                                    <h3 className="font-display text-2xl font-bold text-gray-900 leading-tight">{selectedTestimonial.author}</h3>
+                                    <p className="text-secondary text-xs font-bold uppercase tracking-widest mt-0.5">{selectedTestimonial.role}</p>
                                 </div>
                                 <button
                                     onClick={() => setSelectedTestimonial(null)}
-                                    className="p-3 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-900"
+                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-900"
                                 >
-                                    <X size={28} />
+                                    <X size={24} />
                                 </button>
                             </div>
 
-                            <div className="p-8 overflow-y-auto custom-scrollbar">
+                            <div className="p-4 overflow-y-auto custom-scrollbar flex-1 relative bg-gray-50/30">
                                 {selectedTestimonial.images && selectedTestimonial.images.length > 0 ? (
-                                    <div className="space-y-6">
-                                        {selectedTestimonial.images.map((img, idx) => (
-                                            <img
-                                                key={idx}
-                                                src={img}
-                                                alt={`Depoimento de ${selectedTestimonial.author}`}
-                                                className="w-full h-auto rounded-3xl shadow-sm border border-gray-100"
-                                            />
-                                        ))}
-                                    </div>
+                                     <div className="relative group touch-none">
+                                         <div className="overflow-hidden rounded-2xl shadow-inner">
+                                             <motion.div
+                                                 className="flex"
+                                                 animate={{ x: `-${currentImageIndex * 100}%` }}
+                                                 transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                                                 drag="x"
+                                                 dragConstraints={{ left: 0, right: 0 }}
+                                                 onDragEnd={(e, { offset, velocity }) => {
+                                                     const swipe = Math.abs(offset.x) > 50 || Math.abs(velocity.x) > 200;
+                                                     if (swipe) {
+                                                         if (offset.x < 0) nextImage(e as any);
+                                                         else prevImage(e as any);
+                                                     }
+                                                 }}
+                                             >
+                                                 {selectedTestimonial.images.map((img, idx) => (
+                                                     <div key={idx} className="min-w-full flex items-start justify-center">
+                                                         <img
+                                                             src={img}
+                                                             alt={`Parte ${idx + 1}`}
+                                                             className="w-full h-auto object-contain"
+                                                         />
+                                                     </div>
+                                                 ))}
+                                             </motion.div>
+                                         </div>
+
+                                         {selectedTestimonial.images.length > 1 && (
+                                             <>
+                                                 <div className="absolute top-1/2 -translate-y-1/2 -left-3 z-30">
+                                                     <button
+                                                         onClick={prevImage}
+                                                         className={`p-2 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === 0 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
+                                                     >
+                                                         <ArrowRight className="rotate-180" size={18} />
+                                                     </button>
+                                                 </div>
+                                                 <div className="absolute top-1/2 -translate-y-1/2 -right-3 z-30">
+                                                     <button
+                                                         onClick={nextImage}
+                                                         className={`p-3 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === selectedTestimonial.images.length - 1 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
+                                                     >
+                                                         <ArrowRight size={18} />
+                                                     </button>
+                                                 </div>
+                                                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex space-x-1.5 z-30">
+                                                     {selectedTestimonial.images.map((_, idx) => (
+                                                         <button
+                                                             key={idx}
+                                                             onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
+                                                             className={`w-1.5 h-1.5 rounded-full transition-all ${currentImageIndex === idx ? 'bg-secondary w-4' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                         />
+                                                     ))}
+                                                 </div>
+                                             </>
+                                         )}
+                                     </div>
                                 ) : (
-                                    <div className="relative">
-                                        <Quote className="absolute -top-4 -left-4 text-secondary/10 w-16 h-16 -z-10" />
-                                        <p className="text-gray-700 text-xl leading-relaxed italic whitespace-pre-line relative z-10">
+                                    <div className="p-6 relative">
+                                        <Quote className="absolute -top-2 -left-2 text-secondary/10 w-12 h-12 -z-10" />
+                                        <p className="text-gray-700 text-lg leading-relaxed italic whitespace-pre-line relative z-10">
                                             "{selectedTestimonial.text}"
                                         </p>
                                     </div>
