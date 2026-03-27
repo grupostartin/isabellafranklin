@@ -5,6 +5,7 @@ import LP from './pages/LP';
 import Portal from './pages/Portal';
 import Live from './pages/Live';
 import LiveThanks from './pages/LiveThanks';
+import IsaAdmin from './pages/IsaAdmin';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/portal" element={<Portal />} />
         <Route path="/live" element={<Live />} />
         <Route path="/live/obrigado" element={<LiveThanks />} />
+        <Route path="/isaadmin" element={<IsaAdmin />} />
       </Routes>
     </Router>
   );

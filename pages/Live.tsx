@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, Star, ArrowRight, CheckCircle, Search, ShieldCheck } from 'lucide-react';
 import { IMAGES } from '../constants';
 
+import { supabase } from '../lib/supabase';
+
 const Live: React.FC = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -11,13 +13,27 @@ const Live: React.FC = () => {
     const [phone, setPhone] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Add actual submit logic here if needed (e.g. ActiveCampaign, Mailchimp)
-        setTimeout(() => {
-            navigate('/live/obrigado');
-        }, 800);
+        
+        try {
+            const { error } = await supabase
+                .from('live_registrations')
+                .insert([{ name, email, phone }]);
+
+            if (error) {
+                console.error('Erro ao salvar registro:', error);
+                alert('Ocorreu um erro ao processar sua inscrição. Por favor, tente novamente.');
+            } else {
+                navigate('/live/obrigado');
+            }
+        } catch (err) {
+            console.error('Erro inesperado:', err);
+            alert('Algo deu errado. Tente novamente mais tarde.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -85,7 +101,7 @@ const Live: React.FC = () => {
                     <div className="flex items-center justify-center space-x-6 mb-8 text-primary">
                         <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
                             <Calendar className="w-5 h-5 mr-2" />
-                            <span className="font-bold tracking-tight">DIA 19.03</span>
+                            <span className="font-bold tracking-tight">DIA 15.04</span>
                         </div>
                         <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
                             <Clock className="w-5 h-5 mr-2" />

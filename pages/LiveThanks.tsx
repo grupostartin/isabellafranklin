@@ -60,7 +60,7 @@ const LiveThanks: React.FC = () => {
                     </div>
 
                     <motion.a
-                        href="https://chat.whatsapp.com/DKKkKww2E4O4xHjIQyP84H" // Placeholder group link
+                        href="https://chat.whatsapp.com/KJonCvQje00JMgNMudL2jZ?mode=gi_t" // Placeholder group link
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
