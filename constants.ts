@@ -15,4 +15,5 @@ export const IMAGES = {
   btn6: "/assets/images/6.jpeg",
   portalVideo: "/assets/images/portal_video.mp4",
   portalBackgroundVideo: "/assets/images/Video Project.mp4",
+  isabellaLive: "/assets/images/isabella-live.jpg",
 };
