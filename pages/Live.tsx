@@ -7,6 +7,102 @@ import { IMAGES } from '../constants';
 import { supabase } from '../lib/supabase';
 import { AnimatePresence } from 'framer-motion';
 
+interface RegistrationFormProps {
+    name: string;
+    setName: (val: string) => void;
+    email: string;
+    setEmail: (val: string) => void;
+    phone: string;
+    setPhone: (val: string) => void;
+    isSubmitting: boolean;
+    handleSubmit: (e: React.FormEvent) => void;
+    isPopup?: boolean;
+}
+
+const RegistrationForm = ({ 
+    name, 
+    setName, 
+    email, 
+    setEmail, 
+    phone, 
+    setPhone, 
+    isSubmitting, 
+    handleSubmit, 
+    isPopup = false 
+}: RegistrationFormProps) => (
+    <motion.div 
+        initial={isPopup ? {} : { opacity: 0, y: 20 }}
+        animate={isPopup ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`w-full max-w-md ${isPopup ? '' : 'bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 shadow-2xl'} relative`}
+    >
+        {!isPopup && <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-50 rounded-[2rem] -z-10" />}
+        
+        <div className={`flex items-center justify-center space-x-6 mb-8 text-primary ${isPopup ? 'scale-90' : ''}`}>
+            <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
+                <Calendar className="w-5 h-5 mr-2" />
+                <span className="font-bold tracking-tight">DIA 15.04</span>
+            </div>
+            <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
+                <Clock className="w-5 h-5 mr-2" />
+                <span className="font-bold tracking-tight">ÀS 19H30</span>
+            </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="relative group">
+                <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Digite seu nome"
+                    className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
+                />
+            </div>
+            
+            <div className="relative group">
+                <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Digite seu melhor e-mail"
+                    className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
+                />
+            </div>
+
+            <div className="relative group flex">
+                <div className="bg-white/10 border border-white/20 border-r-0 rounded-l-xl px-4 py-4 flex items-center justify-center text-white/70">
+                    🇧🇷 +55
+                </div>
+                <input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Digite seu telefone"
+                    className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-r-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
+                />
+            </div>
+
+            <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full mt-6 py-5 rounded-xl font-bold text-lg md:text-xl transition-all flex items-center justify-center space-x-2 shadow-xl hover:shadow-primary/30 uppercase tracking-tight ${isSubmitting ? 'bg-primary/70 cursor-not-allowed scale-95' : 'bg-primary hover:bg-[#E35F4B] text-white hover:-translate-y-1'}`}
+            >
+                <span>{isSubmitting ? 'AGUARDE...' : 'TÔ DENTRO, QUERO PARTICIPAR'}</span>
+                {!isSubmitting && <ArrowRight className="w-6 h-6 ml-1" />}
+            </button>
+            
+            <div className="pt-3 flex items-center justify-center text-xs text-white/30 space-x-1">
+                <ShieldCheck size={14} />
+                <span>Seus dados estão seguros conosco.</span>
+            </div>
+        </form>
+    </motion.div>
+);
+
 const Live: React.FC = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -37,80 +133,6 @@ const Live: React.FC = () => {
             setIsSubmitting(false);
         }
     };
-
-    const RegistrationForm = ({ isPopup = false }: { isPopup?: boolean }) => (
-        <motion.div 
-            initial={isPopup ? {} : { opacity: 0, y: 20 }}
-            animate={isPopup ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className={`w-full max-w-md ${isPopup ? '' : 'bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 shadow-2xl'} relative`}
-        >
-            {!isPopup && <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-50 rounded-[2rem] -z-10" />}
-            
-            <div className={`flex items-center justify-center space-x-6 mb-8 text-primary ${isPopup ? 'scale-90' : ''}`}>
-                <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    <span className="font-bold tracking-tight">DIA 15.04</span>
-                </div>
-                <div className="flex items-center bg-primary/10 px-4 py-2 rounded-xl">
-                    <Clock className="w-5 h-5 mr-2" />
-                    <span className="font-bold tracking-tight">ÀS 19H30</span>
-                </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative group">
-                    <input
-                        type="text"
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Digite seu nome"
-                        className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
-                    />
-                </div>
-                
-                <div className="relative group">
-                    <input
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Digite seu melhor e-mail"
-                        className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
-                    />
-                </div>
-
-                <div className="relative group flex">
-                    <div className="bg-white/10 border border-white/20 border-r-0 rounded-l-xl px-4 py-4 flex items-center justify-center text-white/70">
-                        🇧🇷 +55
-                    </div>
-                    <input
-                        type="tel"
-                        required
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Digite seu telefone"
-                        className="w-full bg-white/10 border border-white/20 focus:border-primary text-white rounded-r-xl px-5 py-4 outline-none transition-all placeholder:text-white/40 focus:bg-white/15"
-                    />
-                </div>
-
-                <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full mt-6 py-5 rounded-xl font-bold text-lg md:text-xl transition-all flex items-center justify-center space-x-2 shadow-xl hover:shadow-primary/30 uppercase tracking-tight ${isSubmitting ? 'bg-primary/70 cursor-not-allowed scale-95' : 'bg-primary hover:bg-[#E35F4B] text-white hover:-translate-y-1'}`}
-                >
-                    <span>{isSubmitting ? 'AGUARDE...' : 'TÔ DENTRO, QUERO PARTICIPAR'}</span>
-                    {!isSubmitting && <ArrowRight className="w-6 h-6 ml-1" />}
-                </button>
-                
-                <div className="pt-3 flex items-center justify-center text-xs text-white/30 space-x-1">
-                    <ShieldCheck size={14} />
-                    <span>Seus dados estão seguros conosco.</span>
-                </div>
-            </form>
-        </motion.div>
-    );
 
     return (
         <div className="font-body text-white bg-[#1A0F0D] min-h-screen overflow-x-hidden selection:bg-primary selection:text-white">
@@ -151,7 +173,17 @@ const Live: React.FC = () => {
                                 <p className="text-white/60">Preencha seus dados abaixo para garantir sua vaga gratuita na aula VIP.</p>
                             </div>
 
-                            <RegistrationForm isPopup />
+                            <RegistrationForm 
+                                isPopup 
+                                name={name}
+                                setName={setName}
+                                email={email}
+                                setEmail={setEmail}
+                                phone={phone}
+                                setPhone={setPhone}
+                                isSubmitting={isSubmitting}
+                                handleSubmit={handleSubmit}
+                            />
                         </motion.div>
                     </div>
                 )}
@@ -167,10 +199,13 @@ const Live: React.FC = () => {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="mb-8 flex items-center bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 shadow-xl"
+                            className="mb-8 flex items-center bg-primary/15 backdrop-blur-md px-6 py-2.5 rounded-full border border-primary/50 shadow-[0_0_25px_rgba(233,122,1,0.2)] hover:shadow-[0_0_35px_rgba(233,122,1,0.4)] transition-all duration-300 group cursor-default"
                         >
-                            <Star className="text-secondary w-5 h-5 mr-3 fill-secondary animate-pulse" />
-                            <span className="text-secondary font-bold uppercase tracking-[0.2em] text-sm">Aula VIP • Online e Gratuita</span>
+                            <div className="relative mr-3">
+                                <div className="absolute inset-0 bg-primary blur-md rounded-full opacity-50 animate-pulse" />
+                                <Star className="text-primary w-5 h-5 fill-primary relative z-10 group-hover:scale-110 transition-transform" />
+                            </div>
+                            <span className="text-primary font-bold uppercase tracking-[0.2em] text-xs md:text-sm">Aula VIP • 100% Online e Gratuita</span>
                         </motion.div>
 
                         <motion.h1 
@@ -250,7 +285,16 @@ const Live: React.FC = () => {
                         </motion.div>
 
                         {/* Registration Form */}
-                        <RegistrationForm />
+                        <RegistrationForm 
+                            name={name}
+                            setName={setName}
+                            email={email}
+                            setEmail={setEmail}
+                            phone={phone}
+                            setPhone={setPhone}
+                            isSubmitting={isSubmitting}
+                            handleSubmit={handleSubmit}
+                        />
                     </div>
                 </div>
             </section>
@@ -310,7 +354,7 @@ const Live: React.FC = () => {
                                 <span className="text-secondary italic">MAIS PRÓSPERA DE SI</span>
                             </h2>
                             <p className="text-xl text-white/80 max-w-2xl mb-12">
-                                Aprenda como se posicionar na vida e nos relacionamentos para conquistar o sucesso que te espera em 2026.
+                                Aprenda como se posicionar na vida e nos relacionamentos para conquistar o sucesso que te espera em 2026 na nossa aula <span className="text-primary font-bold">100% GRATUITA E ONLINE!</span>
                             </p>
 
                             <button
