@@ -66,6 +66,13 @@ const Portal: React.FC = () => {
             role: "Portal das Bellas",
             avatar: "P",
             images: ["/assets/testimonials/priscila.jpg"]
+        },
+        {
+            text: "Isa, ontem ele veio pra Sorriso e me pediu em namoro. Chegou com flores, me deu um urso e, naquele momento, eu só conseguia lembrar de tudo que a gente conversou... e ontem, depois de oito meses, se concretizou. Sei que essa transformação começou lá atrás, quando comecei a me posicionar diferente, a me enxergar diferente e a acreditar mais em mim. Sou muito grata por você e pelo seu propósito, porque você realmente muda a vida das mulheres.",
+            author: "Aluna do Portal",
+            role: "Portal das Bellas",
+            avatar: "A",
+            images: ["/assets/images/WhatsApp Image 2026-04-15 at 21.57.45.jpeg"]
         }
     ];
 
