@@ -66,13 +66,6 @@ const Portal: React.FC = () => {
             role: "Portal das Bellas",
             avatar: "P",
             images: ["/assets/testimonials/priscila.jpg"]
-        },
-        {
-            text: "Nunca imaginei que em tão pouco tempo eu estaria tão diferente. O Portal mudou minha relação comigo mesma.",
-            author: "Portal das Bellas",
-            role: "Portal das Bellas",
-            avatar: "B",
-            images: ["/assets/images/6.jpeg"]
         }
     ];
 
@@ -583,15 +576,15 @@ const Portal: React.FC = () => {
                                 <div className="flex flex-col items-center mb-2">
                                     <div className="flex items-baseline space-x-3">
                                         <span className="text-gray-900 font-bold text-xl uppercase tracking-tight">12x de</span>
-                                        <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 41,06</span>
+                                        <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 51,40</span>
                                     </div>
-                                    <span className="text-gray-500 text-lg font-medium mt-3">Ou R$ 397,00 <span className="underline">à vista</span></span>
+                                    <span className="text-gray-500 text-lg font-medium mt-3">Ou R$ 497,00 <span className="underline">à vista</span></span>
                                 </div>
 
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    href="https://pay.kiwify.com.br/Pk004Jy"
+                                    href="https://pay.kiwify.com.br/E6pfuZi"
                                     className="w-full max-w-sm py-6 bg-secondary text-white font-bold text-2xl rounded-2xl shadow-xl shadow-secondary/30 flex items-center justify-center group"
                                 >
                                     QUERO ATRAVESSAR O PORTAL
@@ -744,64 +737,64 @@ const Portal: React.FC = () => {
 
                             <div className="p-4 overflow-y-auto custom-scrollbar flex-1 relative bg-gray-50/30">
                                 {selectedTestimonial.images && selectedTestimonial.images.length > 0 ? (
-                                     <div className="relative group touch-none">
-                                         <div className="overflow-hidden rounded-2xl shadow-inner">
-                                             <motion.div
-                                                 className="flex"
-                                                 animate={{ x: `-${currentImageIndex * 100}%` }}
-                                                 transition={{ type: "spring", stiffness: 400, damping: 40 }}
-                                                 drag="x"
-                                                 dragConstraints={{ left: 0, right: 0 }}
-                                                 onDragEnd={(e, { offset, velocity }) => {
-                                                     const swipe = Math.abs(offset.x) > 50 || Math.abs(velocity.x) > 200;
-                                                     if (swipe) {
-                                                         if (offset.x < 0) nextImage(e as any);
-                                                         else prevImage(e as any);
-                                                     }
-                                                 }}
-                                             >
-                                                 {selectedTestimonial.images.map((img, idx) => (
-                                                     <div key={idx} className="min-w-full flex items-start justify-center">
-                                                         <img
-                                                             src={img}
-                                                             alt={`Parte ${idx + 1}`}
-                                                             className="w-full h-auto object-contain"
-                                                         />
-                                                     </div>
-                                                 ))}
-                                             </motion.div>
-                                         </div>
+                                    <div className="relative group touch-none">
+                                        <div className="overflow-hidden rounded-2xl shadow-inner">
+                                            <motion.div
+                                                className="flex"
+                                                animate={{ x: `-${currentImageIndex * 100}%` }}
+                                                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                                                drag="x"
+                                                dragConstraints={{ left: 0, right: 0 }}
+                                                onDragEnd={(e, { offset, velocity }) => {
+                                                    const swipe = Math.abs(offset.x) > 50 || Math.abs(velocity.x) > 200;
+                                                    if (swipe) {
+                                                        if (offset.x < 0) nextImage(e as any);
+                                                        else prevImage(e as any);
+                                                    }
+                                                }}
+                                            >
+                                                {selectedTestimonial.images.map((img, idx) => (
+                                                    <div key={idx} className="min-w-full flex items-start justify-center">
+                                                        <img
+                                                            src={img}
+                                                            alt={`Parte ${idx + 1}`}
+                                                            className="w-full h-auto object-contain"
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </motion.div>
+                                        </div>
 
-                                         {selectedTestimonial.images.length > 1 && (
-                                             <>
-                                                 <div className="absolute top-1/2 -translate-y-1/2 -left-3 z-30">
-                                                     <button
-                                                         onClick={prevImage}
-                                                         className={`p-2 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === 0 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
-                                                     >
-                                                         <ArrowRight className="rotate-180" size={18} />
-                                                     </button>
-                                                 </div>
-                                                 <div className="absolute top-1/2 -translate-y-1/2 -right-3 z-30">
-                                                     <button
-                                                         onClick={nextImage}
-                                                         className={`p-3 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === selectedTestimonial.images.length - 1 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
-                                                     >
-                                                         <ArrowRight size={18} />
-                                                     </button>
-                                                 </div>
-                                                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex space-x-1.5 z-30">
-                                                     {selectedTestimonial.images.map((_, idx) => (
-                                                         <button
-                                                             key={idx}
-                                                             onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
-                                                             className={`w-1.5 h-1.5 rounded-full transition-all ${currentImageIndex === idx ? 'bg-secondary w-4' : 'bg-gray-300 hover:bg-gray-400'}`}
-                                                         />
-                                                     ))}
-                                                 </div>
-                                             </>
-                                         )}
-                                     </div>
+                                        {selectedTestimonial.images.length > 1 && (
+                                            <>
+                                                <div className="absolute top-1/2 -translate-y-1/2 -left-3 z-30">
+                                                    <button
+                                                        onClick={prevImage}
+                                                        className={`p-2 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === 0 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
+                                                    >
+                                                        <ArrowRight className="rotate-180" size={18} />
+                                                    </button>
+                                                </div>
+                                                <div className="absolute top-1/2 -translate-y-1/2 -right-3 z-30">
+                                                    <button
+                                                        onClick={nextImage}
+                                                        className={`p-3 rounded-full bg-white shadow-xl text-gray-900 border border-secondary/10 transition-all ${currentImageIndex === selectedTestimonial.images.length - 1 ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 hover:scale-110 active:scale-95'}`}
+                                                    >
+                                                        <ArrowRight size={18} />
+                                                    </button>
+                                                </div>
+                                                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex space-x-1.5 z-30">
+                                                    {selectedTestimonial.images.map((_, idx) => (
+                                                        <button
+                                                            key={idx}
+                                                            onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
+                                                            className={`w-1.5 h-1.5 rounded-full transition-all ${currentImageIndex === idx ? 'bg-secondary w-4' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
                                 ) : (
                                     <div className="p-6 relative">
                                         <Quote className="absolute -top-2 -left-2 text-secondary/10 w-12 h-12 -z-10" />
