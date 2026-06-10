@@ -38,6 +38,7 @@ const LP2: React.FC = () => {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
 
   useEffect(() => {
+    document.body.classList.remove('loading');
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowStickyHeader(true);
@@ -183,14 +184,14 @@ const LP2: React.FC = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 right-0 bg-[#FFFBF9]/95 backdrop-blur-md z-50 border-b border-orange-100 shadow-md py-3 px-4 transition-all"
+            className="fixed top-0 left-0 right-0 bg-[#FFFBF9]/95 backdrop-blur-md z-50 border-b border-orange-100 shadow-md py-2.5 sm:py-3 px-3 sm:px-4 transition-all"
           >
             <div className="max-w-6xl mx-auto flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="font-display font-bold text-gray-900 text-sm md:text-base tracking-wide">Isabella Franklin</span>
-                <span className="text-xs text-secondary font-semibold uppercase tracking-wider hidden md:inline">Resgate de Si • Jornada 7 Dias</span>
+                <span className="font-display font-bold text-gray-900 text-xs sm:text-sm md:text-base tracking-wide">Isabella Franklin</span>
+                <span className="text-[10px] sm:text-xs text-secondary font-semibold uppercase tracking-wider hidden md:inline">Resgate de Si • Jornada 7 Dias</span>
               </div>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 sm:space-x-4">
                 <div className="hidden lg:flex items-center text-xs text-gray-500 font-medium space-x-1">
                   <ShieldCheck size={14} className="text-accent-green" />
                   <span>Garantia de 7 Dias</span>
@@ -198,7 +199,7 @@ const LP2: React.FC = () => {
                 <a
                   href="#oferta"
                   onClick={scrollToOffer}
-                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white text-xs md:text-sm font-bold py-2.5 px-5 md:px-7 rounded-xl shadow-glow-primary hover:shadow-lg transition-all transform hover:scale-105 duration-200"
+                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white text-[10px] sm:text-xs md:text-sm font-bold py-2 sm:py-2.5 px-3 sm:px-5 md:px-7 rounded-lg sm:rounded-xl shadow-glow-primary hover:shadow-lg transition-all transform hover:scale-105 duration-200 whitespace-nowrap"
                 >
                   QUERO RESGATAR MEU PODER
                 </a>
@@ -209,7 +210,7 @@ const LP2: React.FC = () => {
       </AnimatePresence>
 
       {/* --- HERO / ABERTURA --- */}
-      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20 px-4 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
+      <section className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
         {/* Background Gradients */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-3xl"></div>
@@ -222,38 +223,38 @@ const LP2: React.FC = () => {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="flex flex-col space-y-6 lg:col-span-7"
+            className="flex flex-col space-y-5 sm:space-y-6 lg:col-span-7 items-center lg:items-start text-center lg:text-left"
           >
             <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full w-fit">
               <Sparkles size={14} className="text-secondary animate-pulse" />
-              <span className="text-secondary font-bold text-xs tracking-wider uppercase">Jornada de Transformação Imediata</span>
+              <span className="text-secondary font-bold text-[10px] sm:text-xs tracking-wider uppercase">Jornada de Transformação Imediata</span>
             </motion.div>
 
-            <motion.h1 variants={fadeInUp} className="font-display text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight font-bold">
+            <motion.h1 variants={fadeInUp} className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight font-bold">
               Você se perde pelo outro porque aprendeu que <span className="text-secondary italic">precisava</span>.
             </motion.h1>
             
-            <motion.h2 variants={fadeInUp} className="font-display text-2xl md:text-3xl text-primary font-semibold italic">
+            <motion.h2 variants={fadeInUp} className="font-display text-xl sm:text-2xl md:text-3xl text-primary font-semibold italic">
               É hora de aprender a se encontrar.
             </motion.h2>
 
-            <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl">
+            <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Nos próximos 7 dias você vai voltar a confiar em si mesma, resgatar o poder pessoal que existe em você e quebrar o ciclo de dependência.
             </motion.p>
 
-            <motion.div variants={fadeInUp} className="pt-4 flex flex-col space-y-4">
+            <motion.div variants={fadeInUp} className="pt-2 sm:pt-4 flex flex-col space-y-4 items-center lg:items-start w-full">
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 href="#oferta"
                 onClick={scrollToOffer}
-                className="inline-flex items-center justify-center px-8 py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 text-lg md:text-xl group hover:shadow-2xl hover:shadow-primary/30 transition-all w-full sm:w-fit text-center"
+                className="inline-flex items-center justify-center px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 text-base sm:text-lg md:text-xl group hover:shadow-2xl hover:shadow-primary/30 transition-all w-full sm:w-fit text-center"
               >
                 QUERO RESGATAR MEU PODER
-                <ArrowRight className="ml-2 group-hover:translate-x-1.5 transition-transform" />
+                <ArrowRight className="ml-2 group-hover:translate-x-1.5 transition-transform" size={18} />
               </motion.a>
               
-              <div className="flex flex-wrap gap-y-2 gap-x-6 text-sm text-gray-500 font-medium">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-y-2 gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-500 font-medium">
                 <span className="flex items-center">
                   <ShieldCheck size={16} className="text-accent-green mr-1.5" />
                   Garantia incondicional de 7 dias
@@ -271,9 +272,9 @@ const LP2: React.FC = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative flex justify-center lg:justify-end"
+            className="lg:col-span-5 relative flex justify-center lg:justify-end mt-4 lg:mt-0"
           >
-            <div className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
               <img
                 src={IMAGES.hero}
                 alt="Isabella Franklin"
@@ -287,14 +288,14 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
-              className="absolute -bottom-6 -left-4 md:-left-8 bg-white p-5 rounded-2xl shadow-2xl flex items-center space-x-3.5 max-w-[280px] border border-orange-50"
+              className="absolute -bottom-6 left-4 right-4 sm:left-auto sm:right-auto sm:-left-4 md:-left-8 bg-white p-4 sm:p-5 rounded-2xl shadow-2xl flex items-center space-x-3.5 max-w-[90%] sm:max-w-[280px] mx-auto sm:mx-0 border border-orange-50"
             >
-              <div className="bg-secondary/15 p-3 rounded-xl flex-shrink-0">
-                <Heart className="text-secondary fill-secondary" size={22} />
+              <div className="bg-secondary/15 p-2.5 sm:p-3 rounded-xl flex-shrink-0">
+                <Heart className="text-secondary fill-secondary" size={20} />
               </div>
               <div>
-                <p className="font-bold text-gray-900 leading-tight text-sm">Quebre o Ciclo</p>
-                <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">Rompa com o trauma transgeracional e resgate seu espaço.</p>
+                <p className="font-bold text-gray-900 leading-tight text-xs sm:text-sm">Quebre o Ciclo</p>
+                <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 leading-relaxed">Rompa com o trauma transgeracional e resgate seu espaço.</p>
               </div>
             </motion.div>
           </motion.div>
@@ -302,17 +303,17 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- PARA QUEM É --- */}
-      <section className="py-20 md:py-28 bg-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-28 bg-white relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Identificação</span>
-            <h2 className="font-display text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               Isso soa familiar <span className="text-primary italic">para você</span>?
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {situations.map((item, idx) => (
               <motion.div
                 key={idx}
@@ -320,14 +321,14 @@ const LP2: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="flex items-start space-x-4 p-6 bg-[#FFFBF9] rounded-2xl border border-orange-100 hover:border-primary/20 hover:shadow-md transition-all duration-300 group"
+                className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4 p-5 sm:p-6 bg-[#FFFBF9] rounded-2xl border border-orange-100 hover:border-primary/20 hover:shadow-md transition-all duration-300 group"
               >
-                <div className="bg-secondary/10 p-2.5 rounded-xl mt-0.5 flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
-                  <Eye size={20} className="text-secondary" />
+                <div className="bg-secondary/10 p-2 sm:p-2.5 rounded-xl flex-shrink-0 group-hover:bg-secondary/20 transition-colors mx-auto sm:mx-0">
+                  <Eye size={18} className="text-secondary sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 text-lg leading-snug">{item.bold}</h3>
-                  <p className="text-gray-600 mt-1.5 leading-relaxed text-sm md:text-base">{item.desc}</p>
+                <div className="flex flex-col items-center sm:items-start">
+                  <h3 className="font-bold text-gray-900 text-base sm:text-lg leading-snug">{item.bold}</h3>
+                  <p className="text-gray-600 mt-1 sm:mt-1.5 leading-relaxed text-xs sm:text-sm md:text-base">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -338,9 +339,9 @@ const LP2: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-12 p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl border-2 border-dashed border-primary/20 text-center"
+            className="mt-10 sm:mt-12 p-5 sm:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl border-2 border-dashed border-primary/20 text-center"
           >
-            <p className="text-gray-800 text-lg md:text-xl font-medium italic leading-relaxed">
+            <p className="text-gray-800 text-base sm:text-lg md:text-xl font-medium italic leading-relaxed">
               "Se você se reconheceu em alguma dessas situações, saiba: você não está quebrada. Você apenas foi programada para agir assim. E você está no lugar certo."
             </p>
           </motion.div>
@@ -348,31 +349,31 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- NARRATIVA DO PROBLEMA (A RAIZ) --- */}
-      <section className="py-20 md:py-28 bg-[#FFFBF9] relative overflow-hidden">
+      <section className="py-16 md:py-28 bg-[#FFFBF9] relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-48 h-96 bg-primary/5 rounded-r-full blur-3xl pointer-events-none"></div>
         <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-48 h-96 bg-secondary/5 rounded-l-full blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-5xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
-            <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 px-3.5 py-1.5 rounded-full">A Raiz Oculta</span>
-              <h2 className="font-display text-3xl md:text-4xl text-gray-900 font-bold leading-tight">
+            <div className="lg:col-span-6 space-y-4 sm:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 px-3.5 py-1.5 rounded-full w-fit">A Raiz Oculta</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-gray-900 font-bold leading-tight">
                 A culpa não é sua. É uma <span className="text-secondary italic">programação invisível</span>.
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-3"></div>
               
-              <p className="text-gray-600 leading-relaxed text-base md:text-lg">
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg font-light">
                 Você aprendeu desde a infância que, para ser aceita e amada, precisava ser a "boazinha", a "silenciosa", ou a "forte que resolve tudo". O amor tornou-se condicionado à sua utilidade ou anulação.
               </p>
-              <p className="text-gray-600 leading-relaxed text-base md:text-lg">
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg font-light">
                 Isso não é uma fraqueza de caráter. Isso se chama <strong className="text-gray-900 font-semibold">Trauma Transgeracional</strong>. São padrões emocionais, medos e feridas repetidos de mãe para filha, de geração em geração, operando no piloto automático do seu sistema familiar.
               </p>
             </div>
 
-            <div className="lg:col-span-6 bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-orange-50 space-y-6">
-              <h3 className="font-display text-2xl text-gray-900 font-bold mb-4">Você foi programada, mas pode se libertar:</h3>
+            <div className="lg:col-span-6 bg-white p-5 sm:p-8 md:p-10 rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-orange-50 space-y-5 sm:space-y-6">
+              <h3 className="font-display text-xl sm:text-2xl text-gray-900 font-bold mb-3 sm:mb-4">Você foi programada, mas pode se libertar:</h3>
               
               <div className="space-y-4">
                 {[
@@ -382,27 +383,26 @@ const LP2: React.FC = () => {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start space-x-3">
                     <div className="bg-[#7F9B52]/10 p-1.5 rounded-lg mt-1 flex-shrink-0">
-                      <Check className="text-accent-green" size={16} />
+                      <Check className="text-accent-green" size={14} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900 text-base">{item.title}</h4>
-                      <p className="text-gray-500 text-sm mt-1">{item.desc}</p>
+                      <h4 className="font-bold text-gray-900 text-sm sm:text-base">{item.title}</h4>
+                      <p className="text-gray-500 text-xs sm:text-sm mt-1">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2 sm:pt-4">
                 <a
                   href="#oferta"
                   onClick={scrollToOffer}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-md text-base hover:shadow-lg transition-all"
+                  className="w-full inline-flex items-center justify-center px-4 sm:px-6 py-3.5 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-md text-sm sm:text-base hover:shadow-lg transition-all text-center"
                 >
                   QUERO REESCREVER MEUS PADRÕES
                 </a>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -416,10 +416,10 @@ const LP2: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 relative z-10">
           <div className="text-center mb-16 md:mb-20">
             <span className="text-xs text-primary font-bold uppercase tracking-widest bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full">O Método</span>
-            <h2 className="font-display text-3xl md:text-5xl font-bold mt-4 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mt-4 leading-tight">
               A Jornada de 7 Dias para <span className="text-primary italic">Resgatar Seu Poder</span>
             </h2>
-            <p className="mt-4 text-white/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="mt-4 text-white/60 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
               Assista ou escute a uma aula rápida e execute uma ativação diária prática estruturada em 3 atos para transformar sua postura de dentro para fora.
             </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-6"></div>
@@ -429,8 +429,8 @@ const LP2: React.FC = () => {
             {curriculum.map((actGroup, actIdx) => (
               <div key={actIdx} className="space-y-6">
                 {/* Act Title */}
-                <h3 className="font-display text-xl md:text-2xl text-primary font-bold flex items-center space-x-3 border-b border-white/10 pb-3">
-                  <span className="bg-primary/25 text-primary text-xs px-2.5 py-1 rounded-md uppercase font-semibold">Fase {actIdx + 1}</span>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl text-primary font-bold flex items-center justify-center md:justify-start space-x-3 border-b border-white/10 pb-3">
+                  <span className="bg-primary/25 text-primary text-[10px] sm:text-xs px-2.5 py-1 rounded-md uppercase font-semibold">Fase {actIdx + 1}</span>
                   <span>{actGroup.act}</span>
                 </h3>
 
@@ -443,20 +443,20 @@ const LP2: React.FC = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: lessonIdx * 0.1 }}
-                      className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 md:p-8 rounded-3xl hover:bg-white/10 transition-colors flex flex-col justify-between"
+                      className="bg-white/5 backdrop-blur-sm border border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl hover:bg-white/10 transition-colors flex flex-col justify-between items-center md:items-start text-center md:text-left"
                     >
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
+                      <div className="flex flex-col items-center md:items-start w-full">
+                        <div className="flex items-center justify-between w-full mb-4">
                           <span className="text-xs font-bold uppercase tracking-widest text-[#7F9B52] bg-[#7F9B52]/10 px-3 py-1 rounded-full">
                             Dia 0{lesson.num}
                           </span>
                           <Clock size={15} className="text-white/30" />
                         </div>
-                        <h4 className="text-lg md:text-xl font-bold mb-2 text-white">{lesson.title}</h4>
+                        <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 text-white">{lesson.title}</h4>
                         <p className="text-white/80 text-xs italic mb-4 font-light leading-relaxed">
                           "{lesson.subtitle}"
                         </p>
-                        <p className="text-white/50 text-sm leading-relaxed font-light">
+                        <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-light">
                           {lesson.desc}
                         </p>
                       </div>
@@ -467,13 +467,13 @@ const LP2: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-12 sm:mt-16 flex justify-center w-full px-4 sm:px-0">
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#oferta"
               onClick={scrollToOffer}
-              className="inline-block px-10 py-5 bg-white text-secondary font-bold text-lg rounded-2xl shadow-glow hover:bg-gray-100 transition-colors"
+              className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-white text-secondary font-bold text-sm sm:text-base md:text-lg rounded-2xl shadow-glow hover:bg-gray-100 transition-colors"
             >
               INICIAR MINHA JORNADA DE 7 DIAS
             </motion.a>
@@ -498,8 +498,8 @@ const LP2: React.FC = () => {
             <div className="absolute bottom-10 -right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl -z-10"></div>
           </div>
 
-          <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Sua Mentora</span>
+          <div className="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full w-fit">Sua Mentora</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               A mulher posicionada que você quer ser começou na minha própria <span className="text-secondary italic">ruptura</span>.
             </h2>
@@ -517,11 +517,11 @@ const LP2: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-6 border-t border-gray-100 flex items-center space-x-5">
+            <div className="pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-5 w-full justify-center lg:justify-start">
               <div className="flex-shrink-0">
                 <img src={IMAGES.signature} alt="Assinatura Isabella Franklin" className="h-10 opacity-60 md:h-12" />
               </div>
-              <div>
+              <div className="flex flex-col items-center lg:items-start">
                 <p className="text-sm font-bold text-gray-900 uppercase tracking-wide">Isabella Franklin</p>
                 <p className="text-xs text-gray-500 font-medium">Terapeuta Sistêmica e Mentora de Mulheres</p>
               </div>
@@ -532,38 +532,38 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- PROVA SOCIAL / DEPOIMENTOS --- */}
-      <section className="py-20 md:py-28 bg-[#FFFBF9] relative overflow-hidden border-t border-orange-50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-28 bg-[#FFFBF9] relative overflow-hidden border-t border-orange-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-accent-green font-bold uppercase tracking-widest bg-[#7F9B52]/10 px-3.5 py-1.5 rounded-full">Histórias de Sucesso</span>
-            <h2 className="font-display text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               Os resultados de quem escolheu <span className="text-secondary under">se priorizar</span>:
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ y: -6 }}
-                className="bg-white p-8 rounded-3xl shadow-lg border border-orange-50/50 flex flex-col justify-between"
+                className="bg-white p-5 sm:p-8 rounded-3xl shadow-lg border border-orange-50/50 flex flex-col justify-between text-center md:text-left items-center md:items-start"
               >
-                <div>
-                  <div className="flex space-x-1 mb-5">
+                <div className="flex flex-col items-center md:items-start">
+                  <div className="flex space-x-1 mb-5 justify-center md:justify-start">
                     {[1, 2, 3, 4, 5].map(s => (
                       <Star key={s} size={15} className="fill-[#E97A01] text-[#E97A01]" />
                     ))}
                   </div>
-                  <p className="italic text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-light">
+                  <p className="italic text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed mb-6 font-light">
                     "{t.text}"
                   </p>
                 </div>
-                <div className="flex items-center space-x-3.5 pt-4 border-t border-gray-50">
-                  <div className="bg-secondary/15 text-secondary w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs">
+                <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-3.5 pt-4 border-t border-gray-50 w-full justify-center md:justify-start">
+                  <div className="bg-secondary/15 text-secondary w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">
                     {t.avatar}
                   </div>
-                  <div>
+                  <div className="flex flex-col items-center sm:items-start">
                     <p className="font-bold text-gray-900 text-sm">{t.name}</p>
                     <p className="text-xs text-gray-400 font-medium">{t.role}</p>
                   </div>
@@ -575,38 +575,38 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- O QUE VOCÊ VAI RECEBER (ÂNCORA DE VALOR) --- */}
-      <section className="py-20 bg-white relative">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-20 bg-white relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Conteúdo Completo</span>
-            <h2 className="font-display text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               O que você recebe ao <span className="text-primary italic">garantir seu acesso</span>:
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
           </div>
 
-          <div className="bg-[#FFFBF9] rounded-[2.5rem] p-6 md:p-10 border border-orange-100 shadow-md">
+          <div className="bg-[#FFFBF9] rounded-3xl sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 border border-orange-100 shadow-md">
             <div className="divide-y divide-orange-100/50">
               {deliverables.map((item, idx) => (
-                <div key={idx} className="py-5 flex items-center justify-between first:pt-0 last:pb-0">
-                  <div className="flex items-center space-x-3.5">
+                <div key={idx} className="py-4 sm:py-5 flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left gap-3 sm:gap-4 first:pt-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3.5">
                     <div className="bg-[#7F9B52]/10 p-1.5 rounded-lg flex-shrink-0">
-                      <Check className="text-accent-green" size={16} />
+                      <Check className="text-accent-green" size={14} />
                     </div>
-                    <span className="text-gray-800 font-medium text-sm md:text-base leading-snug">{item.name}</span>
+                    <span className="text-gray-800 font-medium text-xs sm:text-sm md:text-base leading-snug">{item.name}</span>
                   </div>
-                  <span className="text-gray-400 font-light text-sm line-through ml-4 flex-shrink-0">{item.value}</span>
+                  <span className="text-gray-400 font-light text-xs sm:text-sm line-through sm:ml-4 flex-shrink-0">{item.value}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-8 pt-8 border-t border-orange-100 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div>
+              <div className="text-center md:text-left">
                 <p className="text-xs uppercase tracking-widest text-gray-400 font-bold">Valor Total Somado:</p>
-                <p className="text-xl font-bold text-gray-500 line-through">R$ 738,00</p>
+                <p className="text-lg sm:text-xl font-bold text-gray-500 line-through">R$ 738,00</p>
               </div>
-              <div className="bg-secondary/10 px-5 py-3 rounded-2xl border border-secondary/20">
-                <span className="text-secondary font-bold text-sm md:text-base">
+              <div className="bg-secondary/10 px-4 sm:px-5 py-3 rounded-2xl border border-secondary/20 text-center">
+                <span className="text-secondary font-bold text-xs sm:text-sm md:text-base">
                   Economia Imediata de R$ 641,00 hoje!
                 </span>
               </div>
@@ -616,9 +616,9 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- OFERTA E PREÇO --- */}
-      <section id="oferta" className="py-20 bg-gradient-to-b from-white to-[#FFFBF9] relative scroll-mt-24">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-gradient-to-br from-[#1A0F0D] to-[#2D1B18] text-white rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10 text-center">
+      <section id="oferta" className="py-16 md:py-20 bg-gradient-to-b from-white to-[#FFFBF9] relative scroll-mt-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="bg-gradient-to-br from-[#1A0F0D] to-[#2D1B18] text-white rounded-3xl sm:rounded-[3rem] p-5 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10 text-center">
             
             {/* Absolute decorative star */}
             <div className="absolute top-6 right-6 opacity-20 animate-spin" style={{ animationDuration: '8s' }}>
@@ -629,10 +629,10 @@ const LP2: React.FC = () => {
               Oferta Especial de Lançamento
             </span>
 
-            <h3 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               Jornada Resgate de Si
             </h3>
-            <p className="text-white/60 text-sm md:text-base max-w-lg mx-auto mb-8 font-light leading-relaxed">
+            <p className="text-white/60 text-xs sm:text-sm md:text-base max-w-lg mx-auto mb-8 font-light leading-relaxed">
               O primeiro passo definitivo para quebrar o ciclo de carência transgeracional e começar a se posicionar com segurança e leveza.
             </p>
 
@@ -640,10 +640,10 @@ const LP2: React.FC = () => {
             <div className="bg-white/5 backdrop-blur-md rounded-2xl py-6 px-4 max-w-sm mx-auto mb-8 border border-white/5">
               <span className="text-white/50 text-xs uppercase tracking-widest font-semibold block">Por Apenas</span>
               <div className="flex items-center justify-center mt-2">
-                <span className="text-xl md:text-2xl font-bold text-primary mr-1">12x de</span>
-                <span className="text-4xl md:text-5xl font-display font-extrabold text-white">R$ 9,70</span>
+                <span className="text-base sm:text-xl md:text-2xl font-bold text-primary mr-1">12x de</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white">R$ 9,70</span>
               </div>
-              <span className="text-white/40 text-xs mt-2 block">ou R$ 97,00 à vista</span>
+              <span className="text-white/40 text-[10px] sm:text-xs mt-2 block">ou R$ 97,00 à vista</span>
             </div>
 
             {/* CTA Button */}
@@ -651,13 +651,13 @@ const LP2: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               href="https://wa.me/5531990622003"
-              className="w-full inline-flex items-center justify-center px-8 py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 text-lg group hover:shadow-2xl transition-all"
+              className="w-full inline-flex items-center justify-center px-4 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 text-sm sm:text-base md:text-lg group hover:shadow-2xl transition-all text-center"
             >
               COMEÇAR MINHA JORNADA AGORA
-              <ArrowRight className="ml-2.5 group-hover:translate-x-1.5 transition-transform" />
+              <ArrowRight className="ml-2 sm:ml-2.5 group-hover:translate-x-1.5 transition-transform" size={16} />
             </motion.a>
 
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/50 text-xs font-light">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/50 text-xs font-light">
               <span className="flex items-center">
                 <ShieldCheck size={16} className="text-accent-green mr-1.5 flex-shrink-0" />
                 Acesso Imediato à Plataforma
@@ -669,15 +669,15 @@ const LP2: React.FC = () => {
             </div>
 
             {/* Guarantee Section */}
-            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-left">
+            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-center md:text-left">
               <div className="md:col-span-3 flex justify-center">
-                <div className="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center border border-white/20">
-                  <span className="font-display font-bold text-2xl text-primary">7</span>
-                  <span className="text-xs uppercase text-white/70 font-semibold ml-0.5">Dias</span>
+                <div className="bg-white/10 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border border-white/20">
+                  <span className="font-display font-bold text-xl sm:text-2xl text-primary">7</span>
+                  <span className="text-[10px] sm:text-xs uppercase text-white/70 font-semibold ml-0.5">Dias</span>
                 </div>
               </div>
               <div className="md:col-span-9 space-y-2">
-                <h4 className="font-bold text-white text-base">Garantia Blindada de 7 Dias</h4>
+                <h4 className="font-bold text-white text-sm sm:text-base">Garantia Blindada de 7 Dias</h4>
                 <p className="text-white/60 text-xs leading-relaxed font-light">
                   Se por qualquer motivo você não se identificar com as aulas nos primeiros 7 dias de acesso, basta nos enviar um e-mail. Nós devolvemos 100% do seu investimento. Sem perguntas, sem estresse. O risco é todo meu.
                 </p>
@@ -689,11 +689,11 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- FAQ SECTION --- */}
-      <section className="py-20 md:py-28 bg-[#FFFBF9] border-t border-orange-50/50">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-28 bg-[#FFFBF9] border-t border-orange-50/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">FAQ</span>
-            <h2 className="font-display text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               Perguntas Frequentes
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
@@ -732,9 +732,9 @@ const LP2: React.FC = () => {
               >
                 <button
                   onClick={() => toggleFaq(i)}
-                  className="w-full text-left p-6 flex items-center justify-between focus:outline-none focus:ring-1 focus:ring-primary/20"
+                  className="w-full text-left p-4 sm:p-6 flex items-center justify-between focus:outline-none focus:ring-1 focus:ring-primary/20"
                 >
-                  <span className="font-bold text-gray-900 pr-4 text-base md:text-lg">{faq.q}</span>
+                  <span className="font-bold text-gray-900 pr-4 text-sm sm:text-base md:text-lg">{faq.q}</span>
                   {activeFaq === i ? (
                     <ChevronUp className="text-primary flex-shrink-0" size={18} />
                   ) : (
@@ -749,7 +749,7 @@ const LP2: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-6 pb-6 pt-1 text-gray-600 leading-relaxed text-sm md:text-base border-t border-orange-50 font-light">
+                      <div className="px-4 pb-4 sm:px-6 sm:pb-6 pt-1 text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base border-t border-orange-50 font-light">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -762,36 +762,36 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- CTA FINAL --- */}
-      <section className="py-24 bg-gradient-to-br from-[#1A0F0D] to-[#221310] text-white text-center relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-[#1A0F0D] to-[#221310] text-white text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="w-96 h-96 bg-primary rounded-full blur-[100px] absolute -bottom-10 -left-10"></div>
           <div className="w-96 h-96 bg-secondary rounded-full blur-[100px] absolute -top-10 -right-10"></div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-8">
-          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-6 sm:space-y-8">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold leading-tight">
             A mulher que você quer ser está esperando você dar o primeiro passo.
           </h2>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed">
             Você passou anos cuidando das necessidades do mundo inteiro. Chegou o momento de olhar de volta para si e recuperar a sua postura e o seu valor.
           </p>
 
-          <div className="pt-4">
+          <div className="pt-4 flex flex-col items-center justify-center w-full px-4 sm:px-0">
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="https://wa.me/5531990622003"
-              className="inline-flex items-center px-12 py-6 bg-white text-secondary font-bold text-xl rounded-2xl shadow-2xl hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-12 py-4 sm:py-6 bg-white text-secondary font-bold text-base sm:text-xl rounded-2xl shadow-2xl hover:bg-gray-50 transition-colors"
             >
               COMEÇAR MINHA JORNADA AGORA
               <ArrowRight className="ml-3" />
             </motion.a>
-            <p className="mt-4 text-xs text-white/40 font-light">
+            <p className="mt-4 text-[10px] sm:text-xs text-white/40 font-light">
               Pagamento seguro • Acesso imediato • Garantia incondicional de 7 dias
             </p>
           </div>
 
-          <div className="pt-8 text-white/60 italic font-light text-sm max-w-lg mx-auto border-t border-white/5">
+          <div className="pt-8 text-white/60 italic font-light text-xs sm:text-sm max-w-lg mx-auto border-t border-white/5">
             "Não tenha medo de perder quem só te amava quando você se desrespeitava para agradar. O resgate de si é o único caminho para a prosperidade e amor real."
             <span className="block mt-2 font-bold text-white not-italic text-xs uppercase tracking-wider">— Isabella Franklin</span>
           </div>

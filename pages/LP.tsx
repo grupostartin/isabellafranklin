@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, CheckCircle, ShieldCheck, ArrowRight, ChevronDown, Heart, Eye } from 'lucide-react';
 import { IMAGES } from '../constants';
@@ -17,6 +17,10 @@ const staggerContainer = {
 };
 
 const LP: React.FC = () => {
+    useEffect(() => {
+        document.body.classList.remove('loading');
+    }, []);
+
     return (
         <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden">
 
