@@ -219,30 +219,64 @@ const LP2: React.FC = () => {
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           {/* Text Content */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="flex flex-col space-y-5 sm:space-y-6 lg:col-span-7 items-center lg:items-start text-center lg:text-left"
-          >
-            <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full w-fit">
+          <div className="flex flex-col space-y-5 sm:space-y-6 lg:col-span-7 items-center lg:items-start text-center lg:text-left">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-2"
+            >
+              <img
+                src="/assets/images/logo.png"
+                alt="MANA Terapia e Mentoria"
+                className="h-10 sm:h-12 w-auto object-contain"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center space-x-2 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full w-fit"
+            >
               <Sparkles size={14} className="text-secondary animate-pulse" />
               <span className="text-secondary font-bold text-[10px] sm:text-xs tracking-wider uppercase">Jornada de Transformação Imediata</span>
             </motion.div>
 
-            <motion.h1 variants={fadeInUp} className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight font-bold">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight font-bold"
+            >
               Você se perde pelo outro porque aprendeu que <span className="text-secondary italic">precisava</span>.
             </motion.h1>
             
-            <motion.h2 variants={fadeInUp} className="font-display text-xl sm:text-2xl md:text-3xl text-primary font-semibold italic">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="font-display text-xl sm:text-2xl md:text-3xl text-primary font-semibold italic"
+            >
               É hora de aprender a se encontrar.
             </motion.h2>
 
-            <motion.p variants={fadeInUp} className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0"
+            >
               Nos próximos 7 dias você vai voltar a confiar em si mesma, resgatar o poder pessoal que existe em você e quebrar o ciclo de dependência.
             </motion.p>
 
-            <motion.div variants={fadeInUp} className="pt-2 sm:pt-4 flex flex-col space-y-4 items-center lg:items-start w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="pt-2 sm:pt-4 flex flex-col space-y-4 items-center lg:items-start w-full"
+            >
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
@@ -265,7 +299,7 @@ const LP2: React.FC = () => {
                 </span>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Presentation Image */}
           <motion.div
