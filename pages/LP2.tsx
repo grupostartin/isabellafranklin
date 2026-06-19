@@ -35,9 +35,68 @@ const staggerContainer = {
   }
 };
 
+interface CardSlideshowProps {
+  images: string[];
+  label: string;
+  subtitle: string;
+  onZoom: (src: string) => void;
+}
+
+const CardSlideshow: React.FC<CardSlideshowProps> = ({ images, label, subtitle, onZoom }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    // Add a random offset so that transitions across cards are not synchronized
+    const intervalTime = 4000 + Math.random() * 2000;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, intervalTime);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div 
+      onClick={() => onZoom(images[index])}
+      className="relative cursor-zoom-in rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-[#2D1B18] shadow-md hover:shadow-xl hover:border-primary/30 transition-all duration-500 group aspect-[9/16] w-28 sm:w-44 flex-shrink-0"
+    >
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={images[index]}
+          src={images[index]}
+          alt={`${label} - ${subtitle}`}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6 }}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+      </AnimatePresence>
+
+      {/* Dark Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none"></div>
+
+      {/* Zoom Icon indicator */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="bg-white/15 backdrop-blur-sm p-1.5 sm:p-2.5 rounded-full text-white shadow-lg border border-white/10">
+          <ZoomIn size={14} className="sm:w-[18px] sm:h-[18px]" />
+        </div>
+      </div>
+
+      {/* Text Overlay */}
+      <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4 pointer-events-none">
+        <h4 className="font-display font-black text-lg sm:text-2xl text-white tracking-wide uppercase leading-none">
+          {label}
+        </h4>
+        <p className="text-primary font-bold text-[9px] sm:text-[11px] tracking-wider sm:tracking-widest uppercase mt-0.5 sm:mt-1">
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const LP2: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<'dia_00' | 'dia_07' | 'dia_365' | 'novos'>('dia_00');
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [hasOrderBump, setHasOrderBump] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -77,11 +136,7 @@ const LP2: React.FC = () => {
   const finalPriceCash = hasOrderBump ? (basePriceCash + bumpPriceCash) : basePriceCash;
   const finalPriceInstallment = hasOrderBump ? (basePriceInstallment + bumpPriceInstallment) : basePriceInstallment;
 
-  // Custom checkout message for WhatsApp
-  const baseWhatsappMessage = "Olá Isabella! Quero entrar no Desafio Despertar das Bellas (Acesso Padrão).";
-  const bumpWhatsappMessage = "Olá Isabella! Quero entrar no Desafio Despertar das Bellas com o Acesso Triplicado (90 dias).";
-  
-  const checkoutUrl = `https://wa.me/5531990622003?text=${encodeURIComponent(hasOrderBump ? bumpWhatsappMessage : baseWhatsappMessage)}`;
+  const checkoutUrl = "https://pay.kiwify.com.br/fpFPUmF";
 
   const painPoints = [
     "Por que eu sempre faço tanto pelos outros e quase ninguém faz o mesmo por mim?",
@@ -215,6 +270,54 @@ const LP2: React.FC = () => {
         )}
       </AnimatePresence>
 
+      {/* --- BANNER DE DEPOIMENTOS (BANNER TOP DE TUDO) --- */}
+      <section className="py-8 sm:py-12 bg-[#1D110F] text-white relative z-25 border-b border-orange-950/20 shadow-lg">
+        {/* Glowing Background Lights */}
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
+          {/* Section Header */}
+          <div className="text-center mb-6 sm:mb-8 max-w-2xl">
+            <span className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
+              Minha Evolução
+            </span>
+            <h2 className="font-display text-xl sm:text-3xl font-bold mt-2 leading-tight text-white">
+              Do Medo ao Poder Pessoal
+            </h2>
+            <p className="mt-2 text-white/60 text-xs sm:text-sm leading-relaxed font-light">
+              Acompanhe a minha própria jornada e veja como o posicionamento transformou a minha vida do Dia 0 ao Dia 365.
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="flex justify-center items-center gap-3 sm:gap-6 w-full max-w-3xl">
+            <CardSlideshow 
+              images={tabImages.dia_00}
+              label="DIA 0"
+              subtitle="MEDO"
+              onZoom={setSelectedImage}
+            />
+            <CardSlideshow 
+              images={tabImages.dia_07}
+              label="DIA 7"
+              subtitle="CLAREZA"
+              onZoom={setSelectedImage}
+            />
+            <CardSlideshow 
+              images={tabImages.dia_365}
+              label="DIA 365"
+              subtitle="LIBERDADE"
+              onZoom={setSelectedImage}
+            />
+          </div>
+
+          <p className="text-[10px] text-white/35 mt-6 italic">
+            * Clique em qualquer imagem para ampliar.
+          </p>
+        </div>
+      </section>
+
       {/* --- HERO / ABERTURA --- */}
       <section className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
         {/* Background Gradients */}
@@ -258,7 +361,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight font-bold"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight font-bold"
             >
               Nos próximos <span className="text-primary italic">7 dias</span> você vai voltar a confiar em si mesma e <span className="text-secondary italic">despertar o poder pessoal</span> que existe em você
             </motion.h1>
@@ -267,7 +370,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light"
+              className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
             >
               Mulheres agradadoras se perdem pelo outro. Mulheres posicionadas atraem amor, prosperidade e a vida que desejam viver.
             </motion.p>
@@ -334,6 +437,8 @@ const LP2: React.FC = () => {
         </div>
       </section>
 
+
+
       {/* --- IDENTIFICAÇÃO / DORES --- */}
       <section className="py-16 md:py-24 bg-white relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
@@ -387,13 +492,13 @@ const LP2: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-10">
             <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 px-3.5 py-1.5 rounded-full w-fit">A Verdadeira Causa</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-gray-900 font-bold leading-tight mt-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-gray-900 font-bold leading-tight mt-4">
               E se o problema nunca tivesse sido você?
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
           </div>
 
-          <div className="space-y-6 text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed font-light text-justify max-w-3xl mx-auto">
+          <div className="space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed font-normal text-left max-w-3xl mx-auto">
             <p>
               Você não nasceu insegura. Você não nasceu dependendo da aprovação dos outros. E, definitivamente, não nasceu acreditando que precisava agradar para ser amada.
             </p>
@@ -570,6 +675,100 @@ const LP2: React.FC = () => {
               ))}
             </div>
 
+            {/* --- VISUALIZAÇÃO DOS MOCKUPS --- */}
+            <div className="mt-10 pt-8 border-t border-orange-100">
+              <p className="text-center font-display font-bold text-gray-900 text-lg sm:text-xl mb-6">
+                Visualização do Material:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                {/* Mockup 1: Meditação Portal do Renascimento */}
+                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/meditacao_renascimento.jpeg')}>
+                    <img 
+                      src="/assets/mockups/meditacao_renascimento.jpeg" 
+                      alt="Meditação Guiada Portal do Renascimento" 
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
+                        <ZoomIn size={16} />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-secondary font-bold uppercase tracking-wider bg-secondary/10 px-2.5 py-0.5 rounded">Meditação Guiada</span>
+                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Portal do Renascimento</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Meditação guiada completa para fortalecimento da autoconfiança.</p>
+                  </div>
+                </div>
+
+                {/* Mockup 2: Mapa das Crenças Invisíveis */}
+                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/exercicio_crencas.jpeg')}>
+                    <img 
+                      src="/assets/mockups/exercicio_crencas.jpeg" 
+                      alt="Mapa das Crenças Invisíveis" 
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
+                        <ZoomIn size={16} />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-accent-green font-bold uppercase tracking-wider bg-accent-green/10 px-2.5 py-0.5 rounded">Workbook Prático</span>
+                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Mapa das Crenças Invisíveis</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Exercício de identificação e reprogramação de crenças e padrões.</p>
+                  </div>
+                </div>
+
+                {/* Mockup 3: Meditação Uma Nova Mulher */}
+                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/meditacao_nova_mulher.jpeg')}>
+                    <img 
+                      src="/assets/mockups/meditacao_nova_mulher.jpeg" 
+                      alt="Meditação Guiada Uma Nova Mulher" 
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
+                        <ZoomIn size={16} />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-primary font-bold uppercase tracking-wider bg-primary/10 px-2.5 py-0.5 rounded">Áudio Bônus</span>
+                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Meditação: Uma Nova Mulher</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Bônus exclusivo para fortalecimento da identidade e posicionamento.</p>
+                  </div>
+                </div>
+
+                {/* Mockup 4: Plano Uma Nova Mulher */}
+                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/plano_nova_mulher.jpeg')}>
+                    <img 
+                      src="/assets/mockups/plano_nova_mulher.jpeg" 
+                      alt="Plano Uma Nova Mulher" 
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
+                        <ZoomIn size={16} />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-accent-green font-bold uppercase tracking-wider bg-accent-green/10 px-2.5 py-0.5 rounded">Planejador de Hábitos</span>
+                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Plano Uma Nova Mulher</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Guia de ações e escolhas diárias para construir sua nova identidade.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
             <div className="mt-8 pt-8 border-t border-orange-100 text-center">
               <p className="text-xs uppercase tracking-widest text-gray-400 font-bold">VALOR TOTAL DE TODOS OS ENTREGÁVEIS:</p>
               <p className="text-2xl sm:text-3xl font-bold text-gray-500 line-through mt-1">R$ 709,00</p>
@@ -577,7 +776,7 @@ const LP2: React.FC = () => {
                 Adquira hoje e economize mais de 90%
               </p>
               <p className="text-[10px] text-gray-400 mt-2 italic">
-                (imagens de mockups adicionais serão disponibilizadas em breve)
+                * Clique nos mockups acima para ampliá-los.
               </p>
             </div>
           </div>
@@ -629,99 +828,7 @@ const LP2: React.FC = () => {
         </div>
       </section>
 
-      {/* --- EVOLUÇÃO E DEPOIMENTOS (TABS INTERATIVAS) --- */}
-      <section className="py-20 md:py-24 bg-white relative overflow-hidden border-t border-orange-50/50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <span className="text-xs text-accent-green font-bold uppercase tracking-widest bg-accent-green/10 px-3.5 py-1.5 rounded-full">Provas do Desafio</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
-              A Evolução das Nossas Alunas
-            </h2>
-            <p className="mt-3 text-gray-500 max-w-xl mx-auto text-xs sm:text-sm md:text-base">
-              Relatos reais compartilhados no WhatsApp. Veja as transformações do começo ao longo do tempo.
-            </p>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
-          </div>
 
-          {/* Tab buttons */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8 bg-[#FFFBF9] p-2 rounded-2xl border border-orange-100 max-w-fit mx-auto">
-            <button
-              onClick={() => setActiveTab('dia_00')}
-              className={`px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${
-                activeTab === 'dia_00'
-                  ? 'bg-[#1A0F0D] text-white shadow-md'
-                  : 'text-gray-600 hover:text-primary hover:bg-orange-50/50'
-              }`}
-            >
-              Dia 00 (O Começo)
-            </button>
-            <button
-              onClick={() => setActiveTab('dia_07')}
-              className={`px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${
-                activeTab === 'dia_07'
-                  ? 'bg-[#1A0F0D] text-white shadow-md'
-                  : 'text-gray-600 hover:text-primary hover:bg-orange-50/50'
-              }`}
-            >
-              Dia 07 (Primeiros Passos)
-            </button>
-            <button
-              onClick={() => setActiveTab('dia_365')}
-              className={`px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${
-                activeTab === 'dia_365'
-                  ? 'bg-[#1A0F0D] text-white shadow-md'
-                  : 'text-gray-600 hover:text-primary hover:bg-orange-50/50'
-              }`}
-            >
-              Dia 365 (Resultados)
-            </button>
-            <button
-              onClick={() => setActiveTab('novos')}
-              className={`px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${
-                activeTab === 'novos'
-                  ? 'bg-[#1A0F0D] text-white shadow-md'
-                  : 'text-gray-600 hover:text-primary hover:bg-orange-50/50'
-              }`}
-            >
-              Mais Relatos
-            </button>
-          </div>
-
-          {/* Tab content */}
-          <div className="relative min-h-[300px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
-              >
-                {tabImages[activeTab].map((imgPath, index) => (
-                  <div
-                    key={index}
-                    onClick={() => setSelectedImage(imgPath)}
-                    className="relative cursor-zoom-in rounded-2xl overflow-hidden border border-orange-100 bg-[#FFFBF9] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group aspect-[9/16]"
-                  >
-                    <img
-                      src={imgPath}
-                      alt={`Depoimento ${index + 1}`}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full text-secondary shadow-lg">
-                        <ZoomIn size={20} />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
 
       {/* --- IMAGE DETAIL OVERLAY MODAL --- */}
       <AnimatePresence>
