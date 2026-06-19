@@ -11,7 +11,6 @@ import {
   Eye, 
   Sparkles, 
   Lock, 
-  Gift, 
   HelpCircle, 
   Clock, 
   Check,
@@ -98,7 +97,6 @@ const CardSlideshow: React.FC<CardSlideshowProps> = ({ images, label, subtitle, 
 const LP2: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
-  const [hasOrderBump, setHasOrderBump] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -126,15 +124,9 @@ const LP2: React.FC = () => {
     }
   };
 
-  // Base and order bump pricing
+  // Base pricing
   const basePriceCash = 57.00;
   const basePriceInstallment = 5.90;
-  
-  const bumpPriceCash = 32.00;
-  const bumpPriceInstallment = 3.31;
-
-  const finalPriceCash = hasOrderBump ? (basePriceCash + bumpPriceCash) : basePriceCash;
-  const finalPriceInstallment = hasOrderBump ? (basePriceInstallment + bumpPriceInstallment) : basePriceInstallment;
 
   const checkoutUrl = "https://pay.kiwify.com.br/fpFPUmF";
 
@@ -940,44 +932,6 @@ const LP2: React.FC = () => {
       <section id="oferta" className="py-20 md:py-24 bg-gradient-to-b from-white to-[#FFFBF9] relative scroll-mt-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
           
-          {/* ORDER BUMP CHECKBOX */}
-          <div className="bg-[#EBF7F2] rounded-3xl p-6 border-2 border-dashed border-[#7F9B52] shadow-sm relative overflow-hidden transition-all hover:shadow-md">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 relative z-10">
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-[#7F9B52] text-white p-3 rounded-2xl mt-1 md:mt-0 flex-shrink-0 flex items-center justify-center shadow-md shadow-accent-green/20">
-                  <Gift size={22} className="animate-bounce" />
-                </div>
-                <div>
-                  <h4 className="font-display font-extrabold text-gray-950 text-base sm:text-lg">
-                    Tenha acesso ao Desafio pelo triplo de tempo!
-                  </h4>
-                  <p className="text-accent-green font-bold text-xs uppercase tracking-wider mt-0.5">
-                    TRIPLIQUE SEU TEMPO DE ACESSO
-                  </p>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mt-2 font-light">
-                    O acesso padrão ao Desafio é de 30 dias. Ao selecionar esta oferta complementar, você estende o seu período para **90 dias** para rever as aulas e realizar os exercícios quantas vezes desejar.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex-shrink-0 w-full md:w-auto flex items-center justify-start md:justify-center">
-                <label className="flex items-center space-x-3 cursor-pointer bg-white px-5 py-3.5 rounded-2xl border border-orange-100 shadow-sm hover:border-[#7F9B52] transition-colors w-full justify-center md:w-auto">
-                  <input
-                    type="checkbox"
-                    checked={hasOrderBump}
-                    onChange={(e) => setHasOrderBump(e.target.checked)}
-                    className="w-5 h-5 rounded-md border-orange-200 text-[#7F9B52] focus:ring-[#7F9B52] cursor-pointer"
-                  />
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm whitespace-nowrap">
-                    Adicionar por apenas mais <span className="text-[#7F9B52]">R$ 3,31/mês</span>
-                  </span>
-                </label>
-              </div>
-
-            </div>
-          </div>
-
           {/* MAIN PRODUCT OFFER BOX */}
           <div className="bg-gradient-to-br from-[#1A0F0D] to-[#2D1B18] text-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10 text-center">
             
@@ -1003,17 +957,12 @@ const LP2: React.FC = () => {
               <div className="flex items-center justify-center mt-2">
                 <span className="text-base sm:text-xl md:text-2xl font-bold text-primary mr-1.5">12x de</span>
                 <span className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-white">
-                  R$ {finalPriceInstallment.toFixed(2).replace('.', ',')}
+                  R$ {basePriceInstallment.toFixed(2).replace('.', ',')}
                 </span>
               </div>
               <span className="text-white/40 text-xs mt-2 block">
-                ou R$ {finalPriceCash.toFixed(2).replace('.', ',')} à vista
+                ou R$ {basePriceCash.toFixed(2).replace('.', ',')} à vista
               </span>
-              {hasOrderBump && (
-                <div className="absolute -top-3 -right-3 bg-accent-green text-white font-extrabold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg">
-                  + 60 DIAS ADICIONADOS
-                </div>
-              )}
             </div>
 
             {/* CTA Button */}
