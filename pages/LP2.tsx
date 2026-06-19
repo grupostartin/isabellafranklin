@@ -319,16 +319,16 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- HERO / ABERTURA --- */}
-      <section className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
+      <section className="relative flex items-center justify-center pt-6 sm:pt-10 pb-16 sm:pb-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
         {/* Background Gradients */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+        <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
           {/* Text Content */}
-          <div className="flex flex-col space-y-5 sm:space-y-6 lg:col-span-7 items-center lg:items-start text-center lg:text-left">
+          <div className="flex flex-col space-y-5 sm:space-y-6 items-center text-center">
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -361,7 +361,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight font-bold"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight font-bold max-w-3xl"
             >
               Nos próximos <span className="text-primary italic">7 dias</span> você vai voltar a confiar em si mesma e <span className="text-secondary italic">despertar o poder pessoal</span> que existe em você
             </motion.h1>
@@ -370,7 +370,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
+              className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-2xl mx-auto font-normal"
             >
               Mulheres agradadoras se perdem pelo outro. Mulheres posicionadas atraem amor, prosperidade e a vida que desejam viver.
             </motion.p>
@@ -379,7 +379,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-2 sm:pt-4 flex flex-col space-y-4 items-center lg:items-start w-full"
+              className="pt-2 sm:pt-4 flex flex-col space-y-4 items-center w-full"
             >
               <button
                 onClick={scrollToOffer}
@@ -389,7 +389,7 @@ const LP2: React.FC = () => {
                 <ArrowRight className="ml-2 group-hover:translate-x-1.5 transition-transform" size={18} />
               </button>
               
-              <div className="flex flex-wrap justify-center lg:justify-start gap-y-2 gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-500 font-medium">
+              <div className="flex flex-wrap justify-center gap-y-2 gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-500 font-medium">
                 <span className="flex items-center">
                   <ShieldCheck size={16} className="text-accent-green mr-1.5" />
                   Garantia incondicional de 7 dias
@@ -401,39 +401,6 @@ const LP2: React.FC = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* Presentation Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative flex justify-center lg:justify-end mt-4 lg:mt-0"
-          >
-            <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
-              <img
-                src={IMAGES.hero}
-                alt="Isabella Franklin"
-                className="w-full h-full object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-            </div>
-
-            {/* Floating Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
-              className="absolute -bottom-6 left-4 right-4 sm:left-auto sm:right-auto sm:-left-4 md:-left-8 bg-white p-4 sm:p-5 rounded-2xl shadow-2xl flex items-center space-x-3.5 max-w-[90%] sm:max-w-[280px] mx-auto sm:mx-0 border border-orange-50"
-            >
-              <div className="bg-secondary/15 p-2.5 sm:p-3 rounded-xl flex-shrink-0">
-                <Heart className="text-secondary fill-secondary" size={20} />
-              </div>
-              <div>
-                <p className="font-bold text-gray-900 leading-tight text-xs sm:text-sm">Quebre o Ciclo</p>
-                <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 leading-relaxed">Rompa com o trauma transgeracional e resgate seu espaço.</p>
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
