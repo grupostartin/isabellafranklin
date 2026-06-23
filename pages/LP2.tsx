@@ -20,6 +20,7 @@ import {
   X
 } from 'lucide-react';
 import { IMAGES } from '../constants';
+import SplashScreenGold from '../components/SplashScreenGold';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -94,13 +95,75 @@ const CardSlideshow: React.FC<CardSlideshowProps> = ({ images, label, subtitle, 
   );
 };
 
+const WindowLightGlow: React.FC = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+    {/* Warm light source */}
+    <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_0%_10%,rgba(233,122,1,0.14),transparent_70%)]" />
+    {/* Window shadows */}
+    <div className="absolute top-[8%] left-0 w-[240px] h-[360px] opacity-[0.06] transform rotate-[15deg] -translate-x-12 select-none pointer-events-none">
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
+        <div className="bg-[#E97A01] blur-[3px]" />
+        <div className="bg-[#E97A01] blur-[3px]" />
+        <div className="bg-[#E97A01] blur-[3px]" />
+        <div className="bg-[#E97A01] blur-[3px]" />
+      </div>
+    </div>
+  </div>
+);
+
+const SunflowerOutline: React.FC<{ className?: string }> = ({ className = "absolute right-0 top-0 w-[280px] h-[280px] md:w-[380px] md:h-[380px]" }) => (
+  <div className={`${className} opacity-[0.03] text-[#E97A01] pointer-events-none select-none z-0`}>
+    <svg viewBox="0 0 100 100" className="w-full h-full stroke-current fill-none" strokeWidth="0.5">
+      <circle cx="50" cy="50" r="14" strokeDasharray="1 1" />
+      <circle cx="50" cy="50" r="9" />
+      {Array.from({ length: 24 }).map((_, i) => {
+        const angle = (i * 360) / 24;
+        return (
+          <path
+            key={i}
+            d="M 50 50 Q 46 25 50 15 Q 54 25 50 50"
+            transform={`rotate(${angle} 50 50)`}
+          />
+        );
+      })}
+    </svg>
+  </div>
+);
+
+const SpiralSeparator: React.FC = () => (
+  <div className="flex items-center justify-center my-10 sm:my-14 pointer-events-none select-none z-10 relative">
+    <div className="h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent w-full max-w-[180px] sm:max-w-[240px]" />
+    <div className="mx-4 relative flex items-center justify-center">
+      <div className="absolute w-7 h-7 rounded-full bg-primary/10 blur-sm" />
+      <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 text-primary relative z-10 fill-none stroke-current" strokeWidth="1.5">
+        <path d="M12 12c1-1 2.5-.5 2.5 1s-1.5 2-3 2-3.5-2.5-3.5-4.5 3-5.5 5.5-5.5 6 4 6 7-4.5 8-8 8-7-5.5-7-9.5C4.5 6 9.5 3.5 15 3.5" />
+      </svg>
+    </div>
+    <div className="h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent w-full max-w-[180px] sm:max-w-[240px]" />
+  </div>
+);
+
+const SparkleStars: React.FC = () => (
+  <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
+    <div className="absolute left-[5%] top-[15%] text-primary/30 animate-pulse" style={{ animationDuration: '3s' }}>
+      <Star size={12} className="fill-primary" />
+    </div>
+    <div className="absolute right-[8%] top-[40%] text-primary/45 animate-pulse" style={{ animationDuration: '4.5s' }}>
+      <Star size={16} className="fill-primary" />
+    </div>
+    <div className="absolute left-[12%] bottom-[20%] text-primary/35 animate-pulse" style={{ animationDuration: '3.5s' }}>
+      <Star size={14} className="fill-primary" />
+    </div>
+  </div>
+);
+
 const LP2: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    document.body.classList.remove('loading');
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowStickyHeader(true);
@@ -111,6 +174,11 @@ const LP2: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+    document.body.classList.remove('loading');
+  };
 
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -141,13 +209,68 @@ const LP2: React.FC = () => {
   ];
 
   const deliverables = [
-    { text: "7 aulas do Desafio da Mulher Posicionada", value: "R$ 197,00" },
-    { text: "Workbook completo de exercícios de destrave de ciclos", value: "R$ 97,00" },
-    { text: "Exercício de identificação de crenças e padrões", value: "R$ 87,00" },
-    { text: "Carta de libertação emocional", value: "R$ 67,00" },
-    { text: "Plano da Nova Mulher", value: "R$ 97,00" },
-    { text: "Meditação guiada de fortalecimento da autoconfiança", value: "R$ 77,00" },
-    { text: "BÔNUS: Meditação da Mulher Posicionada", value: "R$ 97,00", isBonus: true }
+    {
+      num: "01",
+      icon: "video",
+      badge: { label: "Aulas ao Vivo", color: "primary" },
+      title: "7 aulas ao vivo do Desafio da Mulher Posicionada",
+      description: "Aulas profundas e transformadoras para despertar sua nova consciência.",
+      value: "R$ 197,00",
+      image: "/assets/mockups/meditacao_renascimento.jpeg",
+      imageAlt: "7 Aulas ao Vivo"
+    },
+    {
+      num: "02",
+      icon: "book",
+      badge: { label: "Workbook", color: "accent-green" },
+      title: "Workbook completo de exercícios de destrave de ciclos",
+      description: "Exercícios práticos para quebrar padrões e destravar sua vida.",
+      value: "R$ 97,00",
+      image: "/assets/mockups/exercicio_crencas.jpeg",
+      imageAlt: "Workbook Destrave de Ciclos"
+    },
+    {
+      num: "03",
+      icon: "headphones",
+      badge: { label: "Meditações Guiadas", color: "secondary" },
+      title: "2 Meditações Guiadas",
+      description: "",
+      bullets: [
+        { label: "Meditação – Portal do Renascimento", detail: "para você se despedir da sua velha versão" },
+        { label: "Meditação – De volta para casa", detail: "para você conectar com sua essência" }
+      ],
+      value: "R$ 147,00",
+      image: "/assets/mockups/meditacao_renascimento.jpeg",
+      imageAlt: "Meditação Portal do Renascimento"
+    },
+    {
+      num: "04",
+      icon: "star",
+      badge: { label: "BÔNUS EXCLUSIVO", color: "primary" },
+      title: "1 Meditação Bônus – Uma Nova Mulher",
+      description: "",
+      bullets: [
+        { label: "Meditação – Uma Nova Mulher", detail: "Autoconfiante, Posicionada, no Seu Poder" }
+      ],
+      value: "R$ 97,00",
+      isBonus: true,
+      image: "/assets/mockups/meditacao_nova_mulher.jpeg",
+      imageAlt: "Meditação Uma Nova Mulher"
+    },
+    {
+      num: "05",
+      icon: "map",
+      badge: { label: "Exercícios Extras", color: "accent-green" },
+      title: "+ Exercícios Extras",
+      description: "",
+      bullets: [
+        { label: "Mapa do seu território", detail: "definindo limites" },
+        { label: "Mapa das Crenças que sabotam o seu poder", detail: "" }
+      ],
+      value: "R$ 87,00",
+      image: "/assets/mockups/plano_nova_mulher.jpeg",
+      imageAlt: "Exercícios Extras"
+    }
   ];
 
   const forYouList = [
@@ -228,7 +351,12 @@ const LP2: React.FC = () => {
   };
 
   return (
-    <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden antialiased select-none">
+    <>
+      <AnimatePresence>
+        {showSplash && <SplashScreenGold onComplete={handleSplashComplete} />}
+      </AnimatePresence>
+
+      <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden antialiased select-none">
       
       {/* --- STICKY CTA HEADER --- */}
       <AnimatePresence>
@@ -263,10 +391,11 @@ const LP2: React.FC = () => {
       </AnimatePresence>
 
       {/* --- BANNER DE DEPOIMENTOS (BANNER TOP DE TUDO) --- */}
-      <section className="py-8 sm:py-12 bg-[#1D110F] text-white relative z-25 border-b border-orange-950/20 shadow-lg">
-        {/* Glowing Background Lights */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+      <section className="py-8 sm:py-12 bg-[#0F0807] text-white relative z-20 border-b border-orange-950/20 shadow-lg overflow-hidden">
+        {/* Visual theme helpers */}
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute right-0 top-0 w-[240px] h-[240px] opacity-[0.03]" />
+        <SparkleStars />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
           {/* Section Header */}
@@ -311,12 +440,11 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- HERO / ABERTURA --- */}
-      <section className="relative flex items-center justify-center pt-6 sm:pt-10 pb-16 sm:pb-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FFFBF9] via-[#FFF8F5] to-[#FFFBF9]">
-        {/* Background Gradients */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl"></div>
-        </div>
+      <section className="relative flex items-center justify-center pt-8 sm:pt-14 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#0F0807] via-[#080403] to-[#0F0807] text-white">
+        {/* Visual theme helpers */}
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute right-0 bottom-0 w-[300px] h-[300px] md:w-[420px] md:h-[420px] opacity-[0.02]" />
+        <SparkleStars />
 
         <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
           {/* Text Content */}
@@ -331,7 +459,7 @@ const LP2: React.FC = () => {
               <img
                 src="/assets/images/logo.png"
                 alt="MANA Terapia e Mentoria"
-                className="h-10 sm:h-12 w-auto object-contain"
+                className="h-10 sm:h-12 w-auto object-contain brightness-0 invert"
                 onError={(e) => {
                   // Fallback if logo doesn't load
                   (e.target as HTMLElement).style.display = 'none';
@@ -343,17 +471,17 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center space-x-2 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full w-fit"
+              className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full w-fit"
             >
-              <Sparkles size={14} className="text-secondary animate-pulse" />
-              <span className="text-secondary font-bold text-[10px] sm:text-xs tracking-wider uppercase">DESAFIO DESPERTAR DAS BELLAS</span>
+              <Sparkles size={14} className="text-primary animate-pulse" />
+              <span className="text-primary font-bold text-[10px] sm:text-xs tracking-wider uppercase">DESAFIO DESPERTAR DAS BELLAS</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight font-bold max-w-3xl"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-tight font-bold max-w-3xl"
             >
               Nos próximos <span className="text-primary italic">7 dias</span> você vai voltar a confiar em si mesma e <span className="text-secondary italic">despertar o poder pessoal</span> que existe em você
             </motion.h1>
@@ -362,7 +490,7 @@ const LP2: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-2xl mx-auto font-normal"
+              className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto font-light"
             >
               Mulheres agradadoras se perdem pelo outro. Mulheres posicionadas atraem amor, prosperidade e a vida que desejam viver.
             </motion.p>
@@ -375,13 +503,13 @@ const LP2: React.FC = () => {
             >
               <button
                 onClick={scrollToOffer}
-                className="inline-flex items-center justify-center px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 text-base sm:text-lg md:text-xl group hover:shadow-2xl hover:shadow-primary/30 transition-all w-full sm:w-fit text-center"
+                className="inline-flex items-center justify-center px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 border border-primary/25 transition-all w-full sm:w-fit text-center group transform hover:scale-103 duration-200"
               >
                 QUERO DESPERTAR MEU PODER
                 <ArrowRight className="ml-2 group-hover:translate-x-1.5 transition-transform" size={18} />
               </button>
               
-              <div className="flex flex-wrap justify-center gap-y-2 gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-500 font-medium">
+              <div className="flex flex-wrap justify-center gap-y-2 gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-400 font-medium">
                 <span className="flex items-center">
                   <ShieldCheck size={16} className="text-accent-green mr-1.5" />
                   Garantia incondicional de 7 dias
@@ -399,7 +527,8 @@ const LP2: React.FC = () => {
 
 
       {/* --- IDENTIFICAÇÃO / DORES --- */}
-      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* --- IDENTIFICAÇÃO / DORES --- */}
+      <section className="py-16 md:py-24 bg-[#FDFBF7] relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Sintomas</span>
@@ -417,7 +546,7 @@ const LP2: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: idx * 0.05, duration: 0.5 }}
-                className="flex items-start space-x-4 p-5 sm:p-6 bg-[#FFFBF9] rounded-2xl border border-orange-100/60 hover:border-primary/20 hover:shadow-md transition-all duration-300 group"
+                className="flex items-start space-x-4 p-5 sm:p-6 bg-white rounded-2xl border border-orange-100/40 hover:border-primary/20 hover:shadow-md transition-all duration-300 group"
               >
                 <div className="bg-secondary/10 p-2 rounded-xl flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
                   <AlertCircle size={18} className="text-secondary" />
@@ -434,34 +563,37 @@ const LP2: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-10 sm:mt-12 p-5 sm:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl border-2 border-dashed border-primary/20 text-center"
+            className="mt-10 sm:mt-12 p-5 sm:p-8 bg-[#F9F6F0] rounded-3xl border border-orange-100/65 shadow-sm text-center"
           >
             <p className="text-gray-800 text-base sm:text-lg md:text-xl font-medium italic leading-relaxed">
               "Se você se identificou em alguma dessas situações, saiba: você não está quebrada. Você apenas foi programada para agir assim. E você está no lugar certo."
             </p>
           </motion.div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
       {/* --- NARRATIVA DO PROBLEMA --- */}
-      <section className="py-16 md:py-24 bg-[#FFFBF9] relative overflow-hidden border-t border-orange-50/50">
-        <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-48 h-96 bg-primary/5 rounded-r-full blur-3xl pointer-events-none"></div>
-        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-48 h-96 bg-secondary/5 rounded-l-full blur-3xl pointer-events-none"></div>
+      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute left-0 top-0 w-[285px] h-[285px] opacity-[0.02] transform -scale-x-100" />
+        <SparkleStars />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-10">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 px-3.5 py-1.5 rounded-full w-fit">A Verdadeira Causa</span>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-gray-900 font-bold leading-tight mt-4">
-              E se o problema nunca tivesse sido você?
+            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full w-fit">A Verdadeira Causa</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold leading-tight mt-4">
+              E se o problema nunca tivesse sido <span className="text-primary italic">você?</span>
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
           </div>
 
-          <div className="space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed font-normal text-left max-w-3xl mx-auto">
+          <div className="space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed font-light text-left max-w-3xl mx-auto">
             <p>
               Você não nasceu insegura. Você não nasceu dependendo da aprovação dos outros. E, definitivamente, não nasceu acreditando que precisava agradar para ser amada.
             </p>
-            <p className="font-normal text-gray-800 border-l-4 border-primary pl-4 py-1 bg-primary/5 rounded-r-xl">
+            <p className="font-semibold text-white border-l-4 border-primary pl-4 py-1.5 bg-primary/10 rounded-r-xl">
               Ao longo da vida, você foi sendo condicionada.
             </p>
             <p>
@@ -471,50 +603,48 @@ const LP2: React.FC = () => {
               E muitas dessas aprendizagens nasceram de dores, medos e padrões que foram passando de geração em geração. Sem perceber, você começou a viver seguindo regras que nunca escolheu.
             </p>
 
-            <div className="my-10 p-6 sm:p-8 bg-white rounded-3xl border border-orange-100 shadow-sm space-y-4">
-              <h3 className="font-display font-bold text-lg sm:text-xl text-gray-950 text-center md:text-left">O resultado?</h3>
-              <ul className="space-y-3 font-normal text-gray-800">
+            <div className="my-10 p-6 sm:p-8 bg-[#1C100E]/40 backdrop-blur-md rounded-3xl border border-primary/25 shadow-lg shadow-black/30 space-y-4">
+              <h3 className="font-display font-bold text-lg sm:text-xl text-white text-center md:text-left">O resultado?</h3>
+              <ul className="space-y-3 font-normal text-gray-200">
                 <li className="flex items-start space-x-2.5">
                   <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a cuidar de todo mundo. Mas ninguém te ensinou a cuidar de você.</span>
+                  <span>Te ensinaram a cuidar de todo mundo. Mas ninguém te ensinou a <span className="text-primary font-semibold">cuidar de você.</span></span>
                 </li>
                 <li className="flex items-start space-x-2.5">
                   <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a ser aceita. Mas não te ensinaram a descobrir quem você é.</span>
+                  <span>Te ensinaram a ser aceita. Mas não te ensinaram a <span className="text-primary font-semibold">descobrir quem você é.</span></span>
                 </li>
                 <li className="flex items-start space-x-2.5">
                   <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a agradar. Mas não te ensinaram a se escolher.</span>
+                  <span>Te ensinaram a agradar. Mas não te ensinaram a <span className="text-primary font-semibold">se escolher.</span></span>
                 </li>
               </ul>
             </div>
 
             <div className="text-center pt-4">
               <h4 className="font-display font-bold text-xl sm:text-2xl text-accent-green mb-2">A boa notícia?</h4>
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-white">
                 Tudo aquilo que foi aprendido pode ser desaprendido.
               </p>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-400 mt-1">
                 E é exatamente isso que vamos começar a fazer nos próximos 7 dias.
               </p>
             </div>
           </div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
       {/* --- O MÉTODO (OS 3 ATOS) --- */}
-      <section className="py-20 md:py-24 bg-[#1A0F0D] text-white relative overflow-hidden">
-        {/* Decorative background effects */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-[120px] opacity-[0.08] pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-[120px] opacity-[0.08] pointer-events-none"></div>
-
+      <section className="py-20 md:py-24 bg-[#FDFBF7] text-gray-800 relative overflow-hidden border-t border-orange-50/50">
         <div className="max-w-5xl mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full">O Método</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mt-4 leading-tight">
+            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full">O Método</span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               A Jornada de 7 Dias
             </h2>
-            <p className="mt-4 text-white/60 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
+            <p className="mt-4 text-gray-650 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed font-light">
               Estruturada rigorosamente em 3 atos para você reconstruir o seu posicionamento e resgatar o seu espaço vital.
             </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-6"></div>
@@ -527,17 +657,17 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:bg-white/10 transition-colors"
+              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/15 px-3 py-1 rounded-full inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
                   Ato 1 (Dias 1 & 2)
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-white">1. A PRISÃO INVISÍVEL</h3>
-                <p className="text-white/80 font-semibold italic text-xs mb-4">
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">1. A PRISÃO INVISÍVEL</h3>
+                <p className="text-gray-700 font-semibold italic text-xs mb-4">
                   "Entenda por que você se tornou uma mulher agradadora - e como isso impacta sua vida."
                 </p>
-                <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-light">
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
                   Nos dois primeiros dias você vai identificar os padrões, crenças e comportamentos que fazem você se apagar, agradar a todos e perder a confiança em si mesma. Essa é a raiz de tudo, e a maioria das mulheres nunca para para olhar para ela.
                 </p>
               </div>
@@ -549,17 +679,17 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:bg-white/10 transition-colors"
+              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/15 px-3 py-1 rounded-full inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
                   Ato 2 (Dias 3 & 4)
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-white">2. O DESPERTAR</h3>
-                <p className="text-white/80 font-semibold italic text-xs mb-4">
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">2. O DESPERTAR</h3>
+                <p className="text-gray-700 font-semibold italic text-xs mb-4">
                   "Identifique o que está impedindo você de viver a vida que deseja."
                 </p>
-                <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-light">
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
                   Em 2 dias você vai enxergar como suas feridas emocionais, seus condicionamentos e os padrões que você herdou estão moldando seus relacionamentos, sua autoestima e as escolhas que você faz todos os dias, muitas vezes sem perceber.
                 </p>
               </div>
@@ -571,17 +701,17 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:bg-white/10 transition-colors"
+              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/15 px-3 py-1 rounded-full inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
                   Ato 3 (Dias 5, 6 & 7)
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-white">3. UMA NOVA MULHER</h3>
-                <p className="text-white/80 font-semibold italic text-xs mb-4">
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">3. UMA NOVA MULHER</h3>
+                <p className="text-gray-700 font-semibold italic text-xs mb-4">
                   "Construa uma nova forma de se enxergar e se posicionar."
                 </p>
-                <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-light">
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
                   Nos últimos 3 dias você vai se tornar a nova mulher que sempre sonhou em ser, vai confiar mais em si mesma, estabelecer limites saudáveis e criar uma vida alinhada com quem você realmente é.
                 </p>
               </div>
@@ -591,164 +721,195 @@ const LP2: React.FC = () => {
           <div className="mt-12 flex justify-center">
             <button
               onClick={scrollToOffer}
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-secondary font-bold text-sm sm:text-base md:text-lg rounded-2xl shadow-glow hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white font-bold text-sm sm:text-base md:text-lg rounded-2xl shadow-xl shadow-primary/20 hover:shadow-2xl border border-primary/25 transition-all transform hover:scale-103 duration-200"
             >
               COMEÇAR MINHA TRANSFORMAÇÃO DE 7 DIAS
             </button>
           </div>
+
+          <SpiralSeparator />
         </div>
       </section>
+      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.02]" />
+        <SparkleStars />
 
-      {/* --- O QUE VOCÊ VAI RECEBER --- */}
-      <section className="py-16 md:py-24 bg-white relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Conteúdo Incluso</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 border border-secondary/20 px-3.5 py-1.5 rounded-full">Conteúdo Incluso</span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-white font-bold mt-4 leading-tight">
               Tudo o que você vai receber:
             </h2>
+            <p className="mt-3 text-white/50 text-xs sm:text-sm font-light max-w-md mx-auto">
+              Materiais completos e transformadores para te guiar em cada passo da sua jornada.
+            </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
           </div>
 
-          <div className="bg-[#FFFBF9] rounded-3xl sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 border border-orange-100 shadow-md">
-            <div className="divide-y divide-orange-100/50">
-              {deliverables.map((item, idx) => (
-                <div key={idx} className="py-4 sm:py-5 flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left gap-3 sm:gap-4 first:pt-0 last:pb-0">
-                  <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3.5">
-                    <div className="bg-[#7F9B52]/10 p-1.5 rounded-lg flex-shrink-0">
-                      <Check className="text-accent-green" size={14} />
-                    </div>
-                    <span className="text-gray-800 font-medium text-xs sm:text-sm md:text-base leading-snug">
-                      {item.text}
+          {/* --- DELIVERABLES NUMBERED CARDS with inline images --- */}
+          <div className="space-y-4 sm:space-y-5">
+            {deliverables.map((item, idx) => {
+              const badgeColors: Record<string, string> = {
+                "primary": "bg-primary/20 text-primary border-primary/30",
+                "accent-green": "bg-accent-green/15 text-accent-green border-accent-green/25",
+                "secondary": "bg-secondary/15 text-secondary border-secondary/25",
+              };
+              const iconMap: Record<string, React.ReactNode> = {
+                "video": (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                    <circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+                  </svg>
+                ),
+                "book": (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                ),
+                "headphones": (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                  </svg>
+                ),
+                "map": (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+                  </svg>
+                ),
+                "star": (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ),
+              };
+
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.07 }}
+                  className={`relative flex flex-col sm:flex-row gap-0 rounded-2xl sm:rounded-3xl border overflow-hidden transition-all duration-300 group ${
+                    item.isBonus
+                      ? "bg-gradient-to-br from-primary/10 to-[#1C100E]/70 border-primary/35 hover:border-primary/55 shadow-lg shadow-primary/10"
+                      : "bg-[#1C100E]/50 backdrop-blur-md border-white/8 hover:border-primary/20"
+                  }`}
+                >
+                  {/* LEFT: text content */}
+                  <div className="flex-1 p-5 sm:p-7 flex flex-col justify-center gap-3">
+                    {/* Number + badge row */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className={`font-display font-black text-xl sm:text-2xl select-none ${
+                        item.isBonus ? "text-primary" : "text-white/25"
+                      }`}>
+                        {item.num}
+                      </span>
+                      <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${badgeColors[item.badge.color] ?? badgeColors["primary"]} flex items-center gap-1.5`}>
+                        <span>{iconMap[item.icon]}</span>
+                        {item.badge.label}
+                      </span>
                       {item.isBonus && (
-                        <span className="ml-2 inline-block bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded font-extrabold uppercase">
-                          BÔNUS EXCLUSIVO
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/25 animate-pulse">
+                          UAU!
                         </span>
                       )}
-                    </span>
-                  </div>
-                  <span className="text-gray-400 font-light text-xs sm:text-sm line-through sm:ml-4 flex-shrink-0">
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-            </div>
+                    </div>
 
-            {/* --- VISUALIZAÇÃO DOS MOCKUPS --- */}
-            <div className="mt-10 pt-8 border-t border-orange-100">
-              <p className="text-center font-display font-bold text-gray-900 text-lg sm:text-xl mb-6">
-                Visualização do Material:
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                {/* Mockup 1: Meditação Portal do Renascimento */}
-                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/meditacao_renascimento.jpeg')}>
-                    <img 
-                      src="/assets/mockups/meditacao_renascimento.jpeg" 
-                      alt="Meditação Guiada Portal do Renascimento" 
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    {/* Title */}
+                    <h3 className={`font-display font-bold text-base sm:text-lg md:text-xl leading-snug ${
+                      item.isBonus ? "text-primary" : "text-white"
+                    }`}>
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    {item.description && (
+                      <p className="text-white/50 text-xs sm:text-sm font-light leading-relaxed">{item.description}</p>
+                    )}
+
+                    {/* Bullets */}
+                    {item.bullets && (
+                      <ul className="space-y-1.5">
+                        {item.bullets.map((b, bi) => (
+                          <li key={bi} className="flex items-start gap-2 text-xs sm:text-sm text-white/60">
+                            <span className="text-primary mt-0.5 flex-shrink-0">•</span>
+                            <span>
+                              <span className="font-semibold text-white/80">{b.label}</span>
+                              {b.detail && <span className="text-white/40 italic"> – {b.detail}</span>}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* RIGHT: product image */}
+                  <div
+                    className="relative w-full sm:w-48 md:w-56 flex-shrink-0 aspect-[4/3] sm:aspect-auto overflow-hidden cursor-zoom-in"
+                    onClick={() => setSelectedImage(item.image)}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
-                        <ZoomIn size={16} />
+                    {/* Gradient overlay left edge on desktop */}
+                    <div className="hidden sm:block absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1C100E] to-transparent pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+                    {/* Zoom hint */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                      <div className="bg-black/60 text-primary backdrop-blur-sm border border-primary/30 p-2 rounded-full shadow-md">
+                        <ZoomIn size={14} />
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <span className="text-[10px] text-secondary font-bold uppercase tracking-wider bg-secondary/10 px-2.5 py-0.5 rounded">Meditação Guiada</span>
-                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Portal do Renascimento</h4>
-                    <p className="text-xs text-gray-500 mt-0.5">Meditação guiada completa para fortalecimento da autoconfiança.</p>
-                  </div>
-                </div>
 
-                {/* Mockup 2: Mapa das Crenças Invisíveis */}
-                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/exercicio_crencas.jpeg')}>
-                    <img 
-                      src="/assets/mockups/exercicio_crencas.jpeg" 
-                      alt="Mapa das Crenças Invisíveis" 
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
-                        <ZoomIn size={16} />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-accent-green font-bold uppercase tracking-wider bg-accent-green/10 px-2.5 py-0.5 rounded">Workbook Prático</span>
-                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Mapa das Crenças Invisíveis</h4>
-                    <p className="text-xs text-gray-500 mt-0.5">Exercício de identificação e reprogramação de crenças e padrões.</p>
-                  </div>
-                </div>
-
-                {/* Mockup 3: Meditação Uma Nova Mulher */}
-                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/meditacao_nova_mulher.jpeg')}>
-                    <img 
-                      src="/assets/mockups/meditacao_nova_mulher.jpeg" 
-                      alt="Meditação Guiada Uma Nova Mulher" 
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
-                        <ZoomIn size={16} />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-primary font-bold uppercase tracking-wider bg-primary/10 px-2.5 py-0.5 rounded">Áudio Bônus</span>
-                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Meditação: Uma Nova Mulher</h4>
-                    <p className="text-xs text-gray-500 mt-0.5">Bônus exclusivo para fortalecimento da identidade e posicionamento.</p>
-                  </div>
-                </div>
-
-                {/* Mockup 4: Plano Uma Nova Mulher */}
-                <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm flex flex-col space-y-3">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 border border-orange-50 cursor-zoom-in group" onClick={() => setSelectedImage('/assets/mockups/plano_nova_mulher.jpeg')}>
-                    <img 
-                      src="/assets/mockups/plano_nova_mulher.jpeg" 
-                      alt="Plano Uma Nova Mulher" 
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-white/95 p-2 rounded-full text-secondary shadow-md">
-                        <ZoomIn size={16} />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-accent-green font-bold uppercase tracking-wider bg-accent-green/10 px-2.5 py-0.5 rounded">Planejador de Hábitos</span>
-                    <h4 className="font-bold text-gray-900 text-sm sm:text-base mt-1">Plano Uma Nova Mulher</h4>
-                    <p className="text-xs text-gray-500 mt-0.5">Guia de ações e escolhas diárias para construir sua nova identidade.</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-orange-100 text-center">
-              <p className="text-xs uppercase tracking-widest text-gray-400 font-bold">VALOR TOTAL DE TODOS OS ENTREGÁVEIS:</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-500 line-through mt-1">R$ 709,00</p>
-              <p className="text-accent-green text-sm sm:text-base font-semibold mt-1">
-                Adquira hoje e economize mais de 90%
-              </p>
-              <p className="text-[10px] text-gray-400 mt-2 italic">
-                * Clique nos mockups acima para ampliá-los.
-              </p>
-            </div>
+                  {/* Bonus glow ring */}
+                  {item.isBonus && (
+                    <div className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none ring-1 ring-primary/20 shadow-[inset_0_0_40px_rgba(233,122,1,0.05)]" />
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
+
+          {/* Total + CTA */}
+          <div className="mt-10 sm:mt-12 bg-[#1C100E]/60 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-primary/20 p-6 sm:p-8 text-center shadow-xl shadow-black/30">
+            <p className="text-xs uppercase tracking-widest text-white/35 font-bold">VALOR TOTAL DE TODOS OS ENTREGÁVEIS:</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white/30 line-through mt-1">R$ 625,00</p>
+            <p className="text-accent-green text-sm sm:text-base font-semibold mt-1">
+              Adquira hoje e economize mais de 90%
+            </p>
+
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={scrollToOffer}
+              className="mt-6 inline-flex items-center justify-center gap-2.5 px-7 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl sm:rounded-2xl shadow-xl shadow-primary/25 hover:shadow-primary/40 border border-primary/25 transition-all text-sm sm:text-base"
+            >
+              <Sparkles size={16} className="flex-shrink-0" />
+              COMEÇAR MINHA TRANSFORMAÇÃO DE 7 DIAS
+              <ArrowRight size={16} className="flex-shrink-0" />
+            </motion.button>
+
+            <p className="mt-4 text-[10px] text-white/30 font-light flex items-center justify-center gap-1.5">
+              <ShieldCheck size={12} className="text-accent-green" />
+              Garantia de 7 Dias ou seu dinheiro de volta
+            </p>
+          </div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
       {/* --- É PARA VOCÊ / NÃO É PARA VOCÊ --- */}
-      <section className="py-16 md:py-24 bg-[#FFFBF9] relative overflow-hidden border-t border-orange-50/50">
+      <section className="py-16 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             
             {/* É PARA VOCÊ */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100/60">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100/50 hover:shadow-md transition-all duration-300">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="bg-accent-green/10 p-2.5 rounded-2xl">
                   <CheckCircle className="text-accent-green" size={24} />
@@ -766,7 +927,7 @@ const LP2: React.FC = () => {
             </div>
 
             {/* NÃO É PARA VOCÊ */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100/60">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-orange-100/50 hover:shadow-md transition-all duration-300">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="bg-red-50 p-2.5 rounded-2xl">
                   <XCircle className="text-red-500" size={24} />
@@ -784,6 +945,8 @@ const LP2: React.FC = () => {
             </div>
 
           </div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
@@ -823,14 +986,18 @@ const LP2: React.FC = () => {
       </AnimatePresence>
 
       {/* --- DUAS TRAJETÓRIAS ("A verdade é que nada muda...") --- */}
-      <section className="py-20 md:py-24 bg-[#FFFBF9] relative overflow-hidden border-t border-orange-50/50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <section className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute left-0 bottom-0 w-[300px] h-[300px] opacity-[0.02] transform -scale-x-100" />
+        <SparkleStars />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 px-3.5 py-1.5 rounded-full">Decisão</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
+            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full">Decisão</span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-white font-bold mt-4 leading-tight">
               A verdade é que nada muda...
             </h2>
-            <p className="mt-3 text-gray-500 max-w-xl mx-auto text-xs sm:text-sm md:text-base">
+            <p className="mt-3 text-gray-300 max-w-xl mx-auto text-xs sm:text-sm md:text-base font-light">
               ...enquanto você continua repetindo os mesmos padrões. Daqui a 6 meses, qual será sua escolha?
             </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
@@ -839,41 +1006,43 @@ const LP2: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
             
             {/* PATH 1 */}
-            <div className="bg-red-50/40 p-6 sm:p-8 rounded-3xl border border-red-100 flex flex-col justify-between">
+            <div className="bg-red-950/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-red-900/30 shadow-lg shadow-black/20 flex flex-col justify-between hover:border-red-900/50 transition-all duration-300">
               <div>
-                <h3 className="font-display font-bold text-lg sm:text-xl text-red-700 mb-4">Caminho 1: O <span className="italic">Piloto Automático</span></h3>
-                <p className="text-gray-650 text-sm sm:text-base leading-relaxed mb-6 font-light">
+                <h3 className="font-display font-bold text-lg sm:text-xl text-red-400 mb-4">Caminho 1: O <span className="italic">Piloto Automático</span></h3>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
                   Continuar exatamente onde está hoje. Evitando conflitos, engolindo sapos, dizendo 'sim' querendo dizer 'não'. Vivendo para agradar a todos ao seu redor e, no final das contas, abandonando você mesma.
                 </p>
               </div>
-              <span className="text-xs text-red-500/80 font-bold tracking-wider uppercase bg-red-100/60 py-2 px-4 rounded-xl text-center">
+              <span className="text-xs text-red-400/90 font-bold tracking-wider uppercase bg-red-950/30 border border-red-900/25 py-2 px-4 rounded-xl text-center">
                 Estagnação e anulação pessoal
               </span>
             </div>
 
             {/* PATH 2 */}
-            <div className="bg-accent-green/5 p-6 sm:p-8 rounded-3xl border border-accent-green/20 flex flex-col justify-between">
+            <div className="bg-accent-green/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-accent-green/30 shadow-lg shadow-black/20 flex flex-col justify-between hover:border-accent-green/50 transition-all duration-300">
               <div>
                 <h3 className="font-display font-bold text-lg sm:text-xl text-accent-green mb-4">Caminho 2: Despertar das <span className="italic">Bellas</span></h3>
-                <p className="text-gray-650 text-sm sm:text-base leading-relaxed mb-6 font-light">
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
                   Estar mais confiante, mais posicionada e construindo uma vida alinhada com quem você realmente é. Rompendo os ciclos de carência emocional e atraindo o respeito, prosperidade e reciprocidade que merece.
                 </p>
               </div>
-              <span className="text-xs text-accent-green font-bold tracking-wider uppercase bg-accent-green/10 py-2 px-4 rounded-xl text-center">
+              <span className="text-xs text-accent-green/90 font-bold tracking-wider uppercase bg-accent-green/20 border border-accent-green/25 py-2 px-4 rounded-xl text-center">
                 Autoconfiança e posicionamento real
               </span>
             </div>
 
           </div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
       {/* --- SOBRE MENTORA --- */}
-      <section className="py-20 md:py-24 bg-white relative overflow-hidden border-t border-orange-50/50">
+      <section className="py-20 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative aspect-[3/4] w-full max-w-[360px] rounded-[3rem] overflow-hidden border-8 border-secondary/5 shadow-2xl">
+            <div className="relative aspect-[3/4] w-full max-w-[360px] rounded-[3rem] overflow-hidden border-8 border-primary/10 shadow-2xl">
               <img 
                 src={IMAGES.about} 
                 alt="Isabella Franklin" 
@@ -891,9 +1060,9 @@ const LP2: React.FC = () => {
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-3"></div>
 
-            <div className="space-y-4 text-gray-650 leading-relaxed text-sm sm:text-base font-light">
+            <div className="space-y-4 text-gray-655 leading-relaxed text-sm sm:text-base font-light">
               <p>
-                Durante muito tempo eu também fui uma mulher que buscava fora aquilo que precisava construir dentro de si. Eu me preocupava com a opinião dos outros, buscava aprovação, tentava corresponder às expectativas e, sem perceber, me afastava cada vez mais de quem eu realmente era.
+                Durante muito tempo eu também fui uma mulher que buscava fora aquilo que precisava construir dentro de si. Eu me preocupava com a opinion dos outros, buscava aprovação, tentava corresponder às expectativas e, sem perceber, me afastava cada vez mais de quem eu realmente era.
               </p>
               <p>
                 Por trás disso existiam inseguranças, feridas emocionais, crenças e padrões que eu carregava sem sequer perceber. Até que a vida começou a me mostrar que, enquanto eu continuasse tentando agradar todo mundo, nunca conseguiria construir a vida que realmente desejava viver.
@@ -926,20 +1095,26 @@ const LP2: React.FC = () => {
           </div>
 
         </div>
+
+        <SpiralSeparator />
       </section>
 
       {/* --- ORDER BUMP & FINAL OFFER --- */}
-      <section id="oferta" className="py-20 md:py-24 bg-gradient-to-b from-white to-[#FFFBF9] relative scroll-mt-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
+      <section id="oferta" className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
+        <WindowLightGlow />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.02]" />
+        <SparkleStars />
+
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
           
           {/* MAIN PRODUCT OFFER BOX */}
-          <div className="bg-gradient-to-br from-[#1A0F0D] to-[#2D1B18] text-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10 text-center">
+          <div className="bg-[#1C100E]/40 backdrop-blur-md text-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-primary/25 text-center">
             
-            <div className="absolute top-6 right-6 opacity-25 animate-spin" style={{ animationDuration: '10s' }}>
+            <div className="absolute top-6 right-6 opacity-20 animate-spin" style={{ animationDuration: '12s' }}>
               <Star size={36} className="text-primary fill-primary" />
             </div>
 
-            <span className="text-xs text-primary font-bold uppercase tracking-wider bg-primary/20 border border-primary/40 px-4 py-1.5 rounded-full inline-block mb-6">
+            <span className="text-xs text-primary font-bold uppercase tracking-wider bg-primary/20 border border-primary/45 px-4 py-1.5 rounded-full inline-block mb-6 animate-pulse">
               Oferta Especial de Lançamento
             </span>
 
@@ -970,7 +1145,7 @@ const LP2: React.FC = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               href={checkoutUrl}
-              className="w-full inline-flex items-center justify-center px-6 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 text-base sm:text-lg group hover:shadow-2xl hover:shadow-primary/40 transition-all text-center"
+              className="w-full inline-flex items-center justify-center px-6 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 border border-primary/25 transition-all text-center group transform hover:scale-102 duration-200"
             >
               COMEÇAR MINHA JORNADA AGORA
               <ArrowRight className="ml-2.5 group-hover:translate-x-1.5 transition-transform" size={18} />
@@ -1004,11 +1179,13 @@ const LP2: React.FC = () => {
             </div>
 
           </div>
+
+          <SpiralSeparator />
         </div>
       </section>
 
       {/* --- FAQ SECTION --- */}
-      <section className="py-16 md:py-24 bg-[#FFFBF9] border-t border-orange-50/50">
+      <section className="py-16 md:py-24 bg-[#FDFBF7] border-t border-orange-50/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">FAQ</span>
@@ -1022,7 +1199,7 @@ const LP2: React.FC = () => {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl shadow-sm border border-orange-100/60 overflow-hidden transition-all"
+                className="bg-white rounded-2xl shadow-sm border border-orange-100/40 hover:border-primary/20 hover:shadow-md transition-all duration-300 overflow-hidden"
               >
                 <button
                   onClick={() => toggleFaq(i)}
@@ -1043,7 +1220,7 @@ const LP2: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-4 pb-4 sm:px-6 sm:pb-6 pt-1 text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base border-t border-orange-50/20 mt-1">
+                      <div className="px-4 pb-4 sm:px-6 sm:pb-6 pt-1 text-gray-650 leading-relaxed text-xs sm:text-sm md:text-base border-t border-orange-50/20 mt-1">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -1067,6 +1244,7 @@ const LP2: React.FC = () => {
       </footer>
 
     </div>
+    </>
   );
 };
 
