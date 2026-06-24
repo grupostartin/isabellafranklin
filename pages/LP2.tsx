@@ -20,7 +20,7 @@ import {
   X
 } from 'lucide-react';
 import { IMAGES } from '../constants';
-import SplashScreenGold from '../components/SplashScreenGold';
+
 import BackgroundGradientAnimation from '../components/BackgroundGradientAnimation';
 
 const fadeInUp = {
@@ -162,7 +162,7 @@ const LP2: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [showSplash, setShowSplash] = useState(true);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -176,10 +176,7 @@ const LP2: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-    document.body.classList.remove('loading');
-  };
+
 
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -352,9 +349,6 @@ const LP2: React.FC = () => {
 
   return (
     <>
-      <AnimatePresence>
-        {showSplash && <SplashScreenGold onComplete={handleSplashComplete} />}
-      </AnimatePresence>
 
       <div className="font-body text-gray-800 bg-[#FFFBF9] overflow-x-hidden antialiased select-none">
       
@@ -784,7 +778,7 @@ const LP2: React.FC = () => {
                 </span>
               </div>
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">1. A PRISÃO INVISÍVEL</h3>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">1. IDENTIFIQUE OS PADRÕES LIMITANTES</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Você vai entender por que continua repetindo padrões que te afastam da vida que deseja. Aqui você identifica crenças, medos e condicionamentos que silenciosamente sabotam sua autoestima, seus relacionamentos e suas escolhas.
@@ -811,7 +805,7 @@ const LP2: React.FC = () => {
                 </span>
               </div>
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">2. O DESPERTAR</h3>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">2. DESPERTE SUA VERSÃO MAIS PRÓSPERA</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Em 2 dias você começa a enxergar com clareza aquilo que antes passava despercebido. Vai compreender como suas feridas emocionais influenciam suas decisões, relações e a forma como se vê.
@@ -838,7 +832,7 @@ const LP2: React.FC = () => {
                 </span>
               </div>
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">3. UMA NOVA MULHER</h3>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">3. SE TORNE UMA NOVA MULHER</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Você descobre uma versão mais forte, confiante e posicionada de si mesma. Uma mulher que se respeita, se escolhe e constrói uma vida alinhada com quem realmente é.
