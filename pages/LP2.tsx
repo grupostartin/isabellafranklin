@@ -132,7 +132,7 @@ const SunflowerOutline: React.FC<{ className?: string }> = ({ className = "absol
 );
 
 const SpiralSeparator: React.FC = () => (
-  <div className="flex items-center justify-center my-10 sm:my-14 pointer-events-none select-none z-10 relative">
+  <div className="flex items-center justify-center my-4 sm:my-6 pointer-events-none select-none z-10 relative">
     <div className="h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent w-full max-w-[180px] sm:max-w-[240px]" />
     <div className="mx-4 relative flex items-center justify-center">
       <div className="absolute w-7 h-7 rounded-full bg-primary/10 blur-sm" />
@@ -391,24 +391,13 @@ const LP2: React.FC = () => {
       </AnimatePresence>
 
       {/* --- BANNER DE DEPOIMENTOS (BANNER TOP DE TUDO) --- */}
-      <section className="py-8 sm:py-12 bg-[#0F0807] text-white relative z-20 overflow-hidden">
+      <section className="py-6 sm:py-8 bg-[#0F0807] text-white relative z-20 overflow-hidden">
         {/* Animated gradient background */}
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute right-0 top-0 w-[240px] h-[240px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
-          {/* Section Header */}
-          <div className="text-center mb-6 sm:mb-8 max-w-2xl">
-            <span className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
-              Minha Evolução
-            </span>
-            <h2 className="font-display text-xl sm:text-3xl font-bold mt-2 leading-tight text-white">
-              Do Medo ao Poder Pessoal
-            </h2>
-            <p className="mt-2 text-white/60 text-xs sm:text-sm leading-relaxed font-light">
-              Acompanhe a minha própria jornada e veja como o posicionamento transformou a minha vida do Dia 0 ao Dia 365.
-            </p>
-          </div>
+
 
           {/* Cards Grid */}
           <div className="flex justify-center items-center gap-3 sm:gap-6 w-full max-w-3xl">
@@ -439,7 +428,7 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- HERO / ABERTURA --- */}
-      <section className="relative flex items-center justify-center pt-0 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#0F0807] via-[#080403] to-[#0F0807] text-white">
+      <section className="relative flex items-center justify-center pt-0 pb-10 sm:pb-14 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#0F0807] via-[#080403] to-[#0F0807] text-white">
         {/* Animated gradient background */}
         <BackgroundGradientAnimation />
         <SunflowerOutline className="absolute right-0 bottom-0 w-[300px] h-[300px] md:w-[420px] md:h-[420px] opacity-[0.03] z-[1]" />
@@ -449,15 +438,7 @@ const LP2: React.FC = () => {
           <div className="flex flex-col space-y-5 sm:space-y-6 items-center text-center">
             
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full w-fit"
-            >
-              <Sparkles size={14} className="text-primary animate-pulse" />
-              <span className="text-primary font-bold text-[10px] sm:text-xs tracking-wider uppercase">DESAFIO DESPERTAR DAS BELLAS</span>
-            </motion.div>
+
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -507,19 +488,19 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- DEPOIMENTOS --- */}
-      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden">
+      <section className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden">
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute right-0 top-0 w-[280px] h-[280px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-10">
             <span className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
               Resultados Reais
             </span>
             <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mt-3 leading-tight text-white">
               O que dizem as Bellas
             </h2>
-            <p className="mt-3 text-white/50 text-xs sm:text-sm font-light max-w-md mx-auto">
+            <p className="mt-3 text-white/80 text-sm sm:text-base font-light max-w-md mx-auto">
               Histórias reais de mulheres que escolheram despertar o seu poder pessoal.
             </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5" />
@@ -561,9 +542,9 @@ const LP2: React.FC = () => {
 
 
       {/* --- IDENTIFICAÇÃO / DORES --- */}
-      <section className="py-16 md:py-24 bg-[#FDFBF7] relative overflow-hidden">
+      <section className="py-10 md:py-14 bg-[#FDFBF7] relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-10">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">Sintomas</span>
             <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               Você já se pegou pensando...
@@ -596,7 +577,7 @@ const LP2: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-10 sm:mt-12 p-5 sm:p-8 bg-[#F9F6F0] rounded-3xl border border-orange-100/65 shadow-sm text-center"
+            className="mt-6 sm:mt-8 p-5 sm:p-7 bg-[#F9F6F0] rounded-3xl border border-orange-100/65 shadow-sm text-center"
           >
             <p className="text-gray-800 text-base sm:text-lg md:text-xl font-medium italic leading-relaxed">
               "Se você se identificou em alguma dessas situações, saiba: você não está quebrada. Você apenas foi programada para agir assim. E você está no lugar certo."
@@ -608,18 +589,18 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- NARRATIVA DO PROBLEMA --- */}
-      <section className="py-16 md:py-24 bg-[#FFFBF9] text-[#1E1E1E] relative overflow-hidden border-t border-orange-50/60">
+      <section className="py-10 md:py-14 bg-[#FFFBF9] text-[#1E1E1E] relative overflow-hidden border-t border-orange-50/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Header section matching style */}
-          <div className="text-center mb-10 flex flex-col items-center">
+          <div className="text-center mb-6 flex flex-col items-center">
             <span className="text-[11px] sm:text-xs text-[#805B3F] font-bold uppercase tracking-[0.2em] bg-[#F3ECE5] border border-[#E3D7CD] px-4 py-1.5 rounded-full inline-flex items-center gap-1.5">
               <span className="text-[8px]">✦</span> A VERDADEIRA CAUSA
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#2D1B18] font-bold leading-tight mt-6 max-w-2xl">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#2D1B18] font-bold leading-tight mt-4 max-w-2xl">
               E se o problema nunca tivesse sido <span className="text-[#D1523E] italic font-normal font-display">você?</span>
             </h2>
-            <div className="flex items-center justify-center my-6 text-[#D1523E]/50 select-none">
+            <div className="flex items-center justify-center my-4 text-[#D1523E]/50 select-none">
               <div className="h-[1px] bg-gradient-to-r from-transparent via-[#D1523E]/30 to-transparent w-16" />
               <span className="mx-2 text-xs">✦</span>
               <div className="h-[1px] bg-gradient-to-r from-transparent via-[#D1523E]/30 to-transparent w-16" />
@@ -627,7 +608,7 @@ const LP2: React.FC = () => {
           </div>
 
           <div className="space-y-6 max-w-3xl mx-auto">
-            {/* Primary Main Card (Dark brown card with window doorway light image on the right) */}
+            {/* Primary Main Card */}
             <div className="relative overflow-hidden rounded-3xl bg-[#20100D] border border-white/5 shadow-2xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 min-h-[280px]">
               {/* Card text content */}
               <div className="flex-1 space-y-5 text-left z-10">
@@ -638,13 +619,14 @@ const LP2: React.FC = () => {
                     </svg>
                   </div>
                 </div>
-                <p className="text-white text-base sm:text-lg leading-relaxed font-light">
-                  Você foi <span className="text-[#E97A01] font-semibold">condicionada</span> a colocar as necessidades dos outros acima das suas.
+                <p className="text-white text-lg sm:text-xl leading-relaxed font-light">
+                  Ao longo da vida, você foi <span className="text-[#E97A01] font-semibold">condicionada</span> a se adaptar.
                 </p>
-                <div className="w-12 h-[1px] bg-[#E97A01]/30"></div>
-                <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-light">
-                  E muitas dessas crenças te impedem de viver a <span className="text-[#E97A01] font-semibold">vida que você merece.</span>
-                </p>
+                <div className="space-y-1 text-white/80 text-base sm:text-lg font-light leading-relaxed">
+                  <p>A agradar.</p>
+                  <p>A caber nas expectativas dos outros.</p>
+                  <p>E, sem perceber, foi se afastando de quem realmente é.</p>
+                </div>
               </div>
 
               {/* Card Image */}
@@ -663,72 +645,71 @@ const LP2: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               
               {/* Left Column: O RESULTADO */}
-              <div className="bg-[#FFFBF9] border border-[#E3D7CD] rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
+              <div className="bg-[#1A0A07] border border-[#D1523E]/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
                 <div>
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full border border-[#D1523E]/20 bg-[#FBF6F0] flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full border border-[#D1523E]/40 bg-[#2D1008] flex items-center justify-center">
                       <span className="text-[#D1523E] font-display font-light text-base">✕</span>
                     </div>
-                    <h3 className="font-display font-extrabold text-[#2D1B18] text-sm tracking-widest uppercase">O RESULTADO?</h3>
+                    <h3 className="font-display font-extrabold text-white text-sm tracking-widest uppercase">O RESULTADO?</h3>
                   </div>
                   
                   <div className="flex items-center justify-start my-4 text-[#D1523E]/50 select-none">
-                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
-                    <span className="mx-2 text-[8px]">✦</span>
-                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                    <div className="h-[1px] bg-[#D1523E]/20 w-12" />
+                    <span className="mx-2 text-[8px] text-[#D1523E]/50">✦</span>
+                    <div className="h-[1px] bg-[#D1523E]/20 w-12" />
                   </div>
 
-                  <ul className="space-y-4 text-left text-xs sm:text-sm text-[#4E3629] font-light">
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
-                      <span>Te ensinaram a cuidar de todo mundo. <br /><span className="text-[#D1523E] font-medium">Mas ninguém te ensinou a cuidar de você.</span></span>
+                  <ul className="space-y-5 text-left text-sm sm:text-base text-white/80 font-light">
+                    <li className="flex items-start gap-3">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono text-lg">✕</span>
+                      <span>Te ensinaram a cuidar de todo mundo.<br /><span className="text-[#E97A01] font-semibold">Mas não a cuidar de você.</span></span>
                     </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
-                      <span>Te ensinaram a ser aceita. <br /><span className="text-[#D1523E] font-medium">Mas não te ensinaram a descobrir quem você é.</span></span>
+                    <li className="flex items-start gap-3">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono text-lg">✕</span>
+                      <span>Te ensinaram a buscar aprovação.<br /><span className="text-[#E97A01] font-semibold">Mas não a ouvir a própria voz.</span></span>
                     </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
-                      <span>Te ensinaram a agradar. <br /><span className="text-[#D1523E] font-medium">Mas não te ensinaram a se escolher.</span></span>
+                    <li className="flex items-start gap-3">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono text-lg">✕</span>
+                      <span>Te ensinaram a agradar.<br /><span className="text-[#E97A01] font-semibold">Mas não a se escolher.</span></span>
                     </li>
                   </ul>
                 </div>
               </div>
 
               {/* Right Column: A BOA NOTÍCIA */}
-              <div className="relative overflow-hidden bg-gradient-to-b from-[#FFFBF9] to-[#F5ECE5] border border-[#E3D7CD] rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[300px]">
+              <div className="relative overflow-hidden bg-gradient-to-b from-[#20100D] to-[#2D1510] border border-[#E97A01]/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[300px]">
                 <div className="z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full border border-[#E97A01]/30 bg-[#FDFBF7] flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full border border-[#E97A01]/40 bg-[#301508] flex items-center justify-center">
                       <span className="text-[#E97A01] text-xs">✦</span>
                     </div>
-                    <h3 className="font-display font-extrabold text-[#805B3F] text-sm tracking-widest uppercase">A BOA NOTÍCIA</h3>
+                    <h3 className="font-display font-extrabold text-[#E97A01] text-sm tracking-widest uppercase">A BOA NOTÍCIA</h3>
                   </div>
 
-                  <div className="flex items-center justify-start my-4 text-[#D1523E]/50 select-none">
-                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
-                    <span className="mx-2 text-[8px]">✦</span>
-                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                  <div className="flex items-center justify-start my-4 text-[#E97A01]/30 select-none">
+                    <div className="h-[1px] bg-[#E97A01]/20 w-12" />
+                    <span className="mx-2 text-[8px] text-[#E97A01]/40">✦</span>
+                    <div className="h-[1px] bg-[#E97A01]/20 w-12" />
                   </div>
 
                   <div className="space-y-4 text-left">
-                    <h4 className="font-display font-bold text-xl sm:text-2xl text-[#2D1B18] leading-tight">
-                      Tudo aquilo que foi aprendido pode ser <span className="text-[#D1523E] italic font-normal">desaprendido.</span>
+                    <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed">Você não nasceu assim.</p>
+                    <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed">Você aprendeu.</p>
+                    <h4 className="font-display font-bold text-xl sm:text-2xl text-white leading-tight">
+                      E tudo aquilo que foi aprendido pode ser <span className="text-[#E97A01] italic font-normal">desaprendido.</span>
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#4E3629]/75 font-light leading-relaxed">
-                      E é exatamente isso que vamos começar a fazer nos próximos 7 dias.
-                    </p>
                   </div>
                 </div>
 
                 {/* Subtle Door Light Overlay Background */}
-                <div className="absolute right-0 bottom-0 top-0 w-[140px] pointer-events-none opacity-90 z-0">
+                <div className="absolute right-0 bottom-0 top-0 w-[140px] pointer-events-none opacity-30 z-0">
                   <img
                     src="/assets/images/narrative_doorway.png"
                     alt="Boa notícia"
                     className="w-full h-full object-cover object-left"
                   />
-                  <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#FFFBF9] to-transparent"></div>
+                  <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#20100D] to-transparent"></div>
                 </div>
               </div>
 
@@ -761,16 +742,16 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- O MÉTODO (OS 3 ATOS) --- */}
-      <section className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+      <section className="py-12 md:py-16 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
         
         <div className="max-w-5xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 flex flex-col items-center">
+          <div className="text-center mb-10 flex flex-col items-center">
             <span className="text-[11px] sm:text-xs text-[#E97A01] font-bold uppercase tracking-[0.2em] bg-[#E97A01]/10 border border-[#E97A01]/25 px-4 py-1.5 rounded-full inline-block">
               O Método
             </span>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-[56px] text-white font-bold leading-tight mt-6">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-[56px] text-white font-bold leading-tight mt-4">
               A Jornada de <span className="text-[#E97A01] italic font-normal font-display">7 Dias</span>
             </h2>
             <p className="mt-4 text-white/70 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-light">
@@ -805,7 +786,7 @@ const LP2: React.FC = () => {
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">1. A PRISÃO INVISÍVEL</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
-                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Você vai entender por que continua repetindo padrões que te afastam da vida que deseja. Aqui você identifica crenças, medos e condicionamentos que silenciosamente sabotam sua autoestima, seus relacionamentos e suas escolhas.
                 </p>
               </div>
@@ -832,7 +813,7 @@ const LP2: React.FC = () => {
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">2. O DESPERTAR</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
-                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Em 2 dias você começa a enxergar com clareza aquilo que antes passava despercebido. Vai compreender como suas feridas emocionais influenciam suas decisões, relações e a forma como se vê.
                 </p>
               </div>
@@ -859,14 +840,14 @@ const LP2: React.FC = () => {
               <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">3. UMA NOVA MULHER</h3>
                 <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
-                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light flex-1">
                   Você descobre uma versão mais forte, confiante e posicionada de si mesma. Uma mulher que se respeita, se escolhe e constrói uma vida alinhada com quem realmente é.
                 </p>
               </div>
             </motion.div>
           </div>
 
-          <div className="mt-16 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <button
               onClick={scrollToOffer}
               className="inline-flex items-center justify-center gap-2.5 px-8 py-4.5 bg-gradient-to-r from-[#A06A42] to-[#E97A01] hover:from-[#B07B52] hover:to-[#ff8d0c] text-white font-bold text-sm sm:text-base rounded-xl shadow-xl transition-all duration-300 transform hover:scale-[1.02] uppercase tracking-wider"
@@ -879,17 +860,17 @@ const LP2: React.FC = () => {
           <SpiralSeparator />
         </div>
       </section>
-      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+      <section className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-10">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 border border-secondary/20 px-3.5 py-1.5 rounded-full">Conteúdo Incluso</span>
             <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-white font-bold mt-4 leading-tight">
               Tudo o que você vai receber:
             </h2>
-            <p className="mt-3 text-white/50 text-xs sm:text-sm font-light max-w-md mx-auto">
+            <p className="mt-3 text-white/80 text-sm sm:text-base font-light max-w-md mx-auto">
               Materiais completos e transformadores para te guiar em cada passo da sua jornada.
             </p>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
@@ -973,18 +954,18 @@ const LP2: React.FC = () => {
 
                     {/* Description */}
                     {item.description && (
-                      <p className="text-white/50 text-xs sm:text-sm font-light leading-relaxed">{item.description}</p>
+                      <p className="text-white/80 text-sm sm:text-base font-light leading-relaxed">{item.description}</p>
                     )}
 
                     {/* Bullets */}
                     {item.bullets && (
-                      <ul className="space-y-1.5">
+                      <ul className="space-y-2">
                         {item.bullets.map((b, bi) => (
-                          <li key={bi} className="flex items-start gap-2 text-xs sm:text-sm text-white/60">
+                          <li key={bi} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
                             <span className="text-primary mt-0.5 flex-shrink-0">•</span>
                             <span>
-                              <span className="font-semibold text-white/80">{b.label}</span>
-                              {b.detail && <span className="text-white/40 italic"> – {b.detail}</span>}
+                              <span className="font-semibold text-white">{b.label}</span>
+                              {b.detail && <span className="text-white/60 italic"> – {b.detail}</span>}
                             </span>
                           </li>
                         ))}
@@ -1023,7 +1004,7 @@ const LP2: React.FC = () => {
           </div>
 
           {/* Total + CTA */}
-          <div className="mt-10 sm:mt-12 bg-[#1C100E]/60 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-primary/20 p-6 sm:p-8 text-center shadow-xl shadow-black/30">
+          <div className="mt-6 sm:mt-8 bg-[#1C100E]/60 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-primary/20 p-6 sm:p-8 text-center shadow-xl shadow-black/30">
             <p className="text-xs uppercase tracking-widest text-white/35 font-bold">VALOR TOTAL DE TODOS OS ENTREGÁVEIS:</p>
             <p className="text-2xl sm:text-3xl font-bold text-white/30 line-through mt-1">R$ 625,00</p>
             <p className="text-accent-green text-sm sm:text-base font-semibold mt-1">
@@ -1041,8 +1022,8 @@ const LP2: React.FC = () => {
               <ArrowRight size={16} className="flex-shrink-0" />
             </motion.button>
 
-            <p className="mt-4 text-[10px] text-white/30 font-light flex items-center justify-center gap-1.5">
-              <ShieldCheck size={12} className="text-accent-green" />
+            <p className="mt-4 text-sm text-white/70 font-light flex items-center justify-center gap-1.5">
+              <ShieldCheck size={14} className="text-accent-green" />
               Garantia de 7 Dias ou seu dinheiro de volta
             </p>
           </div>
@@ -1052,7 +1033,7 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- É PARA VOCÊ / NÃO É PARA VOCÊ --- */}
-      <section className="py-16 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
+      <section className="py-10 md:py-14 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             
@@ -1132,7 +1113,7 @@ const LP2: React.FC = () => {
         )}
       </AnimatePresence>
 
-      <section className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+      <section className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute left-0 bottom-0 w-[300px] h-[300px] opacity-[0.04] transform -scale-x-100 z-[1]" />
 
@@ -1150,13 +1131,13 @@ const LP2: React.FC = () => {
             Daqui a 6 meses, qual será <span className="text-[#E97A01] font-semibold">sua escolha?</span>
           </p>
 
-          <div className="flex items-center justify-center my-6 text-[#E97A01]/50 select-none">
+          <div className="flex items-center justify-center my-4 text-[#E97A01]/50 select-none">
             <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
             <span className="mx-2 text-xs">✦</span>
             <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
           </div>
 
-          <div className="relative mt-12">
+          <div className="relative mt-6">
             {/* Middle OU Badge Divider for Desktop */}
             <div className="hidden md:flex absolute inset-y-0 left-1/2 -translate-x-1/2 items-center justify-center pointer-events-none z-20">
               <div className="h-full w-[1px] bg-gradient-to-b from-[#E97A01]/10 via-[#E97A01]/30 to-[#E97A01]/10 relative flex items-center justify-center">
@@ -1269,7 +1250,7 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- ORDER BUMP & FINAL OFFER --- */}
-      <section id="oferta" className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
+      <section id="oferta" className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
         <BackgroundGradientAnimation />
         <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
 
@@ -1353,7 +1334,7 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- SOBRE MENTORA --- */}
-      <section className="py-20 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
+      <section className="py-10 md:py-14 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           <div className="lg:col-span-5 relative flex justify-center">
@@ -1415,9 +1396,9 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- FAQ SECTION --- */}
-      <section className="py-16 md:py-24 bg-[#FDFBF7] border-t border-orange-50/50">
+      <section className="py-10 md:py-14 bg-[#FDFBF7] border-t border-orange-50/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-10">
             <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full">FAQ</span>
             <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
               Perguntas Frequentes
@@ -1463,7 +1444,7 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-12 bg-[#150B0A] border-t border-white/5 text-center text-white/30 text-xs">
+      <footer className="py-8 bg-[#150B0A] border-t border-white/5 text-center text-white/30 text-xs">
         <div className="max-w-6xl mx-auto px-4 space-y-4">
           <p className="font-display font-medium text-white/50 text-sm tracking-wide">Isabella Franklin</p>
           <p>© {new Date().getFullYear()} Isabella Franklin. Todos os direitos reservados.</p>
