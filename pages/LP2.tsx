@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { IMAGES } from '../constants';
 import SplashScreenGold from '../components/SplashScreenGold';
+import BackgroundGradientAnimation from '../components/BackgroundGradientAnimation';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -204,8 +205,7 @@ const LP2: React.FC = () => {
     "Por mais que eu tente, nunca me sinto boa o suficiente.",
     "Eu sei que mereço mais, mas continuo aceitando menos do que gostaria.",
     "Eu me sinto insegura e queria confiar mais em mim mesma.",
-    "Parece que eu vivo para agradar os outros e me esqueço de mim.",
-    "Às vezes sinto que me perdi de mim mesma."
+    "Parece que eu vivo para agradar os outros e me esqueço de mim."
   ];
 
   const deliverables = [
@@ -391,11 +391,10 @@ const LP2: React.FC = () => {
       </AnimatePresence>
 
       {/* --- BANNER DE DEPOIMENTOS (BANNER TOP DE TUDO) --- */}
-      <section className="py-8 sm:py-12 bg-[#0F0807] text-white relative z-20 border-b border-orange-950/20 shadow-lg overflow-hidden">
-        {/* Visual theme helpers */}
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute right-0 top-0 w-[240px] h-[240px] opacity-[0.03]" />
-        <SparkleStars />
+      <section className="py-8 sm:py-12 bg-[#0F0807] text-white relative z-20 overflow-hidden">
+        {/* Animated gradient background */}
+        <BackgroundGradientAnimation interactive={false} />
+        <SunflowerOutline className="absolute right-0 top-0 w-[240px] h-[240px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
           {/* Section Header */}
@@ -440,32 +439,15 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- HERO / ABERTURA --- */}
-      <section className="relative flex items-center justify-center pt-8 sm:pt-14 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#0F0807] via-[#080403] to-[#0F0807] text-white">
-        {/* Visual theme helpers */}
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute right-0 bottom-0 w-[300px] h-[300px] md:w-[420px] md:h-[420px] opacity-[0.02]" />
-        <SparkleStars />
+      <section className="relative flex items-center justify-center pt-0 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#0F0807] via-[#080403] to-[#0F0807] text-white">
+        {/* Animated gradient background */}
+        <BackgroundGradientAnimation />
+        <SunflowerOutline className="absolute right-0 bottom-0 w-[300px] h-[300px] md:w-[420px] md:h-[420px] opacity-[0.03] z-[1]" />
 
         <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
           {/* Text Content */}
           <div className="flex flex-col space-y-5 sm:space-y-6 items-center text-center">
             
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-2"
-            >
-              <img
-                src="/assets/images/logo.png"
-                alt="MANA Terapia e Mentoria"
-                className="h-10 sm:h-12 w-auto object-contain brightness-0 invert"
-                onError={(e) => {
-                  // Fallback if logo doesn't load
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -524,9 +506,60 @@ const LP2: React.FC = () => {
         </div>
       </section>
 
+      {/* --- DEPOIMENTOS --- */}
+      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden">
+        <BackgroundGradientAnimation interactive={false} />
+        <SunflowerOutline className="absolute right-0 top-0 w-[280px] h-[280px] opacity-[0.04] z-[1]" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
+              Resultados Reais
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mt-3 leading-tight text-white">
+              O que dizem as Bellas
+            </h2>
+            <p className="mt-3 text-white/50 text-xs sm:text-sm font-light max-w-md mx-auto">
+              Histórias reais de mulheres que escolheram despertar o seu poder pessoal.
+            </p>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5" />
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            {tabImages.novos.map((src, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                onClick={() => setSelectedImage(src)}
+                className="relative cursor-zoom-in rounded-2xl overflow-hidden border border-white/10 bg-[#1C100E] shadow-md hover:shadow-xl hover:border-primary/30 transition-all duration-500 group aspect-[9/16]"
+              >
+                <img
+                  src={src}
+                  alt={`Depoimento ${idx + 1}`}
+                  className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="bg-white/15 backdrop-blur-sm p-2 rounded-full text-white shadow-lg border border-white/10">
+                    <ZoomIn size={16} />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <p className="text-[10px] text-white/35 mt-6 italic text-center">
+            * Clique em qualquer imagem para ampliar.
+          </p>
+
+          <SpiralSeparator />
+        </div>
+      </section>
 
 
-      {/* --- IDENTIFICAÇÃO / DORES --- */}
       {/* --- IDENTIFICAÇÃO / DORES --- */}
       <section className="py-16 md:py-24 bg-[#FDFBF7] relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
@@ -575,61 +608,152 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- NARRATIVA DO PROBLEMA --- */}
-      <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute left-0 top-0 w-[285px] h-[285px] opacity-[0.02] transform -scale-x-100" />
-        <SparkleStars />
-
+      <section className="py-16 md:py-24 bg-[#FFFBF9] text-[#1E1E1E] relative overflow-hidden border-t border-orange-50/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-10">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full w-fit">A Verdadeira Causa</span>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold leading-tight mt-4">
-              E se o problema nunca tivesse sido <span className="text-primary italic">você?</span>
+          
+          {/* Header section matching style */}
+          <div className="text-center mb-10 flex flex-col items-center">
+            <span className="text-[11px] sm:text-xs text-[#805B3F] font-bold uppercase tracking-[0.2em] bg-[#F3ECE5] border border-[#E3D7CD] px-4 py-1.5 rounded-full inline-flex items-center gap-1.5">
+              <span className="text-[8px]">✦</span> A VERDADEIRA CAUSA
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#2D1B18] font-bold leading-tight mt-6 max-w-2xl">
+              E se o problema nunca tivesse sido <span className="text-[#D1523E] italic font-normal font-display">você?</span>
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+            <div className="flex items-center justify-center my-6 text-[#D1523E]/50 select-none">
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#D1523E]/30 to-transparent w-16" />
+              <span className="mx-2 text-xs">✦</span>
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#D1523E]/30 to-transparent w-16" />
+            </div>
           </div>
 
-          <div className="space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed font-light text-left max-w-3xl mx-auto">
-            <p>
-              Você não nasceu insegura. Você não nasceu dependendo da aprovação dos outros. E, definitivamente, não nasceu acreditando que precisava agradar para ser amada.
-            </p>
-            <p className="font-semibold text-white border-l-4 border-primary pl-4 py-1.5 bg-primary/10 rounded-r-xl">
-              Ao longo da vida, você foi sendo condicionada.
-            </p>
-            <p>
-              Aprendeu a evitar conflitos. Aprendeu a colocar as necessidades dos outros acima das suas. Aprendeu que ser boazinha era mais seguro do que ser verdadeira.
-            </p>
-            <p>
-              E muitas dessas aprendizagens nasceram de dores, medos e padrões que foram passando de geração em geração. Sem perceber, você começou a viver seguindo regras que nunca escolheu.
-            </p>
+          <div className="space-y-6 max-w-3xl mx-auto">
+            {/* Primary Main Card (Dark brown card with window doorway light image on the right) */}
+            <div className="relative overflow-hidden rounded-3xl bg-[#20100D] border border-white/5 shadow-2xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 min-h-[280px]">
+              {/* Card text content */}
+              <div className="flex-1 space-y-5 text-left z-10">
+                <div className="flex items-center justify-center md:justify-start">
+                  <div className="w-12 h-12 rounded-full border border-[#D1523E]/30 bg-[#2D1B18] flex items-center justify-center text-primary">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#E97A01] fill-none stroke-current" strokeWidth="1.5">
+                      <path d="M12 14a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0v6m-4-6h8m-9-4h10M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-white text-base sm:text-lg leading-relaxed font-light">
+                  Você foi <span className="text-[#E97A01] font-semibold">condicionada</span> a colocar as necessidades dos outros acima das suas.
+                </p>
+                <div className="w-12 h-[1px] bg-[#E97A01]/30"></div>
+                <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-light">
+                  E muitas dessas crenças te impedem de viver a <span className="text-[#E97A01] font-semibold">vida que você merece.</span>
+                </p>
+              </div>
 
-            <div className="my-10 p-6 sm:p-8 bg-[#1C100E]/40 backdrop-blur-md rounded-3xl border border-primary/25 shadow-lg shadow-black/30 space-y-4">
-              <h3 className="font-display font-bold text-lg sm:text-xl text-white text-center md:text-left">O resultado?</h3>
-              <ul className="space-y-3 font-normal text-gray-200">
-                <li className="flex items-start space-x-2.5">
-                  <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a cuidar de todo mundo. Mas ninguém te ensinou a <span className="text-primary font-semibold">cuidar de você.</span></span>
-                </li>
-                <li className="flex items-start space-x-2.5">
-                  <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a ser aceita. Mas não te ensinaram a <span className="text-primary font-semibold">descobrir quem você é.</span></span>
-                </li>
-                <li className="flex items-start space-x-2.5">
-                  <XCircle className="text-red-500 mt-1 flex-shrink-0" size={16} />
-                  <span>Te ensinaram a agradar. Mas não te ensinaram a <span className="text-primary font-semibold">se escolher.</span></span>
-                </li>
-              </ul>
+              {/* Card Image */}
+              <div className="w-full md:w-[280px] h-[200px] md:h-[240px] rounded-2xl overflow-hidden relative flex-shrink-0">
+                <img
+                  src="/assets/images/narrative_stairway.png"
+                  alt="A verdadeira causa"
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#20100D] via-transparent to-transparent hidden md:block"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#20100D] via-transparent to-transparent md:hidden"></div>
+              </div>
             </div>
 
-            <div className="text-center pt-4">
-              <h4 className="font-display font-bold text-xl sm:text-2xl text-accent-green mb-2">A boa notícia?</h4>
-              <p className="font-semibold text-white">
-                Tudo aquilo que foi aprendido pode ser desaprendido.
-              </p>
-              <p className="text-sm text-gray-400 mt-1">
-                E é exatamente isso que vamos começar a fazer nos próximos 7 dias.
-              </p>
+            {/* Grid for O RESULTADO? and A BOA NOTÍCIA */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              
+              {/* Left Column: O RESULTADO */}
+              <div className="bg-[#FFFBF9] border border-[#E3D7CD] rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full border border-[#D1523E]/20 bg-[#FBF6F0] flex items-center justify-center">
+                      <span className="text-[#D1523E] font-display font-light text-base">✕</span>
+                    </div>
+                    <h3 className="font-display font-extrabold text-[#2D1B18] text-sm tracking-widest uppercase">O RESULTADO?</h3>
+                  </div>
+                  
+                  <div className="flex items-center justify-start my-4 text-[#D1523E]/50 select-none">
+                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                    <span className="mx-2 text-[8px]">✦</span>
+                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                  </div>
+
+                  <ul className="space-y-4 text-left text-xs sm:text-sm text-[#4E3629] font-light">
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
+                      <span>Te ensinaram a cuidar de todo mundo. <br /><span className="text-[#D1523E] font-medium">Mas ninguém te ensinou a cuidar de você.</span></span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
+                      <span>Te ensinaram a ser aceita. <br /><span className="text-[#D1523E] font-medium">Mas não te ensinaram a descobrir quem você é.</span></span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#D1523E] mt-0.5 font-bold font-mono">✕</span>
+                      <span>Te ensinaram a agradar. <br /><span className="text-[#D1523E] font-medium">Mas não te ensinaram a se escolher.</span></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Right Column: A BOA NOTÍCIA */}
+              <div className="relative overflow-hidden bg-gradient-to-b from-[#FFFBF9] to-[#F5ECE5] border border-[#E3D7CD] rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[300px]">
+                <div className="z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full border border-[#E97A01]/30 bg-[#FDFBF7] flex items-center justify-center">
+                      <span className="text-[#E97A01] text-xs">✦</span>
+                    </div>
+                    <h3 className="font-display font-extrabold text-[#805B3F] text-sm tracking-widest uppercase">A BOA NOTÍCIA</h3>
+                  </div>
+
+                  <div className="flex items-center justify-start my-4 text-[#D1523E]/50 select-none">
+                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                    <span className="mx-2 text-[8px]">✦</span>
+                    <div className="h-[1px] bg-[#E3D7CD] w-12" />
+                  </div>
+
+                  <div className="space-y-4 text-left">
+                    <h4 className="font-display font-bold text-xl sm:text-2xl text-[#2D1B18] leading-tight">
+                      Tudo aquilo que foi aprendido pode ser <span className="text-[#D1523E] italic font-normal">desaprendido.</span>
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#4E3629]/75 font-light leading-relaxed">
+                      E é exatamente isso que vamos começar a fazer nos próximos 7 dias.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Subtle Door Light Overlay Background */}
+                <div className="absolute right-0 bottom-0 top-0 w-[140px] pointer-events-none opacity-90 z-0">
+                  <img
+                    src="/assets/images/narrative_doorway.png"
+                    alt="Boa notícia"
+                    className="w-full h-full object-cover object-left"
+                  />
+                  <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#FFFBF9] to-transparent"></div>
+                </div>
+              </div>
+
             </div>
+
+            {/* Bottom CTA Banner Box */}
+            <div className="rounded-2xl bg-[#20100D] border border-white/5 p-4 sm:p-5 flex items-center justify-between text-left gap-4">
+              <div className="flex items-center gap-4 flex-1">
+                <div className="w-10 h-10 rounded-xl bg-[#2D1B18] border border-white/5 flex items-center justify-center flex-shrink-0 text-primary">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#E97A01] fill-none stroke-current" strokeWidth="1.5">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <p className="font-display text-sm sm:text-base md:text-lg text-white font-medium">
+                  Daqui a 7 dias, <span className="text-[#E97A01] italic font-normal">qual mulher estará olhando para você no espelho?</span>
+                </p>
+              </div>
+              <div className="text-[#E97A01] select-none flex-shrink-0">
+                <span className="text-lg">✦</span>
+              </div>
+            </div>
+
           </div>
 
           <SpiralSeparator />
@@ -637,17 +761,26 @@ const LP2: React.FC = () => {
       </section>
 
       {/* --- O MÉTODO (OS 3 ATOS) --- */}
-      <section className="py-20 md:py-24 bg-[#FDFBF7] text-gray-800 relative overflow-hidden border-t border-orange-50/50">
+      <section className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
+        <BackgroundGradientAnimation interactive={false} />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
+        
         <div className="max-w-5xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full">O Método</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gray-900 font-bold mt-4 leading-tight">
-              A Jornada de 7 Dias
+          <div className="text-center mb-16 flex flex-col items-center">
+            <span className="text-[11px] sm:text-xs text-[#E97A01] font-bold uppercase tracking-[0.2em] bg-[#E97A01]/10 border border-[#E97A01]/25 px-4 py-1.5 rounded-full inline-block">
+              O Método
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-[56px] text-white font-bold leading-tight mt-6">
+              A Jornada de <span className="text-[#E97A01] italic font-normal font-display">7 Dias</span>
             </h2>
-            <p className="mt-4 text-gray-650 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed font-light">
-              Estruturada rigorosamente em 3 atos para você reconstruir o seu posicionamento e resgatar o seu espaço vital.
+            <p className="mt-4 text-white/70 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed font-light">
+              Uma jornada prática para romper padrões, fortalecer sua identidade e construir uma nova relação consigo mesma.
             </p>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-6"></div>
+            <div className="flex items-center justify-center my-6 text-[#E97A01]/50 select-none">
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
+              <span className="mx-2 text-xs">✦</span>
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -657,18 +790,23 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
+              className="bg-[#180E0C] border border-[#E97A01]/10 rounded-[2rem] overflow-hidden flex flex-col hover:border-[#E97A01]/30 transition-all duration-300 group"
             >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
-                  Ato 1 (Dias 1 & 2)
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/images/method_diary.png"
+                  alt="A prisão invisível"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-[#E97A01] text-[9px] tracking-widest uppercase font-bold px-3.5 py-1.5 rounded-full border border-[#E97A01]/25">
+                  ATO 1 • DIAS 1 E 2
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">1. A PRISÃO INVISÍVEL</h3>
-                <p className="text-gray-700 font-semibold italic text-xs mb-4">
-                  "Entenda por que você se tornou uma mulher agradadora - e como isso impacta sua vida."
-                </p>
-                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
-                  Nos dois primeiros dias você vai identificar os padrões, crenças e comportamentos que fazem você se apagar, agradar a todos e perder a confiança em si mesma. Essa é a raiz de tudo, e a maioria das mulheres nunca para para olhar para ela.
+              </div>
+              <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">1. A PRISÃO INVISÍVEL</h3>
+                <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
+                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                  Você vai entender por que continua repetindo padrões que te afastam da vida que deseja. Aqui você identifica crenças, medos e condicionamentos que silenciosamente sabotam sua autoestima, seus relacionamentos e suas escolhas.
                 </p>
               </div>
             </motion.div>
@@ -679,18 +817,23 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
+              className="bg-[#180E0C] border border-[#E97A01]/10 rounded-[2rem] overflow-hidden flex flex-col hover:border-[#E97A01]/30 transition-all duration-300 group"
             >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
-                  Ato 2 (Dias 3 & 4)
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/images/method_candle.png"
+                  alt="O despertar"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-[#E97A01] text-[9px] tracking-widest uppercase font-bold px-3.5 py-1.5 rounded-full border border-[#E97A01]/25">
+                  ATO 2 • DIAS 3 E 4
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">2. O DESPERTAR</h3>
-                <p className="text-gray-700 font-semibold italic text-xs mb-4">
-                  "Identifique o que está impedindo você de viver a vida que deseja."
-                </p>
-                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
-                  Em 2 dias você vai enxergar como suas feridas emocionais, seus condicionamentos e os padrões que você herdou estão moldando seus relacionamentos, sua autoestima e as escolhas que você faz todos os dias, muitas vezes sem perceber.
+              </div>
+              <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">2. O DESPERTAR</h3>
+                <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
+                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                  Em 2 dias você começa a enxergar com clareza aquilo que antes passava despercebido. Vai compreender como suas feridas emocionais influenciam suas decisões, relações e a forma como se vê.
                 </p>
               </div>
             </motion.div>
@@ -701,29 +844,35 @@ const LP2: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white border border-orange-100/50 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-md hover:border-primary/20 transition-all duration-300"
+              className="bg-[#180E0C] border border-[#E97A01]/10 rounded-[2rem] overflow-hidden flex flex-col hover:border-[#E97A01]/30 transition-all duration-300 group"
             >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3.5 py-1 rounded-full inline-block mb-4">
-                  Ato 3 (Dias 5, 6 & 7)
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/images/method_sunset.png"
+                  alt="Uma nova mulher"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-[#E97A01] text-[9px] tracking-widest uppercase font-bold px-3.5 py-1.5 rounded-full border border-[#E97A01]/25">
+                  ATO 3 • DIAS 5, 6 E 7
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-gray-900">3. UMA NOVA MULHER</h3>
-                <p className="text-gray-700 font-semibold italic text-xs mb-4">
-                  "Construa uma nova forma de se enxergar e se posicionar."
-                </p>
-                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-light">
-                  Nos últimos 3 dias você vai se tornar a nova mulher que sempre sonhou em ser, vai confiar mais em si mesma, estabelecer limites saudáveis e criar uma vida alinhada com quem você realmente é.
+              </div>
+              <div className="p-6 sm:p-8 flex flex-col flex-1 text-left">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white">3. UMA NOVA MULHER</h3>
+                <div className="w-8 h-[2px] bg-[#E97A01] mt-3 mb-4"></div>
+                <p className="text-white/60 text-sm leading-relaxed font-light flex-1">
+                  Você descobre uma versão mais forte, confiante e posicionada de si mesma. Uma mulher que se respeita, se escolhe e constrói uma vida alinhada com quem realmente é.
                 </p>
               </div>
             </motion.div>
           </div>
 
-          <div className="mt-12 flex justify-center">
+          <div className="mt-16 flex justify-center">
             <button
               onClick={scrollToOffer}
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white font-bold text-sm sm:text-base md:text-lg rounded-2xl shadow-xl shadow-primary/20 hover:shadow-2xl border border-primary/25 transition-all transform hover:scale-103 duration-200"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4.5 bg-gradient-to-r from-[#A06A42] to-[#E97A01] hover:from-[#B07B52] hover:to-[#ff8d0c] text-white font-bold text-sm sm:text-base rounded-xl shadow-xl transition-all duration-300 transform hover:scale-[1.02] uppercase tracking-wider"
             >
               COMEÇAR MINHA TRANSFORMAÇÃO DE 7 DIAS
+              <ArrowRight size={16} />
             </button>
           </div>
 
@@ -731,9 +880,8 @@ const LP2: React.FC = () => {
         </div>
       </section>
       <section className="py-16 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.02]" />
-        <SparkleStars />
+        <BackgroundGradientAnimation interactive={false} />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12 sm:mb-16">
@@ -950,9 +1098,8 @@ const LP2: React.FC = () => {
         </div>
       </section>
 
-
-
       {/* --- IMAGE DETAIL OVERLAY MODAL --- */}
+
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -985,125 +1132,146 @@ const LP2: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* --- DUAS TRAJETÓRIAS ("A verdade é que nada muda...") --- */}
       <section className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute left-0 bottom-0 w-[300px] h-[300px] opacity-[0.02] transform -scale-x-100" />
-        <SparkleStars />
+        <BackgroundGradientAnimation interactive={false} />
+        <SunflowerOutline className="absolute left-0 bottom-0 w-[300px] h-[300px] opacity-[0.04] transform -scale-x-100 z-[1]" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-xs text-primary font-bold uppercase tracking-widest bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full">Decisão</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-white font-bold mt-4 leading-tight">
-              A verdade é que nada muda...
-            </h2>
-            <p className="mt-3 text-gray-300 max-w-xl mx-auto text-xs sm:text-sm md:text-base font-light">
-              ...enquanto você continua repetindo os mesmos padrões. Daqui a 6 meses, qual será sua escolha?
-            </p>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <span className="text-[11px] sm:text-xs text-[#E97A01] font-bold uppercase tracking-[0.2em] bg-[#E97A01]/10 border border-[#E97A01]/25 px-4 py-1.5 rounded-full inline-block">
+            Decisão
+          </span>
+          <h2 className="font-display text-4xl sm:text-5xl text-white font-bold mt-6 leading-tight">
+            A verdade é que <span className="text-[#E97A01] italic font-normal font-display">nada</span> muda...
+          </h2>
+          <p className="mt-3 text-white/70 text-xs sm:text-sm md:text-base font-light">
+            ...enquanto você continua repetindo os mesmos padrões.
+          </p>
+          <p className="mt-1.5 text-white/90 text-sm sm:text-base md:text-lg font-medium">
+            Daqui a 6 meses, qual será <span className="text-[#E97A01] font-semibold">sua escolha?</span>
+          </p>
+
+          <div className="flex items-center justify-center my-6 text-[#E97A01]/50 select-none">
+            <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
+            <span className="mx-2 text-xs">✦</span>
+            <div className="h-[1px] bg-gradient-to-r from-transparent via-[#E97A01]/30 to-transparent w-16" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
-            
-            {/* PATH 1 */}
-            <div className="bg-red-950/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-red-900/30 shadow-lg shadow-black/20 flex flex-col justify-between hover:border-red-900/50 transition-all duration-300">
-              <div>
-                <h3 className="font-display font-bold text-lg sm:text-xl text-red-400 mb-4">Caminho 1: O <span className="italic">Piloto Automático</span></h3>
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                  Continuar exatamente onde está hoje. Evitando conflitos, engolindo sapos, dizendo 'sim' querendo dizer 'não'. Vivendo para agradar a todos ao seu redor e, no final das contas, abandonando você mesma.
-                </p>
+          <div className="relative mt-12">
+            {/* Middle OU Badge Divider for Desktop */}
+            <div className="hidden md:flex absolute inset-y-0 left-1/2 -translate-x-1/2 items-center justify-center pointer-events-none z-20">
+              <div className="h-full w-[1px] bg-gradient-to-b from-[#E97A01]/10 via-[#E97A01]/30 to-[#E97A01]/10 relative flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[#150B0A] border border-[#E97A01]/30 flex items-center justify-center text-xs font-semibold text-[#E97A01] shadow-lg shadow-black/80 tracking-wider">
+                  OU
+                </div>
               </div>
-              <span className="text-xs text-red-400/90 font-bold tracking-wider uppercase bg-red-950/30 border border-red-900/25 py-2 px-4 rounded-xl text-center">
-                Estagnação e anulação pessoal
-              </span>
             </div>
 
-            {/* PATH 2 */}
-            <div className="bg-accent-green/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-accent-green/30 shadow-lg shadow-black/20 flex flex-col justify-between hover:border-accent-green/50 transition-all duration-300">
-              <div>
-                <h3 className="font-display font-bold text-lg sm:text-xl text-accent-green mb-4">Caminho 2: Despertar das <span className="italic">Bellas</span></h3>
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                  Estar mais confiante, mais posicionada e construindo uma vida alinhada com quem você realmente é. Rompendo os ciclos de carência emocional e atraindo o respeito, prosperidade e reciprocidade que merece.
-                </p>
-              </div>
-              <span className="text-xs text-accent-green/90 font-bold tracking-wider uppercase bg-accent-green/20 border border-accent-green/25 py-2 px-4 rounded-xl text-center">
-                Autoconfiança e posicionamento real
-              </span>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative">
+              
+              {/* PATH 1: CONTINUAR igual */}
+              <div className="flex flex-col">
+                <div className="flex flex-row items-stretch min-h-[220px] rounded-3xl overflow-hidden bg-[#180E0C] border border-red-950/40 shadow-xl">
+                  {/* Left Side: Info */}
+                  <div className="flex-1 p-6 flex flex-col justify-between items-start text-left z-10">
+                    <div className="w-9 h-9 rounded-full border border-red-500/20 bg-red-500/5 flex items-center justify-center text-red-500">
+                      <Lock size={15} />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-white mt-4 uppercase tracking-wider leading-snug">
+                        CONTINUAR <br />
+                        <span className="text-red-500 italic font-normal font-display lowercase">igual</span>
+                      </h3>
+                      <div className="w-8 h-[2px] bg-red-500/30 my-3"></div>
+                    </div>
+                    <div className="border border-red-500/20 px-3.5 py-1.5 rounded-lg text-[9px] font-bold text-red-400/80 uppercase tracking-widest bg-red-500/5">
+                      MAIS DO MESMO
+                    </div>
+                  </div>
 
+                  {/* Right Side: Image */}
+                  <div className="w-[130px] sm:w-[160px] relative flex-shrink-0 overflow-hidden">
+                    <img
+                      src="/assets/images/decision_moody.png"
+                      alt="Continuar igual"
+                      className="w-full h-full object-cover object-center"
+                    />
+                    <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#180E0C] to-transparent z-10" />
+                  </div>
+                </div>
+
+                {/* Caption Text Below Card */}
+                <div className="mt-4 text-center text-xs text-white/50 leading-relaxed font-light">
+                  Cansaço. Frustração. Vazio.<br />
+                  Nada muda.
+                </div>
+              </div>
+
+              {/* OU divider for Mobile */}
+              <div className="flex md:hidden items-center justify-center my-2">
+                <div className="w-10 h-10 rounded-full bg-[#180E0C] border border-[#E97A01]/30 flex items-center justify-center text-xs font-semibold text-[#E97A01] shadow-lg">
+                  OU
+                </div>
+              </div>
+
+              {/* PATH 2: DESPERTAR das Bellas */}
+              <div className="flex flex-col">
+                <div className="flex flex-row items-stretch min-h-[220px] rounded-3xl overflow-hidden bg-[#180E0C] border border-[#E97A01]/20 shadow-xl">
+                  {/* Left Side: Info */}
+                  <div className="flex-1 p-6 flex flex-col justify-between items-start text-left z-10">
+                    <div className="w-9 h-9 rounded-full border border-[#E97A01]/30 bg-[#E97A01]/5 flex items-center justify-center text-[#E97A01]">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-white mt-4 uppercase tracking-wider leading-snug">
+                        DESPERTAR <br />
+                        <span className="text-[#E97A01] italic font-normal font-display lowercase">das Bellas</span>
+                      </h3>
+                      <div className="w-8 h-[2px] bg-[#E97A01]/30 my-3"></div>
+                    </div>
+                    <div className="border border-[#E97A01]/30 px-3.5 py-1.5 rounded-lg text-[9px] font-bold text-[#E97A01]/80 uppercase tracking-widest bg-[#E97A01]/5">
+                      UMA NOVA MULHER
+                    </div>
+                  </div>
+
+                  {/* Right Side: Image */}
+                  <div className="w-[130px] sm:w-[160px] relative flex-shrink-0 overflow-hidden">
+                    <img
+                      src="/assets/images/decision_serene.png"
+                      alt="Despertar das Bellas"
+                      className="w-full h-full object-cover object-center"
+                    />
+                    <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#180E0C] to-transparent z-10" />
+                  </div>
+                </div>
+
+                {/* Caption Text Below Card */}
+                <div className="mt-4 text-center text-xs text-white/50 leading-relaxed font-light">
+                  Leveza. Propósito. Liberdade.<br />
+                  Uma nova história começa com você.
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <SpiralSeparator />
         </div>
       </section>
 
-      {/* --- SOBRE MENTORA --- */}
-      <section className="py-20 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative aspect-[3/4] w-full max-w-[360px] rounded-[3rem] overflow-hidden border-8 border-primary/10 shadow-2xl">
-              <img 
-                src={IMAGES.about} 
-                alt="Isabella Franklin" 
-                className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-700" 
-              />
-            </div>
-            <div className="absolute top-10 -left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl -z-10"></div>
-            <div className="absolute bottom-10 -right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl -z-10"></div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full w-fit">Sua Mentora</span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-              Talvez você se identifique comigo...
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-3"></div>
-
-            <div className="space-y-4 text-gray-655 leading-relaxed text-sm sm:text-base font-light">
-              <p>
-                Durante muito tempo eu também fui uma mulher que buscava fora aquilo que precisava construir dentro de si. Eu me preocupava com a opinion dos outros, buscava aprovação, tentava corresponder às expectativas e, sem perceber, me afastava cada vez mais de quem eu realmente era.
-              </p>
-              <p>
-                Por trás disso existiam inseguranças, feridas emocionais, crenças e padrões que eu carregava sem sequer perceber. Até que a vida começou a me mostrar que, enquanto eu continuasse tentando agradar todo mundo, nunca conseguiria construir a vida que realmente desejava viver.
-              </p>
-              <p>
-                Foi essa busca por respostas que me levou ao autoconhecimento há mais de 10 anos. Desde então, mergulhei em estudos sobre comportamento humano, desenvolvimento pessoal, espiritualidade, Constelação Familiar, Cura Prânica e diversas ferramentas de transformação emocional.
-              </p>
-              <p className="font-semibold text-gray-900 italic">
-                Hoje, como terapeuta e consteladora familiar, ajudo mulheres a identificarem os padrões invisíveis que as fazem se abandonar, para que possam desenvolver mais autoconfiança, posicionamento e liberdade para viver de forma alinhada consigo mesmas. Porque eu acredito que nenhuma mulher nasceu para viver tentando ser quem os outros esperam. Ela nasceu para ser quem verdadeiramente é.
-              </p>
-            </div>
-
-            <div className="pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-5 w-full justify-center lg:justify-start">
-              <div className="flex-shrink-0">
-                <img 
-                  src={IMAGES.signature} 
-                  alt="Assinatura Isabella Franklin" 
-                  className="h-10 opacity-60 md:h-12"
-                  onError={(e) => {
-                    // Fallback signature
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
-                />
-              </div>
-              <div className="flex flex-col items-center lg:items-start">
-                <p className="text-sm font-bold text-gray-900 uppercase tracking-wide">Isabella Franklin</p>
-                <p className="text-xs text-gray-500 font-medium">Terapeuta Sistêmica e Mentora de Mulheres</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <SpiralSeparator />
-      </section>
-
       {/* --- ORDER BUMP & FINAL OFFER --- */}
       <section id="oferta" className="py-20 md:py-24 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
-        <WindowLightGlow />
-        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.02]" />
-        <SparkleStars />
+        <BackgroundGradientAnimation />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
           
@@ -1182,6 +1350,68 @@ const LP2: React.FC = () => {
 
           <SpiralSeparator />
         </div>
+      </section>
+
+      {/* --- SOBRE MENTORA --- */}
+      <section className="py-20 md:py-24 bg-[#FDFBF7] relative overflow-hidden border-t border-orange-50/50">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <div className="lg:col-span-5 relative flex justify-center">
+            <div className="relative aspect-[3/4] w-full max-w-[360px] rounded-[3rem] overflow-hidden border-8 border-primary/10 shadow-2xl">
+              <img 
+                src={IMAGES.about} 
+                alt="Isabella Franklin" 
+                className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-700" 
+              />
+            </div>
+            <div className="absolute top-10 -left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl -z-10"></div>
+            <div className="absolute bottom-10 -right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl -z-10"></div>
+          </div>
+
+          <div className="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <span className="text-xs text-secondary font-bold uppercase tracking-widest bg-secondary/10 px-3.5 py-1.5 rounded-full w-fit">Sua Mentora</span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              Talvez você se identifique comigo...
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-3"></div>
+
+            <div className="space-y-4 text-gray-655 leading-relaxed text-sm sm:text-base font-light">
+              <p>
+                Durante muito tempo eu também fui uma mulher que buscava fora aquilo que precisava construir dentro de si. Eu me preocupava com a opinion dos outros, buscava aprovação, tentava corresponder às expectativas e, sem perceber, me afastava cada vez mais de quem eu realmente era.
+              </p>
+              <p>
+                Por trás disso existiam inseguranças, feridas emocionais, crenças e padrões que eu carregava sem sequer perceber. Até que a vida começou a me mostrar que, enquanto eu continuasse tentando agradar todo mundo, nunca conseguiria construir a vida que realmente desejava viver.
+              </p>
+              <p>
+                Foi essa busca por respostas que me levou ao autoconhecimento há mais de 10 anos. Desde então, mergulhei em estudos sobre comportamento humano, desenvolvimento pessoal, espiritualidade, Constelação Familiar, Cura Prânica e diversas ferramentas de transformação emocional.
+              </p>
+              <p className="font-semibold text-gray-900 italic">
+                Hoje, como terapeuta e consteladora familiar, ajudo mulheres a identificarem os padrões invisíveis que as fazem se abandonar, para que possam desenvolver mais autoconfiança, posicionamento e liberdade para viver de forma alinhada consigo mesmas. Porque eu acredito que nenhuma mulher nasceu para viver tentando ser quem os outros esperam. Ela nasceu para ser quem verdadeiramente é.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-5 w-full justify-center lg:justify-start">
+              <div className="flex-shrink-0">
+                <img 
+                  src={IMAGES.signature} 
+                  alt="Assinatura Isabella Franklin" 
+                  className="h-10 opacity-60 md:h-12"
+                  onError={(e) => {
+                    // Fallback signature
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center lg:items-start">
+                <p className="text-sm font-bold text-gray-900 uppercase tracking-wide">Isabella Franklin</p>
+                <p className="text-xs text-gray-500 font-medium">Terapeuta Sistêmica e Mentora de Mulheres</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <SpiralSeparator />
       </section>
 
       {/* --- FAQ SECTION --- */}
