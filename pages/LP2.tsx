@@ -301,12 +301,12 @@ const LP2: React.FC = () => {
     {
       num: "01",
       icon: "video",
-      badge: { label: "Aulas ao Vivo", color: "primary" },
-      title: "7 aulas ao vivo do Desafio da Mulher Posicionada",
+      badge: { label: "Aulas Gravadas", color: "primary" },
+      title: "7 aulas gravadas do Desafio da Mulher Posicionada",
       description: "Aulas profundas e transformadoras para despertar sua nova consciência.",
       value: "R$ 197,00",
-      image: "/assets/mockups/meditacao_renascimento.jpeg",
-      imageAlt: "7 Aulas ao Vivo"
+      image: "/assets/mockups/aulas_gravadas.jpg",
+      imageAlt: "7 Aulas Gravadas"
     },
     {
       num: "02",
