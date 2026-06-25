@@ -96,6 +96,98 @@ const CardSlideshow: React.FC<CardSlideshowProps> = ({ images, label, subtitle, 
   );
 };
 
+interface TestimonialCarouselProps {
+  images: string[];
+  onZoom: (src: string) => void;
+}
+
+const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({ images, onZoom }) => {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const total = images.length;
+  const goTo = (idx: number) => setActiveIdx((idx + total) % total);
+
+  return (
+    <div className="relative w-full flex flex-col items-center">
+      {/* Card wrapper */}
+      <div className="relative w-full flex items-center justify-center">
+        {/* Prev button */}
+        <button
+          onClick={() => goTo(activeIdx - 1)}
+          className="absolute left-0 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm"
+          aria-label="Anterior"
+        >
+          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        {/* Cards track */}
+        <div className="overflow-hidden w-full max-w-xs sm:max-w-sm md:max-w-md mx-10 sm:mx-14">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIdx}
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragEnd={(_e, info) => {
+                if (info.offset.x < -50) goTo(activeIdx + 1);
+                else if (info.offset.x > 50) goTo(activeIdx - 1);
+              }}
+              onClick={() => onZoom(images[activeIdx])}
+              className="relative cursor-zoom-in rounded-2xl overflow-hidden border border-white/10 bg-white shadow-xl hover:border-primary/30 transition-colors group aspect-[9/16] w-full"
+            >
+              <img
+                src={images[activeIdx]}
+                alt={`Depoimento ${activeIdx + 1}`}
+                className="absolute inset-0 w-full h-full object-contain"
+                draggable={false}
+              />
+              {/* Subtle hover overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="bg-black/20 backdrop-blur-sm p-2 rounded-full text-white shadow-lg border border-white/10">
+                  <ZoomIn size={16} />
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Next button */}
+        <button
+          onClick={() => goTo(activeIdx + 1)}
+          className="absolute right-0 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm"
+          aria-label="Próximo"
+        >
+          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex items-center gap-2 mt-5">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`rounded-full transition-all duration-300 ${
+              i === activeIdx
+                ? 'w-6 h-2 bg-primary'
+                : 'w-2 h-2 bg-white/25 hover:bg-white/50'
+            }`}
+            aria-label={`Ir para depoimento ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      <p className="text-[10px] text-white/35 mt-4 italic text-center">
+        * Arraste ou clique nas setas para navegar. Toque na imagem para ampliar.
+      </p>
+    </div>
+  );
+};
+
 const WindowLightGlow: React.FC = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
     {/* Warm light source */}
@@ -500,35 +592,7 @@ const LP2: React.FC = () => {
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-5" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {tabImages.novos.map((src, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                onClick={() => setSelectedImage(src)}
-                className="relative cursor-zoom-in rounded-2xl overflow-hidden border border-white/10 bg-[#1C100E] shadow-md hover:shadow-xl hover:border-primary/30 transition-all duration-500 group aspect-[9/16]"
-              >
-                <img
-                  src={src}
-                  alt={`Depoimento ${idx + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <div className="bg-white/15 backdrop-blur-sm p-2 rounded-full text-white shadow-lg border border-white/10">
-                    <ZoomIn size={16} />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-[10px] text-white/35 mt-6 italic text-center">
-            * Clique em qualquer imagem para ampliar.
-          </p>
+          <TestimonialCarousel images={tabImages.novos} onZoom={setSelectedImage} />
 
           <SpiralSeparator />
         </div>
@@ -1107,6 +1171,91 @@ const LP2: React.FC = () => {
         )}
       </AnimatePresence>
 
+      {/* --- ORDER BUMP & FINAL OFFER --- */}
+      <section id="oferta" className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
+        <BackgroundGradientAnimation />
+        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
+
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
+          
+          {/* MAIN PRODUCT OFFER BOX */}
+          <div className="bg-[#1C100E]/40 backdrop-blur-md text-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-primary/25 text-center">
+            
+            <div className="absolute top-6 right-6 opacity-20 animate-spin" style={{ animationDuration: '12s' }}>
+              <Star size={36} className="text-primary fill-primary" />
+            </div>
+
+            <span className="text-xs text-primary font-bold uppercase tracking-wider bg-primary/20 border border-primary/45 px-4 py-1.5 rounded-full inline-block mb-6 animate-pulse">
+              Oferta Especial de Lançamento
+            </span>
+
+            <h3 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
+              Desafio <span className="text-primary italic">Despertar das Bellas</span>
+            </h3>
+            
+            <p className="text-white/70 text-xs sm:text-sm md:text-base max-w-lg mx-auto mb-8 font-light leading-relaxed">
+              O primeiro passo definitivo para quebrar o ciclo de carência transgeracional e começar a se posicionar com segurança e leveza nos próximos 7 dias.
+            </p>
+
+            {/* Price Box */}
+            <div className="bg-white/5 backdrop-blur-md rounded-3xl py-6 px-6 max-w-sm mx-auto mb-8 border border-white/10 relative">
+              <span className="text-white/50 text-xs uppercase tracking-widest font-semibold block">POR APENAS</span>
+              <div className="flex items-center justify-center mt-2">
+                <span className="text-base sm:text-xl md:text-2xl font-bold text-primary mr-1.5">12x de</span>
+                <span className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-white">
+                  R$ {basePriceInstallment.toFixed(2).replace('.', ',')}
+                </span>
+              </div>
+              <span className="text-white/40 text-xs mt-2 block">
+                ou R$ {basePriceCash.toFixed(2).replace('.', ',')} à vista
+              </span>
+            </div>
+
+            {/* CTA Button */}
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              href={checkoutUrl}
+              className="w-full inline-flex items-center justify-center px-6 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 border border-primary/25 transition-all text-center group transform hover:scale-102 duration-200"
+            >
+              COMEÇAR MINHA JORNADA AGORA
+              <ArrowRight className="ml-2.5 group-hover:translate-x-1.5 transition-transform" size={18} />
+            </motion.a>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/50 text-xs font-light">
+              <span className="flex items-center">
+                <ShieldCheck size={16} className="text-accent-green mr-1.5 flex-shrink-0" />
+                Acesso Imediato à Plataforma
+              </span>
+              <span className="flex items-center">
+                <Lock size={15} className="text-accent-green mr-1.5 flex-shrink-0" />
+                Pagamento Seguro e Criptografado
+              </span>
+            </div>
+
+            {/* Guarantee Section */}
+            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-center md:text-left">
+              <div className="md:col-span-3 flex justify-center">
+                <div className="bg-white/10 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border border-white/20">
+                  <span className="font-display font-bold text-xl sm:text-2xl text-primary">7</span>
+                  <span className="text-[10px] sm:text-xs uppercase text-white/70 font-semibold ml-0.5">Dias</span>
+                </div>
+              </div>
+              <div className="md:col-span-9 space-y-2">
+                <h4 className="font-bold text-white text-sm sm:text-base">Garantia Blindada de 7 Dias</h4>
+                <p className="text-white/60 text-xs leading-relaxed font-light">
+                  Se por qualquer motivo você não se identificar com as aulas nos primeiros 7 dias de acesso, basta nos enviar um e-mail. Nós devolvemos 100% do seu investimento. Sem perguntas, sem estresse. O risco é todo meu.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <SpiralSeparator />
+        </div>
+      </section>
+
+      {/* --- DECISÃO --- */}
       <section className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20">
         <BackgroundGradientAnimation interactive={false} />
         <SunflowerOutline className="absolute left-0 bottom-0 w-[300px] h-[300px] opacity-[0.04] transform -scale-x-100 z-[1]" />
@@ -1237,90 +1386,6 @@ const LP2: React.FC = () => {
               </div>
 
             </div>
-          </div>
-
-          <SpiralSeparator />
-        </div>
-      </section>
-
-      {/* --- ORDER BUMP & FINAL OFFER --- */}
-      <section id="oferta" className="py-10 md:py-14 bg-[#0F0807] text-white relative overflow-hidden border-t border-orange-950/20 scroll-mt-24">
-        <BackgroundGradientAnimation />
-        <SunflowerOutline className="absolute right-0 top-0 w-[300px] h-[300px] opacity-[0.04] z-[1]" />
-
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
-          
-          {/* MAIN PRODUCT OFFER BOX */}
-          <div className="bg-[#1C100E]/40 backdrop-blur-md text-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden border border-primary/25 text-center">
-            
-            <div className="absolute top-6 right-6 opacity-20 animate-spin" style={{ animationDuration: '12s' }}>
-              <Star size={36} className="text-primary fill-primary" />
-            </div>
-
-            <span className="text-xs text-primary font-bold uppercase tracking-wider bg-primary/20 border border-primary/45 px-4 py-1.5 rounded-full inline-block mb-6 animate-pulse">
-              Oferta Especial de Lançamento
-            </span>
-
-            <h3 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
-              Desafio <span className="text-primary italic">Despertar das Bellas</span>
-            </h3>
-            
-            <p className="text-white/70 text-xs sm:text-sm md:text-base max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              O primeiro passo definitivo para quebrar o ciclo de carência transgeracional e começar a se posicionar com segurança e leveza nos próximos 7 dias.
-            </p>
-
-            {/* Price Box */}
-            <div className="bg-white/5 backdrop-blur-md rounded-3xl py-6 px-6 max-w-sm mx-auto mb-8 border border-white/10 relative">
-              <span className="text-white/50 text-xs uppercase tracking-widest font-semibold block">POR APENAS</span>
-              <div className="flex items-center justify-center mt-2">
-                <span className="text-base sm:text-xl md:text-2xl font-bold text-primary mr-1.5">12x de</span>
-                <span className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-white">
-                  R$ {basePriceInstallment.toFixed(2).replace('.', ',')}
-                </span>
-              </div>
-              <span className="text-white/40 text-xs mt-2 block">
-                ou R$ {basePriceCash.toFixed(2).replace('.', ',')} à vista
-              </span>
-            </div>
-
-            {/* CTA Button */}
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              href={checkoutUrl}
-              className="w-full inline-flex items-center justify-center px-6 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 border border-primary/25 transition-all text-center group transform hover:scale-102 duration-200"
-            >
-              COMEÇAR MINHA JORNADA AGORA
-              <ArrowRight className="ml-2.5 group-hover:translate-x-1.5 transition-transform" size={18} />
-            </motion.a>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/50 text-xs font-light">
-              <span className="flex items-center">
-                <ShieldCheck size={16} className="text-accent-green mr-1.5 flex-shrink-0" />
-                Acesso Imediato à Plataforma
-              </span>
-              <span className="flex items-center">
-                <Lock size={15} className="text-accent-green mr-1.5 flex-shrink-0" />
-                Pagamento Seguro e Criptografado
-              </span>
-            </div>
-
-            {/* Guarantee Section */}
-            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center text-center md:text-left">
-              <div className="md:col-span-3 flex justify-center">
-                <div className="bg-white/10 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border border-white/20">
-                  <span className="font-display font-bold text-xl sm:text-2xl text-primary">7</span>
-                  <span className="text-[10px] sm:text-xs uppercase text-white/70 font-semibold ml-0.5">Dias</span>
-                </div>
-              </div>
-              <div className="md:col-span-9 space-y-2">
-                <h4 className="font-bold text-white text-sm sm:text-base">Garantia Blindada de 7 Dias</h4>
-                <p className="text-white/60 text-xs leading-relaxed font-light">
-                  Se por qualquer motivo você não se identificar com as aulas nos primeiros 7 dias de acesso, basta nos enviar um e-mail. Nós devolvemos 100% do seu investimento. Sem perguntas, sem estresse. O risco é todo meu.
-                </p>
-              </div>
-            </div>
-
           </div>
 
           <SpiralSeparator />
