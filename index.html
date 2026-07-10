@@ -2,6 +2,14 @@
 <html lang="pt-BR">
 
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NXVC67XK');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Isabella Franklin - Terapia e Mentoria</title>
@@ -92,9 +100,22 @@
 }
 </script>
   <link rel="stylesheet" href="/index.css">
+
+  <!--
+    track.js: Meta Pixel + CAPI server side + GA4.
+    Carregado antes do bundle React para garantir que fbq() e cookies
+    já existam quando os componentes montarem.
+    IDs são lidos dinamicamente de /api/track-config (nao expostos no HTML).
+  -->
+  <script src="/track.js" defer></script>
 </head>
 
 <body class="font-body bg-background-light text-gray-800 transition-colors duration-300 antialiased loading">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXVC67XK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

@@ -1,4 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+
+/* goToCheckout é exposto pelo public/track.js */
+declare global {
+  interface Window {
+    goToCheckout?: (opts?: { email?: string; phone?: string; name?: string }) => void;
+    trackInitiateCheckout?: (extra?: Record<string, unknown>) => string;
+    trackContact?: (extra?: Record<string, unknown>) => string;
+    trackEvent?: (name: string, data?: Record<string, unknown>, opts?: Record<string, unknown>) => string;
+  }
+}
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Star, 
@@ -286,7 +296,18 @@ const LP2: React.FC = () => {
   const basePriceCash = 57.00;
   const basePriceInstallment = 5.90;
 
-  const checkoutUrl = "https://pay.kiwify.com.br/fpFPUmF";
+  // URL de fallback caso o track.js nao tenha carregado ainda
+  const FALLBACK_CHECKOUT_URL = 'https://pay.kiwify.com.br/fpFPUmF';
+
+  const handleCheckout = useCallback((e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof window.goToCheckout === 'function') {
+      window.goToCheckout();
+    } else {
+      // Fallback: redireciona direto se track.js ainda nao carregou
+      window.location.href = FALLBACK_CHECKOUT_URL;
+    }
+  }, []);
 
   const painPoints = [
     "Por que eu sempre faço tanto pelos outros e quase ninguém faz o mesmo por mim?",
@@ -1211,16 +1232,16 @@ const LP2: React.FC = () => {
               </span>
             </div>
 
-            {/* CTA Button */}
-            <motion.a
+            {/* CTA Button — via goToCheckout() para InitiateCheckout CAPI + custom_id */}
+            <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              href={checkoutUrl}
+              onClick={handleCheckout}
               className="w-full inline-flex items-center justify-center px-6 py-4 sm:py-5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 border border-primary/25 transition-all text-center group transform hover:scale-102 duration-200"
             >
               COMEÇAR MINHA JORNADA AGORA
               <ArrowRight className="ml-2.5 group-hover:translate-x-1.5 transition-transform" size={18} />
-            </motion.a>
+            </motion.button>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/50 text-xs font-light">
               <span className="flex items-center">
