@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-/* goToCheckout é exposto pelo public/track.js */
+/* goToCheckout e Meta Pixel são expostos pelo public/track.js */
 declare global {
   interface Window {
     goToCheckout?: (opts?: { email?: string; phone?: string; name?: string }) => void;
     trackInitiateCheckout?: (extra?: Record<string, unknown>) => string;
     trackContact?: (extra?: Record<string, unknown>) => string;
     trackEvent?: (name: string, data?: Record<string, unknown>, opts?: Record<string, unknown>) => string;
+    fbq?: (...args: unknown[]) => void;
+    _fbq?: (...args: unknown[]) => void;
+    __trackInit?: boolean;
+    __produto?: { id: string; name: string; price: number; currency: string };
   }
 }
 import { motion, AnimatePresence } from 'framer-motion';
@@ -276,6 +280,58 @@ const LP2: React.FC = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  /* ── Meta Pixel — injetado diretamente no <head> pela LP2 ── */
+  useEffect(() => {
+    const PIXEL_ID = '646405970604300';
+
+    // Snippet base do Meta Pixel (idempotente — não reinicializa se já existir)
+    if (!window.fbq) {
+      const fbqFn = ((...args: unknown[]) => {
+        if ((fbqFn as unknown as { callMethod?: (...a: unknown[]) => void }).callMethod) {
+          (fbqFn as unknown as { callMethod: (...a: unknown[]) => void }).callMethod(...args);
+        } else {
+          (fbqFn as unknown as { queue: unknown[][] }).queue.push(args);
+        }
+      }) as Window['fbq'] & { push?: unknown; loaded?: boolean; version?: string; queue?: unknown[][] };
+
+      window.fbq = fbqFn;
+      window._fbq = fbqFn;
+      fbqFn!.push = fbqFn;
+      (fbqFn as { loaded?: boolean }).loaded = true;
+      (fbqFn as { version?: string }).version = '2.0';
+      (fbqFn as { queue?: unknown[][] }).queue = [];
+
+      const sdkScript = document.createElement('script');
+      sdkScript.id = 'fb-pixel-sdk';
+      sdkScript.async = true;
+      sdkScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(sdkScript);
+    }
+
+    // Init + PageView (safe mesmo se track.js já chamou antes)
+    if (typeof window.fbq === 'function') {
+      window.fbq('init', PIXEL_ID);
+      window.fbq('track', 'PageView');
+    }
+
+    // Noscript fallback pixel
+    const noscript = document.createElement('noscript');
+    noscript.id = 'fb-pixel-noscript';
+    const img = document.createElement('img');
+    img.height = 1;
+    img.width = 1;
+    img.style.display = 'none';
+    img.src = `https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`;
+    noscript.appendChild(img);
+    document.head.appendChild(noscript);
+
+    return () => {
+      // Limpa o noscript ao desmontar (o SDK fica pois é global)
+      const ns = document.getElementById('fb-pixel-noscript');
+      if (ns) ns.remove();
+    };
   }, []);
 
 
