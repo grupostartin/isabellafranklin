@@ -583,15 +583,15 @@ const Portal: React.FC = () => {
                                 <div className="flex flex-col items-center mb-2">
                                     <div className="flex items-baseline space-x-3">
                                         <span className="text-gray-900 font-bold text-xl uppercase tracking-tight">12x de</span>
-                                        <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 51,40</span>
+                                        <span className="text-6xl md:text-8xl font-display font-bold text-secondary tracking-tighter">R$ 61,74 </span>
                                     </div>
-                                    <span className="text-gray-500 text-lg font-medium mt-3">Ou R$ 497,00 <span className="underline">à vista</span></span>
+                                    <span className="text-gray-500 text-lg font-medium mt-3">Ou R$ 597,00 <span className="underline">à vista</span></span>
                                 </div>
 
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    href="https://pay.kiwify.com.br/E6pfuZi"
+                                    href="https://pay.kiwify.com.br/QoHc013"
                                     className="w-full max-w-sm py-6 bg-secondary text-white font-bold text-2xl rounded-2xl shadow-xl shadow-secondary/30 flex items-center justify-center group"
                                 >
                                     QUERO ATRAVESSAR O PORTAL
